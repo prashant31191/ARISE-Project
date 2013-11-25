@@ -1,12 +1,5 @@
-ANS
+ARISE Project
 ===
 
-Audible Navigation System
-
-What features we need in the app?
-
-Location of user on Map(Current).   
-Draw Line Path on map showing the route.
-Turn by Turn direction assistance with Voice( I’m not sure how to implement it though).
-From & To data input via Voice+keyboard.
-
+An Android App to Track a USERS Location within regular intervals and update it on the server. The USER's can look for his
+whereabouts through this app.
