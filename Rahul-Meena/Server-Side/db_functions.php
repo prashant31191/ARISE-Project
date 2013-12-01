@@ -112,6 +112,173 @@ class DB_Functions {
     }
  
     /**
+     * Get user details by email
+     * return user details array
+     */
+    public function getUserDetailsByEmail($email) {
+        $result = mysql_query("SELECT * FROM $this->$tbl_user WHERE email = '$email'") or die(mysql_error());
+        // check for result 
+        $no_of_rows = mysql_num_rows($result);
+        if ($no_of_rows == 1) {
+            $user = array();
+            $user["name"] = $result["name"];
+            $user["email"] = $result["email"];
+            return $user;
+        } else {
+            // user not found
+            return false;
+        }
+    }
+ 
+    /**
+     * Get last known location by email
+     * return user's last known location details array
+     */
+    public function getLastKnownLocationByEmail($email) {
+        $result = mysql_query("SELECT loclat, loclong FROM $this->$tbl_user WHERE email = '$email'") or die(mysql_error());
+        // check for result 
+        $no_of_rows = mysql_num_rows($result);
+        if ($no_of_rows == 1) {
+            $user = array();
+            $user["loclat"] = $result["loclat"];
+            $user["loclong"] = $result["loclong"];
+            return $user;
+        } else {
+            // user not found
+            return false;
+        }
+    }
+ 
+    /**
+     * Get all users who can see my location
+     * return user details array
+     */
+    public function getAllUWCSMLByEmail($email) {
+        $result = mysql_query("SELECT uwcsml FROM $this->$tbl_user WHERE email = '$email'") or die(mysql_error());
+        // check for result 
+        if ($result) {
+            // array of all uwcsml by email
+            $users = explode(',', $string);
+            // users node
+            $response["users"] = array();
+            //looping through all the users emails
+            foreach ($users as $value) {
+                $result = mysql_query("SELECT name FROM $this->$tbl_user WHERE email = '$value'");
+                // temp user array
+                $user = array();
+                $user["name"] = $row["name"];
+                $user["email"] = $value;
+ 
+                // push single user into final response array
+                array_push($response["users"], $user);
+            }
+            return $response;
+        } else {
+            // user not found
+            return false;
+        }
+    }
+ 
+    /**
+     * Get all users whose location i can see
+     * return user details array
+     */
+    public function getAllUWLICSByEmail($email) {
+        $result = mysql_query("SELECT uwlics FROM $this->$tbl_user WHERE email = '$email'") or die(mysql_error());
+        // check for result 
+        if ($result) {
+            // array of all uwlics by email
+            $users = explode(',', $string);
+            // users node
+            $response["users"] = array();
+            //looping through all the users emails
+            foreach ($users as $value) {
+                $result = mysql_query("SELECT name, loclat, loclong FROM $this->$tbl_user WHERE email = '$value'");
+                // temp user array
+                $user = array();
+                $user["name"] = $row["name"];
+                $user["email"] = $value;
+                $user["loclat"] = $row["loclat"];
+                $user["loclong"] = $row["loclong"];
+ 
+                // push single user into final response array
+                array_push($response["users"], $user);
+            }
+            return $response;
+        } else {
+            // user not found
+            return false;
+        }
+    }
+ 
+    /**
+     * Update location by email
+     * return true/false
+     */
+    public function updateLocationByEmail($email,$loclat,$loclong) {
+        $result = mysql_query("UPDATE TABLE $this->$tbl_user SET loclat = '$loclat',loclong = '$loclong' WHERE email = '$email'") or die(mysql_error());
+        // check for result 
+        if ($result) {
+            return true;
+        } else {
+            // user not found
+            return false;
+        }
+    }
+ 
+    /**
+     * Add User who can see my location
+     * return true/false
+     */
+    public function addUWCSMLByEmail($email,$uemail) {
+        // update uwcsml of Logined User
+        $comma = ",";
+        $temp_email = $comma.$email;
+        $temp_uemail = $comma.$uemail;
+        $result1 = mysql_query("UPDATE TABLE $this->$tbl_user SET uwcsml = CONCATE(uwcsml,'$temp_uemail') WHERE email = '$email'") or die(mysql_error());
+        // update uwlics of requested user
+        $result2 = mysql_query("UPDATE TABLE $this->$tbl_user SET uwlics = CONCATE(uwlics,'$temp_email') WHERE email = '$uemail'") or die(mysql_error());
+        // check for result 
+        $no_of_rows = mysql_num_rows($result);
+        if ($result1 && $result2) {
+            return true;
+        } else {
+            // user not found
+            return false;
+        }
+    }
+ 
+    /**
+     * Remove User who can see my location
+     * return true/false
+     */
+    public function removeUWCSMLByEmail($email,$uemail) {
+        // add comma to emails
+        $comma = ",";
+        $temp_email = $comma.$email;
+        $temp_uemail = $comma.$uemail;
+        // get uwcsml of loginned user
+        $result1 = mysql_query("SELECT uwcsml FROM TABLE $this->$tbl_user WHERE email = '$email'") or die(mysql_error());
+        // replace the uemail in uwcsml with null
+        $new_uwcsml = str_replace($temp_uemail,"",$result1);
+        // update the uwcsml
+        $result2 = mysql_query("UPDATE TABLE $this->$tbl_user SET uwcsml = '$new_uwcsml' WHERE email = '$email'") or die(mysql_error());
+        // get uwlics of requested user
+        $result3 = mysql_query("SELECT uwlics FROM TABLE $this->$tbl_user WHERE email = '$uemail'") or die(mysql_error());
+        // replace the email in uwlics with null
+        $new_uwlics = str_replace($temp_email,"",$result3);
+        // update the uwlics
+        $result4 = mysql_query("UPDATE TABLE $this->$tbl_user SET uwlics = '$new_uwlics' WHERE email = '$uemail'") or die(mysql_error());
+        // check for results
+        if ($result2 && $result4) {
+            return true;
+        } else {
+            // user not found
+            return false;
+        }
+    }
+ 
+    /**
      * Send change password link
      */
     public function sendChangePasswordLink($email) {
