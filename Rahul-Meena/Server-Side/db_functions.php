@@ -6,6 +6,11 @@ class DB_Functions {
     private const $tbl_temp_user = "temp_user";
     private const $tbl_change_password_user = "change_password_user";
     private const $tbl_user = "user";
+    private const $tbl_pwlucs_ = "pwlucs_";
+    private const $tbl_pwcsul_ = "pwcsul_";
+    private const $tbl_chat_pair_con = "chat_pair_con";
+    private const $tbl_chat_log_ = "chat_log_";
+    private const $tbl_static_var = "static_var";
  
     //put your code here
     // constructor
@@ -25,7 +30,7 @@ class DB_Functions {
      * Storing new user
      * returns user details
      */
-    public function storeUser($name, $email, $password) {
+    public function createUser($name, $email, $password) {
         // Random confirmation code 
         $code=md5(uniqid(rand())); 
         $hash = $this->hashSSHA($password);
@@ -35,8 +40,18 @@ class DB_Functions {
         $result1 = mysql_query("INSERT INTO $this->$tbl_temp_user(email,code) VALUES('$email','$code')");
         // data in original user table
         $result2 = mysql_query("INSERT INTO $this->$tbl_user(name, email, password, salt) VALUES('$name', '$email', '$password', '$salt')");
+        // get uid for this user
+        $uid = mysql_query("SELECT uid FROM $this->$tbl_user WHERE email = '$email'") or die(mysql_error());
+        // create pwlucs_uid table to store pwlucs and corresponding chat id pairs
+        $temp_pwlucs_uid = CONCATE($tbl_pwlucs_,$uid);
+        $result3 = mysql_query("CREATE TABLE $temp_pwlucs_uid(uid INT(10) UNSIGNED,chat_id INT(10) UNSIGNED)");
+        // create pwcsul_uid table to store pwcsul
+        $temp_pwcsul_uid = CONCATE($tbl_pwcsul_,$uid);
+        $result4 = mysql_query("CREATE TABLE $temp_pwcsul_uid(uid INT(10) UNSIGNED)");
+        // insert the table names in user table
+        $result5 = mysql_query("INSERT INTO $this->$tbl_user(pwlucs_table_name, pwcsul_table_name) VALUES('$temp_pwlucs_uid', '$temp_pwcsul_uid')");
         // check for successful store
-        if ($result1 && $result2) {
+        if ($result1 && $result2 && $result3 && $result4 && $result5) {
             // successfully inserted and send confirmation link
             $topic = "confirmation"
             $sentmail = $this->sendConfirmationLink($email,$code,$topic);
@@ -112,18 +127,15 @@ class DB_Functions {
     }
  
     /**
-     * Get user details by email
+     * Get user details by uid
      * return user details array
      */
-    public function getUserDetailsByEmail($email) {
-        $result = mysql_query("SELECT * FROM $this->$tbl_user WHERE email = '$email'") or die(mysql_error());
+    public function getUserDetailsByUid($uid) {
+        $result = mysql_query("SELECT name,email,photo FROM $this->$tbl_user WHERE uid = '$uid'") or die(mysql_error());
         // check for result 
         $no_of_rows = mysql_num_rows($result);
         if ($no_of_rows == 1) {
-            $user = array();
-            $user["name"] = $result["name"];
-            $user["email"] = $result["email"];
-            return $user;
+            return $result;
         } else {
             // user not found
             return false;
@@ -131,11 +143,27 @@ class DB_Functions {
     }
  
     /**
-     * Get last known location by email
+     * Get user id from email
+     * return email
+     */
+    public function getUserUidByEmail($email) {
+        // person pid
+        $pid = mysql_query("SELECT uid FROM $this->$tbl_user WHERE email = '$email'") or die(mysql_error());
+        // check for result 
+        if ($pid) {
+            return $pid;
+        } else {
+            // user not found
+            return false;
+        }
+    }
+ 
+    /**
+     * Get last known location by uid
      * return user's last known location details array
      */
-    public function getLastKnownLocationByEmail($email) {
-        $result = mysql_query("SELECT loclat, loclong FROM $this->$tbl_user WHERE email = '$email'") or die(mysql_error());
+    public function getLastKnownLocationByUid($uid)) {
+        $result = mysql_query("SELECT loclat, loclong FROM $this->$tbl_user WHERE uid = '$uid'") or die(mysql_error());
         // check for result 
         $no_of_rows = mysql_num_rows($result);
         if ($no_of_rows == 1) {
@@ -150,27 +178,28 @@ class DB_Functions {
     }
  
     /**
-     * Get all users who can see my location
+     * Get all people who can see user's location
      * return user details array
      */
-    public function getAllUWCSMLByEmail($email) {
-        $result = mysql_query("SELECT uwcsml FROM $this->$tbl_user WHERE email = '$email'") or die(mysql_error());
+    public function getAllPWCSULByTableName($pwcsul_table_name) {
+        $result = mysql_query("SELECT uid FROM $pwcsul_table_name") or die(mysql_error());
         // check for result 
-        if ($result) {
-            // array of all uwcsml by email
-            $users = explode(',', $string);
+        $no_of_rows = mysql_num_rows($result);
+        if ($no_of_rows > 0) {
             // users node
-            $response["users"] = array();
+            $response["people"] = array();
             //looping through all the users emails
-            foreach ($users as $value) {
-                $result = mysql_query("SELECT name FROM $this->$tbl_user WHERE email = '$value'");
+            foreach ($result as $value) {
+                $result1 = $this->getUserDetailsByUid($value);
                 // temp user array
                 $user = array();
-                $user["name"] = $row["name"];
-                $user["email"] = $value;
+                $user["uid"] = $value;
+                $user["name"] = $result1["name"];
+                $user["email"] = $result1["email"];
+                $user["photo"] = $result1["photo"];
  
                 // push single user into final response array
-                array_push($response["users"], $user);
+                array_push($response["people"], $user);
             }
             return $response;
         } else {
@@ -180,29 +209,31 @@ class DB_Functions {
     }
  
     /**
-     * Get all users whose location i can see
+     * Get all people whose location user can see
      * return user details array
      */
-    public function getAllUWLICSByEmail($email) {
-        $result = mysql_query("SELECT uwlics FROM $this->$tbl_user WHERE email = '$email'") or die(mysql_error());
+    public function getAllPWLUCSByUid($uid) {
+        // pwlucs table name
+        $temp_pwlucs_uid = CONCATE($tbl_pwlucs_,$uid);
+        $result = mysql_query("SELECT * FROM $temp_pwlucs_uid") or die(mysql_error());
         // check for result 
-        if ($result) {
-            // array of all uwlics by email
-            $users = explode(',', $string);
+        if ($result > 0) {
             // users node
-            $response["users"] = array();
+            $response["people"] = array();
             //looping through all the users emails
-            foreach ($users as $value) {
-                $result = mysql_query("SELECT name, loclat, loclong FROM $this->$tbl_user WHERE email = '$value'");
+            foreach ($result["uid"] as $value) {
+                $result1 = mysql_query("SELECT name, email, gcm_regid, photo, loclat, loclong FROM $this->$tbl_user WHERE uid = '$value'");
                 // temp user array
                 $user = array();
+                $user["cpid"] = $result["cpid"];
                 $user["name"] = $row["name"];
-                $user["email"] = $value;
+                $user["email"] = $row["email"];
+                $user["gcm_regid"] = $row["ngcm_regid"];
                 $user["loclat"] = $row["loclat"];
                 $user["loclong"] = $row["loclong"];
  
                 // push single user into final response array
-                array_push($response["users"], $user);
+                array_push($response["people"], $user);
             }
             return $response;
         } else {
@@ -212,11 +243,43 @@ class DB_Functions {
     }
  
     /**
-     * Update location by email
+     * Get chat log of the particular day
+     * return chat log
+     */
+    public function getChatLogOfThatDay($cpid) {
+        // chat log table for this cpid
+        $temp_chat_log_cpid = CONCATE($tbl_chat_log_, $cpid);
+        $result = mysql_query("SELECT * FROM $temp_chat_log_cpid") or die(mysql_error());
+        // check for result 
+        $no_of_rows = mysql_num_rows($result);
+        if ($no_of_rows > 0) {
+            // users node
+            $response["chat_log"] = array();
+            //looping through all the users emails
+            foreach ($result as $value) {
+                // temp chat array
+                $chat = array();
+                $chat["sender"] = $row["sender"]
+                $chat["receiver"] = $row["receiver"];
+                $chat["message"] = $row["message"];
+                $chat["time_stamp"] = $row["time_stamp"];
+ 
+                // push single user into final response array
+                array_push($response["chat_log"], $chat);
+            }
+            return $response;
+        } else {
+            // user not found
+            return false;
+        }
+    }
+ 
+    /**
+     * Update location by uid
      * return true/false
      */
-    public function updateLocationByEmail($email,$loclat,$loclong) {
-        $result = mysql_query("UPDATE TABLE $this->$tbl_user SET loclat = '$loclat',loclong = '$loclong' WHERE email = '$email'") or die(mysql_error());
+    public function updateLocationByEmail($uid,$loclat,$loclong) {
+        $result = mysql_query("UPDATE TABLE $this->$tbl_user SET loclat = '$loclat',loclong = '$loclong' WHERE uid = '$uid'") or die(mysql_error());
         // check for result 
         if ($result) {
             return true;
@@ -227,20 +290,90 @@ class DB_Functions {
     }
  
     /**
-     * Add User who can see my location
+     * Upload user image
+     * return trur/false
+     */
+    public function uploadImage($uid,$image) {
+        // check for result 
+        if ($result) {
+            //supported file extensions
+            $file_exts = array("jpg", "jpeg", "png");
+            //file ext of uploaded file
+            $upload_exts = end(explode(".", $image["file"]["name"]));
+            //match the format
+            if ((($image["file"]["type"] == "image/jpg") || ($image["file"]["type"] == "image/jpeg") || ($image["file"]["type"] == "image/png"))
+                && ($image["file"]["size"] < 2000000) && in_array($upload_exts, $file_exts)) {
+                // check for error
+                if ($image["file"]["error"] > 0) {
+                    return false;
+                } else {
+                    //upload image
+                    move_uploaded_file($_FILES["file"]["tmp_name"],"/upload/" . $uid);
+                }
+            } else {
+                // image format not supported
+                return false;
+            }
+        } else {
+            // user not found
+            return false;
+        }
+    }
+ 
+    /**
+     * Add Person who can see user location
      * return true/false
      */
-    public function addUWCSMLByEmail($email,$uemail) {
-        // update uwcsml of Logined User
-        $comma = ",";
-        $temp_email = $comma.$email;
-        $temp_uemail = $comma.$uemail;
-        $result1 = mysql_query("UPDATE TABLE $this->$tbl_user SET uwcsml = CONCATE(uwcsml,'$temp_uemail') WHERE email = '$email'") or die(mysql_error());
-        // update uwlics of requested user
-        $result2 = mysql_query("UPDATE TABLE $this->$tbl_user SET uwlics = CONCATE(uwlics,'$temp_email') WHERE email = '$uemail'") or die(mysql_error());
+    public function addPWCSULByUid($uid1,$email2) {
+        // get other person uid
+        $uid2 = $this->getUserUidByEmail($email2);
+        // if a chat piar connnection already exist for this user pair
+        $CPC_exist = $this->doesCPCExist($uid2,$uid1);
+        if(!$CPC_exist){
+            // insert into person's pwlucs table
+            $temp_pwlucs_uid = CONCATE($tbl_pwlucs_,$pid);
+            $chat_id = $this->addNewChatPairCon($uid,$pid);
+            $result1 = mysql_query("INSERT INTO $temp_pwlucs_uid (uid, chat_id) VALUES ('$uid', '$chat_id')");
+            // inser into user's pwcsul table 
+            $temp_pwcsul_uid = CONCATE($tbl_pwcsul_,$uid);
+            $result2 = mysql_query("INSERT INTO $temp_pwcsul_uid (uid) VALUES ('$pid')");
+            // check for result 
+            if ($result1 && $result2) {
+                return true;
+            } else {
+                // user not found
+                return false;
+            }
+        } else{
+            $cpid = $this->getCPId($uid1,$uid2);
+            // insert into person's pwlucs table
+            $temp_pwlucs_uid = CONCATE($tbl_pwlucs_,$pid);
+            $result1 = mysql_query("INSERT INTO $temp_pwlucs_uid (uid, cpid) VALUES ('$uid', '$cpid')");
+            // inser into user's pwcsul table 
+            $temp_pwcsul_uid = CONCATE($tbl_pwcsul_,$uid);
+            $result2 = mysql_query("INSERT INTO $temp_pwcsul_uid (uid) VALUES ('$pid')");
+            // update con value in chat pair conncetion table for this cpid
+            $result3 = mysql_query("UPDATE TABLE $this->$tbl_chat_pair_con SET con = 2 WHERE cpid = '$cpid'") or die(mysql_error());
+            // check for result 
+            if ($result1 && $result2 && $result3) {
+                return true;
+            } else {
+                // user not found
+                return false;
+            }
+
+        }
+    }
+ 
+    /**
+     * Check if Chat pair connection already exist or not
+     * return true/false
+     */
+    public function doesCPCExist($uid2, $uid1) {
+        $temp_pwcsul_uid = CONCATE($tbl_pwcsul_,$uid2);
+        $cpc = mysql_query("SELECT COUNT(*) FROM $temp_pwcsul_uid WHERE uid = '$uid1'") or die(mysql_error());
         // check for result 
-        $no_of_rows = mysql_num_rows($result);
-        if ($result1 && $result2) {
+        if ($cpc) {
             return true;
         } else {
             // user not found
@@ -249,28 +382,84 @@ class DB_Functions {
     }
  
     /**
-     * Remove User who can see my location
+     * Get Chat pair id between user pair
+     * return chat pair id
+     */
+    public function getCPId($uid1, $uid2) {
+        $temp_pwlucs_uid = CONCATE($tbl_pwlucs_,$uid1);
+        $cpid = mysql_query("SELECT cpid FROM $temp_pwlucs_uid WHERE uid = '$uid2'") or die(mysql_error());
+        // check for result 
+        if ($cpid) {
+            return $cpid;
+        } else {
+            // user not found
+            return false;
+        }
+    }
+ 
+    /**
+     * Add new user chat connection
+     * return chat pair id
+     */
+    public function addNewChatPairCon($uid,$pid) {
+        $result = mysql_query("INSERT INTO $this->$tbl_chat_pair_con (u1,u2,con) VALUES ('$uid', '$pid', 1)");
+        // check for result 
+        if ($result) {
+            $cp_id = mysql_query("SELECT cp_id FROM TABLE $this->$tbl_chat_pair_con WHERE u1 = '$uid' && u2 = '$pid'") or die(mysql_error());
+            return $cp_id;
+        } else {
+            // user not found
+            return false;
+        }
+    }
+ 
+    /**
+     * Adjust cpc table
      * return true/false
      */
-    public function removeUWCSMLByEmail($email,$uemail) {
-        // add comma to emails
-        $comma = ",";
-        $temp_email = $comma.$email;
-        $temp_uemail = $comma.$uemail;
-        // get uwcsml of loginned user
-        $result1 = mysql_query("SELECT uwcsml FROM TABLE $this->$tbl_user WHERE email = '$email'") or die(mysql_error());
-        // replace the uemail in uwcsml with null
-        $new_uwcsml = str_replace($temp_uemail,"",$result1);
-        // update the uwcsml
-        $result2 = mysql_query("UPDATE TABLE $this->$tbl_user SET uwcsml = '$new_uwcsml' WHERE email = '$email'") or die(mysql_error());
-        // get uwlics of requested user
-        $result3 = mysql_query("SELECT uwlics FROM TABLE $this->$tbl_user WHERE email = '$uemail'") or die(mysql_error());
-        // replace the email in uwlics with null
-        $new_uwlics = str_replace($temp_email,"",$result3);
-        // update the uwlics
-        $result4 = mysql_query("UPDATE TABLE $this->$tbl_user SET uwlics = '$new_uwlics' WHERE email = '$uemail'") or die(mysql_error());
+    public function adjustCPC($cpid) {
+        $con = mysql_query("SELECT con FROM TABLE $this->$tbl_chat_pair_con WHERE cpid= '$cpid'") or die(mysql_error());
+        // if con = 1
+        if($con == 1){
+            // delete row from the cpc table
+            $delete = mysql_query("DELETE FROM TABLE $this->$tbl_chat_pair_con WHERE cpid= '$cpid'") or die(mysql_error());
+            if($delete){
+                return true;
+            } else {
+                return false;
+            }
+        } else {
+            // update the value of con to 1
+            $update = mysql_query("UPDATE TABLE $this->$tbl_chat_pair_con SET con = 1 WHERE cpid = '$cpid'") or die(mysql_error());
+            if($update){
+                return true;
+            } else {
+                return false;
+            }
+
+        }
+    }
+ 
+    /**
+     * Remove Person who can see user location
+     * return true/false
+     */
+    public function removePWCSULByUid($uid1,$email2) {
+        // get other person uid
+        $uid2 = $this->getUserUidByEmail($email2);
+        // delete row into user's pwcsul table 
+        $temp_pwcsul_uid = CONCATE($tbl_pwcsul_,$uid1);
+        $result1 = mysql_query("DELETE FROM $temp_pwcsul_uid WHERE uid = '$uid2'");
+        // person's pwlucs table
+        $temp_pwlucs_uid = CONCATE($tbl_pwlucs_,$uid2);
+        // get cpid first from person's pwlucs table
+        $cpid = mysql_query("SELECT cpid FROM $temp_pwlucs_uid WHERE uid = '$uid1'") or die(mysql_error());
+        // delete row into person's pwlucs table
+        $result2 = mysql_query("DELETE FROM $temp_pwlucs_uid WHERE uid = '$uid1'") or die(mysql_error());
+        // adjust the chat pair conncetion
+        $adjust_cpc = $this->adjustCPC($cpid);
         // check for results
-        if ($result2 && $result4) {
+        if ($result1 && $result2 && $adjust_cpc) {
             return true;
         } else {
             // user not found
@@ -282,14 +471,16 @@ class DB_Functions {
      * Send change password link
      */
     public function sendChangePasswordLink($email) {
+        // get user id
+        $uid = $this->getUserUidByEmail($email);
         // Random confirmation code 
         $code=md5(uniqid(rand())); 
         //data in change_password_user table
-        $result = mysql_query("INSERT INTO $this->$tbl_change_password_user(email,code) VALUES('$email','$code')");
+        $result = mysql_query("INSERT INTO $this->$tbl_change_password_user(uid,code) VALUES('$uid','$code')");
         // check for successful store
         if ($result) {
             // successfully inserted and send confirmation link
-            $topic = "change_password"
+            $topic = "change password"
             $sentmail = $this->sendConfirmationLink($email,$code,$topic);
             if($sentmail){
                 return true;
@@ -306,7 +497,7 @@ class DB_Functions {
      */
     public function setNewPassword($passkey,$password) {
         // Retrieve data from table where row that match this passkey 
-        $sql="SELECT * FROM $this->$tbl_change_password_user WHERE code ='$passkey'";
+        $sql="SELECT uid FROM $this->$tbl_change_password_user WHERE code ='$passkey'";
         $result=mysql_query($sql);
 
         // Count how many row has this passkey
@@ -315,16 +506,15 @@ class DB_Functions {
         // If successfully queried 
         if($result && $count==1){
             // if found this passkey in our database, retrieve data from table
-            $rows=mysql_fetch_array($result);
-            $email=$rows['email'];
+            $uid=$rows['uid'];
             // encrypt password
             $hash = $this->hashSSHA($password);
             $password = $hash["encrypted"]; // encrypted password
             $salt = $hash["salt"]; // salt
             // Update valid value in original table user" 
-            $sql1="UPDATE $this->$tbl_user SET password = '$password', salt = '$salt' WHERE email = '$email'";
+            $sql1="UPDATE $this->$tbl_user SET password = '$password', salt = '$salt' WHERE uid = '$uid'";
             $result1=mysql_query($sql1);
-            // Delete the entry against this email in change_password_user table" 
+            // Delete the entry against this passkey in change_password_user table" 
             $sql2="DELETE FROM $this->$tbl_change_password_user WHERE code='$passkey'";
             $result2=mysql_query($sql2);
             //check results
@@ -335,6 +525,23 @@ class DB_Functions {
             }
         } else {
             return false;
+        }
+    }
+ 
+    /**
+     * Send Chat message
+     */
+    public function sendChatMessage($chat) {
+        // chat log table name
+        $temp_chat_log_cpid = CONCATE($tbl_chat_log_, $chat['cpid']);
+        $time_stamp = gettimeofday();
+        $result = mysql_query("SELECT COUNT(*) FROM $this->$tbl_user WHERE email = '$email'");
+        if ($result) {
+            // user not existed 
+            return false;
+        } else {
+            // user existed
+            return true;
         }
     }
  

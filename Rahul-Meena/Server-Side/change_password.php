@@ -9,17 +9,14 @@ if(isset($_GET['passkey'])){
 	$passkey=$_GET['passkey'];
 
 	// Retrieve data from table where row that match this passkey 
-	$sql="SELECT * FROM $db->$tbl_change_password_user WHERE code ='$passkey'";
+	$sql="SELECT uid FROM $db->$tbl_change_password_user WHERE code ='$passkey'";
 	$result=mysql_query($sql);
 
 	// Count how many row has this passkey
 	$count=mysql_num_rows($result);
 
-	// If successfully queried 
+	// If successfully queried means password change request exist
 	if($result && $count==1){
-		// if found this passkey in our database, retrieve data from table
-		$rows=mysql_fetch_array($result);
-		$email=$rows['email'];
 		//imput for email
 		echo "
     	<form method="post">

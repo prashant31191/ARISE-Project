@@ -22,7 +22,7 @@ if (isset($_POST['name']) && isset($_POST['email']) && isset($_POST['password'])
     if(!$check){
 
         // inserting a new user
-        $result = $db->storeUser($name, $email, $password);
+        $result = $db->createUser($name, $email, $password);
  
         // check if user inserted or not
         if ($result) {

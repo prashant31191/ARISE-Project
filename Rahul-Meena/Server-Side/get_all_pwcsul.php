@@ -12,14 +12,17 @@ if (isset($_POST['email'])) {
 
     $email = $_POST['email'];
 
-    // look for all uwlics
-    // false = not existed
-    $response = $db->getAllUWCSMLByEmail($email);
+    // look for all pwcsul
+    $pwcsul = $db->getAllPWCSULByUid($uid);
 
     // list found
-    if($response){
+    if($pwcsul){
         // list found success
         $response["success"] = 1;
+        $response["people"] = array();
+
+        // push pwcsul into final response array
+        array_push($response["people"], $pwcsul["people"]);
     } else {
             // failed to insert row
             $response["success"] = 0;

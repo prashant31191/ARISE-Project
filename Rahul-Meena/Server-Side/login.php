@@ -19,11 +19,19 @@ if (isset($_POST['email']) && isset($_POST['password'])) {
         if ($user != false) {
             // user found
             $response["success"] = 1;
-            $response["id"] = $user["id"];
+            $response["user"] = array();
+            $response["user"]["uid"] = $user["uid"];
+            $response["user"]["gcm_regid"] = $user["gcm_regid"];
             $response["user"]["name"] = $user["name"];
-            $response["user"]["email"] = $user["email"];
-            $response["user"]["pwcsml"] = $user["pwcsml"];
-            $response["user"]["pwlics"] = $user["pwlics"];
+            $response["user"]["photo"] = $user["photo"];
+            $response["user"]["pwcsul_table_name"] = $user["pwcsul_table_name"];
+            $response["user"]["pwlucs_table_name"] = $user["pwlics_table_name"];
+            $pwcsul = $dv->getAllPWCSULByTableName($user["pwcsul_table_name"]);
+            if($pwcsul){
+                $response["people"] = array();
+                // push pwcsul into final response array
+                array_push($response["people"], $pwcsul["people"]);
+            }
             echo json_encode($response);
         } else {
             // user not found

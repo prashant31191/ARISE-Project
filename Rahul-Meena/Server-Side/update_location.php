@@ -8,15 +8,14 @@ $db = new DB_Functions();
 $response = array();
  
 // check for required fields
-if (isset($_POST['email']) && isset($_POST['loclat']) && isset($_POST['loclong'])) {
+if (isset($_POST['uid']) && isset($_POST['loclat']) && isset($_POST['loclong'])) {
 
-    $email = $_POST['email'];
+    $uid = $_POST['uid'];
     $loclat = $_POST['loclat'];
     $loclong = $_POST['loclong'];
 
-    // check if user already existed
-    // false = not existed
-    $location = $db->updateLocationByEmail($email,$loclat,$loclong);
+    // update location
+    $location = $db->updateLocationByUid($uid,$loclat,$loclong);
 
     // location found
     if($location){

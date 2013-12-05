@@ -1,4 +1,4 @@
-<?php // removeuwcsml.php
+<?php // adduwcsml.php
 
 // include db handler
 require_once 'db_functions.php';
@@ -8,20 +8,19 @@ $db = new DB_Functions();
 $response = array();
  
 // check for required fields
-if (isset($_POST['email']) && isset($_POST['uemail'])) {
+if (isset($_POST['uid1']) && isset($_POST['email2'])) {
 
-    $email = $_POST['email'];
-    $uemail = $_POST['uemail'];
+    $uid1 = $_POST['uid1'];
+    $email2 = $_POST['email2'];
 
-    // check if user already existed
-    // false = not existed
-    $remove = $db->removeUWCSMLByEmail($email,$uemail);
+    // add new person to pwcsul
+    $add = $db->addPWCSULByUid($uid,$pemail);
 
     // new user
-    if($remove){
+    if($add){
             // user successfully added
             $response["success"] = 1;
-            $response["message"] = "User successfully removed.";
+            $response["message"] = "User successfully added.";
     } else {
             // failed to insert row
             $response["success"] = 0;

@@ -1,4 +1,4 @@
-<?php // adduwcsml.php
+<?php // get_all_uwlics.php
 
 // include db handler
 require_once 'db_functions.php';
@@ -8,20 +8,22 @@ $db = new DB_Functions();
 $response = array();
  
 // check for required fields
-if (isset($_POST['email']) && isset($_POST['uemail'])) {
+if (isset($_POST['uid'])) {
 
-    $email = $_POST['email'];
-    $uemail = $_POST['uemail'];
+    $uid = $_POST['uid'];
 
-    // check if user already existed
+    // look for all pwlucs
     // false = not existed
-    $add = $db->addUWCSMLByEmail($email,$uemail);
+    $rpwlucs = $db->getAllPWLUCSByUid($uid);
 
-    // new user
-    if($add){
-            // user successfully added
-            $response["success"] = 1;
-            $response["message"] = "User successfully added.";
+    // list found
+    if($pwlucs){
+        // list found success
+        $response["success"] = 1;
+        $response["people"] = array();
+
+        // push pwlucs into final response array
+        array_push($response["people"], $pwlucs["people"]);
     } else {
             // failed to insert row
             $response["success"] = 0;

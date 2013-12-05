@@ -1,4 +1,4 @@
-<?php // get_last_known_location.php
+<?php // upload_image.php
 
 // include db handler
 require_once 'db_functions.php';
@@ -8,20 +8,19 @@ $db = new DB_Functions();
 $response = array();
  
 // check for required fields
-if (isset($_POST['uid'])) {
+if (isset($_FILES['image']) && isset($_POST['uid'])) {
 
-    $email = $_POST['uid'];
+    $image = $_FILES['image'];
+    $uid = $_POST['uid'];
 
-    // get last known location of user
-    $location = $db->getLastKnownLocationByUid($uid);
+    // upload image function
+    $upload = $db->uploadImage($uid,$image);
 
-    // location found
-    if($location){
-        // location details
+    // check
+    if($upload){
+        // success
         $response["success"] = 1;
-        $response["location"] = array();
-        // push single user into final response array
-        array_push($response["location"], $location);
+        $response["message"] = "Image successfully updated."
     } else {
             // failed to insert row
             $response["success"] = 0;

@@ -1,4 +1,4 @@
-<?php // get_all_uwlics.php
+<?php // removeuwcsml.php
 
 // include db handler
 require_once 'db_functions.php';
@@ -8,18 +8,19 @@ $db = new DB_Functions();
 $response = array();
  
 // check for required fields
-if (isset($_POST['email'])) {
+if (isset($_POST['uid1']) && isset($_POST['email2'])) {
 
-    $email = $_POST['email'];
+    $uid1 = $_POST['uid1'];
+    $email2 = $_POST['email2'];
 
-    // look for all uwlics
-    // false = not existed
-    $response = $db->getAllUWLICSByEmail($email);
+    // remove the particular person
+    $remove = $db->removePWCSULByEmail($uid1,$email2);
 
-    // list found
-    if($response){
-        // list found success
-        $response["success"] = 1;
+    // new user
+    if($remove){
+            // user successfully added
+            $response["success"] = 1;
+            $response["message"] = "User successfully removed.";
     } else {
             // failed to insert row
             $response["success"] = 0;
