@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <drawable name="dodger_blue">#1589FF</drawable>
+    <drawable name="deep_sky_blue">#3BB9FF</drawable>
+    <drawable name="camera_orange">#FF6702</drawable>
+</resources>

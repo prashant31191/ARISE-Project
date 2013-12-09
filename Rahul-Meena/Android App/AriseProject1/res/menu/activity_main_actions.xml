@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+     
+    <!-- More -->
+    <item android:id="@+id/action_more"
+          android:icon="@drawable/ic_drawer"
+          android:title="@string/action_more"
+          android:showAsAction="always" >
+    <menu >
+     
+    <!-- Log out -->
+    <item android:id="@+id/action_log_out"
+          android:title="@string/action_log_out" />
+     
+    <!-- Settings -->
+    <item android:id="@+id/action_settings"
+          android:title="@string/action_settings" />
+     
+    <!-- Help -->
+    <item android:id="@+id/action_help"
+          android:title="@string/action_help"/>
+    </menu>
+    </item>
+</menu>
