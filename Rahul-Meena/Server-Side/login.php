@@ -14,9 +14,10 @@ if (isset($_POST['email']) && isset($_POST['password'])) {
     $email = $_POST['email'];
     $password = $_POST['password'];
  
-        // check for user
-        $user = $db->getUserByEmailAndPassword($email, $password);
-        if ($user != false) {
+    // check for user
+    $user = $db->getUserByEmailAndPassword($email, $password);
+    if($user != false){
+        if ($user["state"] == 1) {
             // user found
             $response["success"] = 1;
             $response["user"] = array();
@@ -33,12 +34,23 @@ if (isset($_POST['email']) && isset($_POST['password'])) {
                 array_push($response["people"], $pwcsul["people"]);
             }
             echo json_encode($response);
-        } else {
+        } else if($user["state"] == 2) {
             // user not found
             $response["success"] = 0;
             $response["message"] = "Incorrect email or password!";
             echo json_encode($response);
+        } else if($user["state"] == 0) {
+            // user not found
+            $response["success"] = 0;
+            $response["message"] = "Account is not activated yet!";
+            echo json_encode($response);
         }
+    } else() {
+            // user not found
+            $response["success"] = 0;
+            $response["message"] = "Incorrect email or password!";
+            echo json_encode($response);
+    }
 } else {
     // required field is missing
     $response["success"] = 0;

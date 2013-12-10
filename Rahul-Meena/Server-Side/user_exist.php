@@ -1,4 +1,4 @@
-<?php //register.php
+<?php // user_exist.php
 
 // include db handler
 require_once 'db_functions.php';
@@ -8,25 +8,22 @@ $db = new DB_Functions();
 $response = array();
  
 // check for required fields
-if (isset($_POST['name']) && isset($_POST['email']) && isset($_POST['password']) && isset($_POST['gcm_regid'])) {
- 
-    $name = $_POST['name'];
+if (isset($_POST['email'])) {
+
     $email = $_POST['email'];
-    $password = $_POST['password'];
-    $gcm_regid = $_POST['gcm_regid'];
 
         // inserting a new user
-        $result = $db->createUser($name, $email, $password, $gcm_regid);
+        $check = $db->userExist($email);
  
         // check if user inserted or not
-        if ($result) {
+        if ($check) {
             // confirmation link is sent
             $response["success"] = 1;
-            $response["message"] = "User successfully registered and a confirmation link is sent to your email.";
+            $response["message"] = "User Email Already Exist";
         } else {
             // failed to insert row
             $response["success"] = 0;
-            $response["message"] = "Oops! An error occurred.";
+            $response["message"] = "New User Email.";
         }
 
 } else {

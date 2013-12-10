@@ -3,14 +3,14 @@
 class DB_Functions {
  
     private $db;
-    private const $tbl_temp_user = "temp_user";
-    private const $tbl_change_password_user = "change_password_user";
-    private const $tbl_user = "user";
-    private const $tbl_pwlucs_ = "pwlucs_";
-    private const $tbl_pwcsul_ = "pwcsul_";
-    private const $tbl_chat_pair_con = "chat_pair_con";
-    private const $tbl_chat_log_ = "chat_log_";
-    private const $tbl_static_var = "static_var";
+    public $tbl_user = "user";
+    public $tbl_temp_user = "temp_user";
+    public $tbl_change_password_user = "change_password_user";
+    public $tbl_pwlucs_ = "pwlucs_";
+    public $tbl_pwcsul_ = "pwcsul_";
+    public $tbl_chat_pair_con = "chat_pair_con";
+    public $tbl_chat_log_ = "chat_log_";
+    public $tbl_static_var = "static_var";
  
     //put your code here
     // constructor
@@ -30,37 +30,43 @@ class DB_Functions {
      * Storing new user
      * returns user details
      */
-    public function createUser($name, $email, $password) {
+    public function createUser($name, $email, $password, $gcm_regid) {
         // Random confirmation code 
         $code=md5(uniqid(rand())); 
         $hash = $this->hashSSHA($password);
         $password = $hash["encrypted"]; // encrypted password
         $salt = $hash["salt"]; // salt
-        //data in temp_user table
-        $result1 = mysql_query("INSERT INTO $this->$tbl_temp_user(email,code) VALUES('$email','$code')");
         // data in original user table
-        $result2 = mysql_query("INSERT INTO $this->$tbl_user(name, email, password, salt) VALUES('$name', '$email', '$password', '$salt')");
+        $result1 = mysql_query("INSERT INTO $this->tbl_user(name, email, password, salt, gcm_regid) VALUES('$name', '$email', '$password', '$salt', '$gcm_regid')");
         // get uid for this user
-        $uid = mysql_query("SELECT uid FROM $this->$tbl_user WHERE email = '$email'") or die(mysql_error());
+        $sql = mysql_query("SELECT uid FROM $this->tbl_user WHERE email = '$email'");
+        $row = mysql_fetch_array($sql);
+        $uid = $row['uid'];
+        echo $uid;
+        //data in temp_user table
+        $result2 = mysql_query("INSERT INTO $this->tbl_temp_user(uid,code) VALUES('$uid','$code')");
         // create pwlucs_uid table to store pwlucs and corresponding chat id pairs
-        $temp_pwlucs_uid = CONCATE($tbl_pwlucs_,$uid);
+        $temp_pwlucs_uid = $this->tbl_pwlucs_.$uid;
+        echo $temp_pwlucs_uid;
         $result3 = mysql_query("CREATE TABLE $temp_pwlucs_uid(uid INT(10) UNSIGNED,chat_id INT(10) UNSIGNED)");
         // create pwcsul_uid table to store pwcsul
-        $temp_pwcsul_uid = CONCATE($tbl_pwcsul_,$uid);
+        $temp_pwcsul_uid = $this->tbl_pwcsul_.$uid;
+        echo $temp_pwcsul_uid;
         $result4 = mysql_query("CREATE TABLE $temp_pwcsul_uid(uid INT(10) UNSIGNED)");
         // insert the table names in user table
-        $result5 = mysql_query("INSERT INTO $this->$tbl_user(pwlucs_table_name, pwcsul_table_name) VALUES('$temp_pwlucs_uid', '$temp_pwcsul_uid')");
+        $result5 = mysql_query("INSERT INTO $this->tbl_user(pwlucs_table_name, pwcsul_table_name) VALUES('$temp_pwlucs_uid', '$temp_pwcsul_uid')");
         // check for successful store
         if ($result1 && $result2 && $result3 && $result4 && $result5) {
             // successfully inserted and send confirmation link
-            $topic = "confirmation"
-            $sentmail = $this->sendConfirmationLink($email,$code,$topic);
-            if($sentmail){
+            $topic = "confirmation";
+            $mail = $this->sendConfirmationLink($email,$code,$topic);
+            if($mail){
                 return true;
             } else{
                 return false;
             }
         } else {
+            echo "result prob";
             return false;
         }
     }
@@ -77,19 +83,19 @@ class DB_Functions {
         $to=$email;
 
         // Your subject
-        $subject="Your '$topic' link here";
+        $subject="Your $topic link";
 
         // From
         $header="from: Rahul Meena <rahul184.iitr@gmail.com>";
 
         // Your message
-        $message="Your '$topic' link \r\n";
+        $message="Your $topic link \r\n";
         if($topic == "confirmation"){
             $message.="Click on this link to activate your account \r\n";
-            $message.="http://10.0.2.2/users/confirmation.php?passkey='$code'";
+            $message.="http://10.0.2.2/users/confirmation.php?passkey=$code";
         } else {
             $message.="Click on this link to change password of your account \r\n";
-            $message.="http://10.0.2.2/users/change_password.php?passkey='$code'";
+            $message.="http://10.0.2.2/users/change_password.php?passkey=$code";
         }
         // send email
         $sentmail = mail($to,$subject,$message,$header);
@@ -107,7 +113,9 @@ class DB_Functions {
      * Get user by email and password
      */
     public function getUserByEmailAndPassword($email, $password) {
-        $result = mysql_query("SELECT * FROM $this->$tbl_user WHERE email = '$email' AND valid = 1") or die(mysql_error());
+        // state: 0 - invalid account, 1 - login, 2 - invalid password or email
+
+        $result = mysql_query("SELECT * FROM $this->tbl_user WHERE email = '$email'") or die(mysql_error());
         // check for result 
         $no_of_rows = mysql_num_rows($result);
         if ($no_of_rows > 0) {
@@ -115,9 +123,21 @@ class DB_Functions {
             $salt = $result['salt'];
             $password = $result['password'];
             $hash = $this->checkhashSSHA($salt, $password);
-            // check for password equality
-            if ($password == $hash) {
-                // user authentication details are correct
+            // check for account being valid
+            if($result["valid"] == 1){
+                // check for password equality
+                if ($password == $hash) {
+                    // user authentication details are correct
+                    $result["state"] = 1;
+                    return $result;
+                } else {
+                    // password did not match
+                    $result["state"] = 2;
+                    return $result;
+                }
+            } else {
+                // invalid account(not activated)
+                $result["state"] = 0;
                 return $result;
             }
         } else {
@@ -131,7 +151,7 @@ class DB_Functions {
      * return user details array
      */
     public function getUserDetailsByUid($uid) {
-        $result = mysql_query("SELECT name,email,photo FROM $this->$tbl_user WHERE uid = '$uid'") or die(mysql_error());
+        $result = mysql_query("SELECT name,email,photo FROM $this->tbl_user WHERE uid = '$uid'") or die(mysql_error());
         // check for result 
         $no_of_rows = mysql_num_rows($result);
         if ($no_of_rows == 1) {
@@ -148,7 +168,7 @@ class DB_Functions {
      */
     public function getUserUidByEmail($email) {
         // person pid
-        $pid = mysql_query("SELECT uid FROM $this->$tbl_user WHERE email = '$email'") or die(mysql_error());
+        $pid = mysql_query("SELECT uid FROM $this->tbl_user WHERE email = '$email'") or die(mysql_error());
         // check for result 
         if ($pid) {
             return $pid;
@@ -162,8 +182,8 @@ class DB_Functions {
      * Get last known location by uid
      * return user's last known location details array
      */
-    public function getLastKnownLocationByUid($uid)) {
-        $result = mysql_query("SELECT loclat, loclong FROM $this->$tbl_user WHERE uid = '$uid'") or die(mysql_error());
+    public function getLastKnownLocationByUid($uid) {
+        $result = mysql_query("SELECT loclat, loclong FROM $this->tbl_user WHERE uid = '$uid'") or die(mysql_error());
         // check for result 
         $no_of_rows = mysql_num_rows($result);
         if ($no_of_rows == 1) {
@@ -214,7 +234,7 @@ class DB_Functions {
      */
     public function getAllPWLUCSByUid($uid) {
         // pwlucs table name
-        $temp_pwlucs_uid = CONCATE($tbl_pwlucs_,$uid);
+        $temp_pwlucs_uid = CONCATE($this->tbl_pwlucs_,$uid);
         $result = mysql_query("SELECT * FROM $temp_pwlucs_uid") or die(mysql_error());
         // check for result 
         if ($result > 0) {
@@ -222,7 +242,7 @@ class DB_Functions {
             $response["people"] = array();
             //looping through all the users emails
             foreach ($result["uid"] as $value) {
-                $result1 = mysql_query("SELECT name, email, gcm_regid, photo, loclat, loclong FROM $this->$tbl_user WHERE uid = '$value'");
+                $result1 = mysql_query("SELECT name, email, gcm_regid, photo, loclat, loclong FROM $this->tbl_user WHERE uid = '$value'");
                 // temp user array
                 $user = array();
                 $user["cpid"] = $result["cpid"];
@@ -248,7 +268,7 @@ class DB_Functions {
      */
     public function getChatLogOfThatDay($cpid) {
         // chat log table for this cpid
-        $temp_chat_log_cpid = CONCATE($tbl_chat_log_, $cpid);
+        $temp_chat_log_cpid = CONCATE($this->tbl_chat_log_, $cpid);
         $result = mysql_query("SELECT * FROM $temp_chat_log_cpid") or die(mysql_error());
         // check for result 
         $no_of_rows = mysql_num_rows($result);
@@ -259,7 +279,7 @@ class DB_Functions {
             foreach ($result as $value) {
                 // temp chat array
                 $chat = array();
-                $chat["sender"] = $row["sender"]
+                $chat["sender"] = $row["sender"];
                 $chat["receiver"] = $row["receiver"];
                 $chat["message"] = $row["message"];
                 $chat["time_stamp"] = $row["time_stamp"];
@@ -279,7 +299,7 @@ class DB_Functions {
      * return true/false
      */
     public function updateLocationByEmail($uid,$loclat,$loclong) {
-        $result = mysql_query("UPDATE TABLE $this->$tbl_user SET loclat = '$loclat',loclong = '$loclong' WHERE uid = '$uid'") or die(mysql_error());
+        $result = mysql_query("UPDATE TABLE $this->tbl_user SET loclat = '$loclat',loclong = '$loclong' WHERE uid = '$uid'") or die(mysql_error());
         // check for result 
         if ($result) {
             return true;
@@ -331,11 +351,11 @@ class DB_Functions {
         $CPC_exist = $this->doesCPCExist($uid2,$uid1);
         if(!$CPC_exist){
             // insert into person's pwlucs table
-            $temp_pwlucs_uid = CONCATE($tbl_pwlucs_,$pid);
+            $temp_pwlucs_uid = CONCATE($this->tbl_pwlucs_,$pid);
             $chat_id = $this->addNewChatPairCon($uid,$pid);
             $result1 = mysql_query("INSERT INTO $temp_pwlucs_uid (uid, chat_id) VALUES ('$uid', '$chat_id')");
             // inser into user's pwcsul table 
-            $temp_pwcsul_uid = CONCATE($tbl_pwcsul_,$uid);
+            $temp_pwcsul_uid = CONCATE($this->tbl_pwcsul_,$uid);
             $result2 = mysql_query("INSERT INTO $temp_pwcsul_uid (uid) VALUES ('$pid')");
             // check for result 
             if ($result1 && $result2) {
@@ -347,13 +367,13 @@ class DB_Functions {
         } else{
             $cpid = $this->getCPId($uid1,$uid2);
             // insert into person's pwlucs table
-            $temp_pwlucs_uid = CONCATE($tbl_pwlucs_,$pid);
+            $temp_pwlucs_uid = CONCATE($this->tbl_pwlucs_,$pid);
             $result1 = mysql_query("INSERT INTO $temp_pwlucs_uid (uid, cpid) VALUES ('$uid', '$cpid')");
             // inser into user's pwcsul table 
-            $temp_pwcsul_uid = CONCATE($tbl_pwcsul_,$uid);
+            $temp_pwcsul_uid = CONCATE($this->tbl_pwcsul_,$uid);
             $result2 = mysql_query("INSERT INTO $temp_pwcsul_uid (uid) VALUES ('$pid')");
             // update con value in chat pair conncetion table for this cpid
-            $result3 = mysql_query("UPDATE TABLE $this->$tbl_chat_pair_con SET con = 2 WHERE cpid = '$cpid'") or die(mysql_error());
+            $result3 = mysql_query("UPDATE TABLE $this->tbl_chat_pair_con SET con = 2 WHERE cpid = '$cpid'") or die(mysql_error());
             // check for result 
             if ($result1 && $result2 && $result3) {
                 return true;
@@ -370,7 +390,7 @@ class DB_Functions {
      * return true/false
      */
     public function doesCPCExist($uid2, $uid1) {
-        $temp_pwcsul_uid = CONCATE($tbl_pwcsul_,$uid2);
+        $temp_pwcsul_uid = CONCATE($this->tbl_pwcsul_,$uid2);
         $cpc = mysql_query("SELECT COUNT(*) FROM $temp_pwcsul_uid WHERE uid = '$uid1'") or die(mysql_error());
         // check for result 
         if ($cpc) {
@@ -386,7 +406,7 @@ class DB_Functions {
      * return chat pair id
      */
     public function getCPId($uid1, $uid2) {
-        $temp_pwlucs_uid = CONCATE($tbl_pwlucs_,$uid1);
+        $temp_pwlucs_uid = CONCATE($this->tbl_pwlucs_,$uid1);
         $cpid = mysql_query("SELECT cpid FROM $temp_pwlucs_uid WHERE uid = '$uid2'") or die(mysql_error());
         // check for result 
         if ($cpid) {
@@ -402,11 +422,15 @@ class DB_Functions {
      * return chat pair id
      */
     public function addNewChatPairCon($uid,$pid) {
-        $result = mysql_query("INSERT INTO $this->$tbl_chat_pair_con (u1,u2,con) VALUES ('$uid', '$pid', 1)");
-        // check for result 
-        if ($result) {
-            $cp_id = mysql_query("SELECT cp_id FROM TABLE $this->$tbl_chat_pair_con WHERE u1 = '$uid' && u2 = '$pid'") or die(mysql_error());
-            return $cp_id;
+        $result1 = mysql_query("INSERT INTO $this->tbl_chat_pair_con (u1,u2,con) VALUES ('$uid', '$pid', 1)");
+        // get cpid for the just created chat pair
+        $cpid = mysql_query("SELECT cpid FROM TABLE $this->tbl_chat_pair_con WHERE u1 = '$uid' && u2 = '$pid'") or die(mysql_error());
+        // create corresponding chat table
+        $temp_chat_log_cpid = CONCATE($this->tbl_chat_log_,$cpid);
+        $result2 = mysql_query("CREATE TABLE $temp_chat_log_cpid(sender text, receiver text, message text, date_time_stamp timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP");
+        // check for results
+        if ($result1 && $result2) {
+            return $cpid;
         } else {
             // user not found
             return false;
@@ -418,11 +442,11 @@ class DB_Functions {
      * return true/false
      */
     public function adjustCPC($cpid) {
-        $con = mysql_query("SELECT con FROM TABLE $this->$tbl_chat_pair_con WHERE cpid= '$cpid'") or die(mysql_error());
+        $con = mysql_query("SELECT con FROM TABLE $this->tbl_chat_pair_con WHERE cpid= '$cpid'") or die(mysql_error());
         // if con = 1
         if($con == 1){
             // delete row from the cpc table
-            $delete = mysql_query("DELETE FROM TABLE $this->$tbl_chat_pair_con WHERE cpid= '$cpid'") or die(mysql_error());
+            $delete = mysql_query("DELETE FROM TABLE $this->tbl_chat_pair_con WHERE cpid= '$cpid'") or die(mysql_error());
             if($delete){
                 return true;
             } else {
@@ -430,7 +454,7 @@ class DB_Functions {
             }
         } else {
             // update the value of con to 1
-            $update = mysql_query("UPDATE TABLE $this->$tbl_chat_pair_con SET con = 1 WHERE cpid = '$cpid'") or die(mysql_error());
+            $update = mysql_query("UPDATE TABLE $this->tbl_chat_pair_con SET con = 1 WHERE cpid = '$cpid'") or die(mysql_error());
             if($update){
                 return true;
             } else {
@@ -448,10 +472,10 @@ class DB_Functions {
         // get other person uid
         $uid2 = $this->getUserUidByEmail($email2);
         // delete row into user's pwcsul table 
-        $temp_pwcsul_uid = CONCATE($tbl_pwcsul_,$uid1);
+        $temp_pwcsul_uid = CONCATE($this->tbl_pwcsul_,$uid1);
         $result1 = mysql_query("DELETE FROM $temp_pwcsul_uid WHERE uid = '$uid2'");
         // person's pwlucs table
-        $temp_pwlucs_uid = CONCATE($tbl_pwlucs_,$uid2);
+        $temp_pwlucs_uid = CONCATE($this->tbl_pwlucs_,$uid2);
         // get cpid first from person's pwlucs table
         $cpid = mysql_query("SELECT cpid FROM $temp_pwlucs_uid WHERE uid = '$uid1'") or die(mysql_error());
         // delete row into person's pwlucs table
@@ -476,11 +500,11 @@ class DB_Functions {
         // Random confirmation code 
         $code=md5(uniqid(rand())); 
         //data in change_password_user table
-        $result = mysql_query("INSERT INTO $this->$tbl_change_password_user(uid,code) VALUES('$uid','$code')");
+        $result = mysql_query("INSERT INTO $this->tbl_change_password_user(uid,code) VALUES('$uid','$code')");
         // check for successful store
         if ($result) {
             // successfully inserted and send confirmation link
-            $topic = "change password"
+            $topic = "change password";
             $sentmail = $this->sendConfirmationLink($email,$code,$topic);
             if($sentmail){
                 return true;
@@ -497,7 +521,7 @@ class DB_Functions {
      */
     public function setNewPassword($passkey,$password) {
         // Retrieve data from table where row that match this passkey 
-        $sql="SELECT uid FROM $this->$tbl_change_password_user WHERE code ='$passkey'";
+        $sql="SELECT uid FROM $this->tbl_change_password_user WHERE code ='$passkey'";
         $result=mysql_query($sql);
 
         // Count how many row has this passkey
@@ -512,10 +536,10 @@ class DB_Functions {
             $password = $hash["encrypted"]; // encrypted password
             $salt = $hash["salt"]; // salt
             // Update valid value in original table user" 
-            $sql1="UPDATE $this->$tbl_user SET password = '$password', salt = '$salt' WHERE uid = '$uid'";
+            $sql1="UPDATE $this->tbl_user SET password = '$password', salt = '$salt' WHERE uid = '$uid'";
             $result1=mysql_query($sql1);
             // Delete the entry against this passkey in change_password_user table" 
-            $sql2="DELETE FROM $this->$tbl_change_password_user WHERE code='$passkey'";
+            $sql2="DELETE FROM $this->tbl_change_password_user WHERE code='$passkey'";
             $result2=mysql_query($sql2);
             //check results
             if($result1 && $result2){
@@ -532,10 +556,14 @@ class DB_Functions {
      * Send Chat message
      */
     public function sendChatMessage($chat) {
+        // caht details
+        $sender = $chat["sender"];
+        $receiver = $chat["receiver"];
+        $message = $chat["message"];
         // chat log table name
-        $temp_chat_log_cpid = CONCATE($tbl_chat_log_, $chat['cpid']);
-        $time_stamp = gettimeofday();
-        $result = mysql_query("SELECT COUNT(*) FROM $this->$tbl_user WHERE email = '$email'");
+        $temp_chat_log_cpid = CONCATE($this->tbl_chat_log_, $chat['cpid']);
+        // insert new message entry
+        $result = mysql_query("INSERT INTO $temp_chat_log_cpid (sender,receiver,message,time_stamp) VALUES('$sender', $receiver, '$message')");
         if ($result) {
             // user not existed 
             return false;
@@ -548,14 +576,15 @@ class DB_Functions {
     /**
      * Check user is existed or not
      */
-    public function isUserExisted($email) {
-        $result = mysql_query("SELECT COUNT(*) FROM $this->$tbl_user WHERE email = '$email'");
-        if ($result) {
-            // user not existed 
-            return false;
+    public function userExist($email) {
+        $result = mysql_query("SELECT COUNT(*) FROM $this->tbl_user WHERE email = '$email'");
+        $row = mysql_fetch_array($result);
+        if ($row[0]  == 1) {
+            // user email exist
+            return true;
         } else {
             // user existed
-            return true;
+            return false;
         }
     }
  

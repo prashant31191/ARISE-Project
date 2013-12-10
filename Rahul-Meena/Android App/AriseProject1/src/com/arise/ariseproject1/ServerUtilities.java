@@ -1,6 +1,6 @@
 package com.arise.ariseproject1;
 
-import static com.arise.ariseproject1.CommonUtilities.SERVER_URL;
+import static com.arise.ariseproject1.CommonUtilities.SERVER_REGISTER_URL;
 import static com.arise.ariseproject1.CommonUtilities.TAG;
 import static com.arise.ariseproject1.CommonUtilities.displayMessage;
 
@@ -32,7 +32,7 @@ public final class ServerUtilities {
     */
    static void register(final Context context, String full_name, String email, String password, final String regId) {
        Log.i(TAG, "registering device (regId = " + regId + ")");
-       String serverUrl = SERVER_URL;
+       String serverUrl = SERVER_REGISTER_URL;
        Map<String, String> params = new HashMap<String, String>();
        params.put("name", full_name);
        params.put("email", email);
@@ -84,24 +84,13 @@ public final class ServerUtilities {
     */
    static void unregister(final Context context, final String regId) {
        Log.i(TAG, "unregistering device (regId = " + regId + ")");
-       String serverUrl = SERVER_URL + "/unregister";
+       String serverUrl = SERVER_REGISTER_URL + "/unregister";
        Map<String, String> params = new HashMap<String, String>();
        params.put("regId", regId);
-       try {
-           post(serverUrl, params);
-           GCMRegistrar.setRegisteredOnServer(context, false);
-           String message = context.getString(R.string.server_unregistered);
-           CommonUtilities.displayMessage(context, message);
-       } catch (IOException e) {
-           // At this point the device is unregistered from GCM, but still
-           // registered in the server.
-           // We could try to unregister again, but it is not necessary:
-           // if the server tries to send a message to the device, it will get
-           // a "NotRegistered" error message and should unregister the device.
-           String message = context.getString(R.string.server_unregister_error,
-                   e.getMessage());
-           CommonUtilities.displayMessage(context, message);
-       }
+       //  post(serverUrl, params);
+	   GCMRegistrar.setRegisteredOnServer(context, false);
+	   String message = context.getString(R.string.server_unregistered);
+	   CommonUtilities.displayMessage(context, message);
    }
 
    /**

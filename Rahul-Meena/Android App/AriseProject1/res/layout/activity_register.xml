@@ -53,6 +53,15 @@
                 android:ems="10"
                 android:hint="@string/email"
                 android:inputType="textEmailAddress" />
+
+            <TextView
+                android:id="@+id/textView_regsiter_activity_email_error"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:visibility="gone"
+                android:textColor="#ff0000"
+                android:text="@string/email_error" />
         </LinearLayout>
 
         <LinearLayout
@@ -85,6 +94,15 @@
             android:background="@drawable/selector_send_button"
             android:text="@string/register"
             android:textColor="#ffffff" />
+
+            <TextView
+                android:id="@+id/textView_regsiter_activity_device_error"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:visibility="gone"
+                android:textColor="#ff0000"
+                android:text="@string/device_error" />
     </LinearLayout>
 
 </LinearLayout>

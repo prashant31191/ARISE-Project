@@ -48,6 +48,8 @@
     <string name="first_name">First Name</string>
     <string name="last_name">Last Name</string>
     <string name="email">Email</string>
+    <string name="email_error">This email is already registered!</string>
+    <string name="device_error">The current email account associated with this Device Settings is already registered with us!</string>
     <string name="password">Password</string>
     <string name="title_activity_registration_result">RegistrationResultActivity</string>
 

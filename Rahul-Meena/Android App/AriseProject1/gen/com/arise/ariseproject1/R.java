@@ -41,31 +41,34 @@ public final class R {
         public static final int selector_send_button=0x7f02000e;
     }
     public static final class id {
-        public static final int TextView1=0x7f080006;
-        public static final int action_help=0x7f080018;
-        public static final int action_log_out=0x7f080016;
-        public static final int action_more=0x7f080015;
-        public static final int action_settings=0x7f080017;
-        public static final int button1=0x7f08000b;
-        public static final int button_index_activity_log_in=0x7f080001;
+        public static final int TextView1=0x7f080007;
+        public static final int action_help=0x7f08001b;
+        public static final int action_log_out=0x7f080019;
+        public static final int action_more=0x7f080018;
+        public static final int action_settings=0x7f08001a;
+        public static final int button1=0x7f08000c;
+        public static final int button_index_activity_log_in=0x7f080002;
         public static final int button_index_activity_register=0x7f080000;
-        public static final int button_log_in_activity_register=0x7f080003;
-        public static final int button_main_activity_log_in=0x7f080008;
-        public static final int button_main_activity_register=0x7f080007;
-        public static final int button_register_activity_register=0x7f080013;
-        public static final int editText2=0x7f080004;
-        public static final int editText3=0x7f080005;
-        public static final int editText_register_activity_email=0x7f080011;
-        public static final int editText_register_activity_first_name=0x7f08000f;
-        public static final int editText_register_activity_last_name=0x7f080010;
-        public static final int editText_register_activity_password=0x7f080012;
-        public static final int imageView1=0x7f080009;
-        public static final int listView1=0x7f08000d;
-        public static final int spinner1=0x7f08000e;
-        public static final int textView1=0x7f080002;
-        public static final int textView2=0x7f08000a;
-        public static final int textView3=0x7f08000c;
-        public static final int textView_regsitration_result_output=0x7f080014;
+        public static final int button_log_in_activity_register=0x7f080004;
+        public static final int button_main_activity_log_in=0x7f080009;
+        public static final int button_main_activity_register=0x7f080008;
+        public static final int button_register_activity_register=0x7f080015;
+        public static final int button_unregister=0x7f080001;
+        public static final int editText2=0x7f080005;
+        public static final int editText3=0x7f080006;
+        public static final int editText_register_activity_email=0x7f080012;
+        public static final int editText_register_activity_first_name=0x7f080010;
+        public static final int editText_register_activity_last_name=0x7f080011;
+        public static final int editText_register_activity_password=0x7f080014;
+        public static final int imageView1=0x7f08000a;
+        public static final int listView1=0x7f08000e;
+        public static final int spinner1=0x7f08000f;
+        public static final int textView1=0x7f080003;
+        public static final int textView2=0x7f08000b;
+        public static final int textView3=0x7f08000d;
+        public static final int textView_regsiter_activity_device_error=0x7f080016;
+        public static final int textView_regsiter_activity_email_error=0x7f080013;
+        public static final int textView_regsitration_result_output=0x7f080017;
     }
     public static final class layout {
         public static final int activity_index=0x7f030000;
@@ -98,7 +101,9 @@ public final class R {
         public static final int already_registered=0x7f050005;
         public static final int app_name=0x7f050000;
         public static final int btn_send_message=0x7f05001b;
+        public static final int device_error=0x7f050028;
         public static final int email=0x7f050026;
+        public static final int email_error=0x7f050027;
         public static final int error_config=0x7f050004;
         /**  Register Activity 
          */
@@ -117,7 +122,7 @@ public final class R {
         public static final int options_exit=0x7f050014;
         public static final int options_register=0x7f050011;
         public static final int options_unregister=0x7f050012;
-        public static final int password=0x7f050027;
+        public static final int password=0x7f050029;
         /**  Index Activity 
          */
         public static final int register=0x7f050022;
@@ -136,7 +141,7 @@ public final class R {
         public static final int title_activity_profile=0x7f050018;
         public static final int title_activity_radar=0x7f050019;
         public static final int title_activity_register=0x7f050015;
-        public static final int title_activity_registration_result=0x7f050028;
+        public static final int title_activity_registration_result=0x7f05002a;
         public static final int title_activity_temp_main=0x7f050016;
     }
     public static final class style {

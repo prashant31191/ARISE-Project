@@ -22,15 +22,14 @@ public class RegistrationResultActivity extends Activity {
        String name = i.getStringExtra("name");
        String email = i.getStringExtra("email");
        boolean success = i.getBooleanExtra("success", false);
-       
        // referencing ui elements
        tv_output = (TextView) findViewById(R.id.textView_regsitration_result_output);
        
-       // if success is true
+       // if success
        if(success){
-    	   tv_output.setText("Dear"+" "+name+", "+"your email"+" "+email+" "+"is successfully registered!");
-       } else{
-    	   tv_output.setText("Dear"+" "+name+", "+"your email"+" "+email+" "+"is already registered!"+" "+"Please try with another email account");
+    	   tv_output.setText("Dear "+name+", your account is successfully registered and a confirmation link is sent to your following email "+email+".\n"+"Please verify your account before Signing In.");
+       } else {
+    	   tv_output.setText("Unfortunately an error occured! Please try again.");
        }
 	}
 

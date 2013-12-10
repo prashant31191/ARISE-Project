@@ -9,7 +9,7 @@ if(isset($_GET['passkey'])){
 	$passkey=$_GET['passkey'];
 
 	// Retrieve data from table where row that match this passkey 
-	$sql="SELECT * FROM $db->$tbl_temp_user WHERE code ='$passkey'";
+	$sql="SELECT * FROM $db->tbl_temp_user WHERE code ='$passkey'";
 	$result=mysql_query($sql);
 
 	// Count how many row has this passkey
@@ -19,14 +19,14 @@ if(isset($_GET['passkey'])){
 	if($result && $count==1){
 		// if found this passkey in our database, retrieve data from table
 		$rows=mysql_fetch_array($result);
-		$email=$rows['email'];
+		$uid=$rows['uid'];
 		// set Valid column to 1 and Code to 0
 		$valid= 1;
 		// Update valid value in original table user" 
-		$sql1="UPDATE $db->$tbl_user SET valid = 1 WHERE email = '$email'";
+		$sql1="UPDATE $db->tbl_user SET valid = 1 WHERE uid = '$uid'";
 		$result1=mysql_query($sql1);
 		// Delete the entry against this email in temp_user table" 
-		$sql2="DELETE FROM $db->$tbl_temp_user WHERE code='$passkey'";
+		$sql2="DELETE FROM $db->tbl_temp_user WHERE code='$passkey'";
 		$result2=mysql_query($sql2);
 	} else{
 		echo "No such account exist!";
