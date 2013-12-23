@@ -11,6 +11,32 @@ public final class CommonUtilities {
     // give your server user exist url here
     static final String SERVER_USER_EXIST_URL = "http://10.0.2.2/users/user_exist.php";
     
+    // give your server user exist url here
+    static final String SERVER_LOG_IN_URL = "http://10.0.2.2/users/log_in.php";
+    
+    // give your server user exist url here
+    public static final String SERVER_IMAGE_URL = "http://10.0.2.2/users/photo/";
+    
+  	// JSON Node names
+    static final String TAG_SUCCESS = "success";
+    
+  	// TAGS
+    public static final String TAG_UID = "uid";
+    
+    public static final String TAG_NAME = "name";
+    
+    public static final String TAG_EMAIL = "email";
+    
+    public static final String TAG_LOC_LONG = "loclong";
+    
+    public static final String TAG_LOC_LAT = "loclat";
+    
+    public static final String TAG_IMAGE = "email";
+    
+    public static final String TAG_PWCSUL = "pwcsul";
+    
+    public static final String TAG_PWLUCS = "pwlucs";
+    
     // Google project id
     static final String SENDER_ID = "850154662912"; 
  

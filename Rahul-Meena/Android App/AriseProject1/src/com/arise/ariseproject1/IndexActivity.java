@@ -18,6 +18,9 @@ public class IndexActivity extends Activity implements OnClickListener {
 	Button b_register,b_log_in, b_unreg;
 	
 	Intent intent;
+	
+    // Session Manager Class
+    SessionManager session;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -34,7 +37,14 @@ public class IndexActivity extends Activity implements OnClickListener {
 		b_register.setOnClickListener(this);
 		b_unreg.setOnClickListener(this);
 		b_log_in.setOnClickListener(this);
-		
+
+
+        /**
+         * Call this function whenever you want to check user login
+         * This will redirect user to LoginActivity is he is not
+         * logged in
+         * */
+		session.checkLogin();
 	}
 
 	@Override

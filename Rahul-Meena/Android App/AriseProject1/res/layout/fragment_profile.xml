@@ -22,20 +22,20 @@
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="3"
+                android:layout_weight="2.5"
                 android:orientation="vertical" >
 
                 <ImageView
-                    android:id="@+id/imageView1"
+                    android:id="@+id/imageView_profile_fragment_image"
                     android:layout_width="70dp"
                     android:layout_height="70dp"
-                    android:src="@drawable/camera_orange" />
+                    android:src="@drawable/tc" />
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="7"
+                android:layout_weight="7.5"
                 android:orientation="vertical" >
 
                 <LinearLayout
@@ -45,7 +45,7 @@
                     android:orientation="vertical" >
 
                     <TextView
-                        android:id="@+id/textView1"
+                        android:id="@+id/textView_profile_fragment_name"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Name"
@@ -59,18 +59,18 @@
                     android:orientation="horizontal" >
 
                     <TextView
-                        android:id="@+id/textView2"
+                        android:id="@+id/textView_profile_fragment_LKL"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Last Known Location"
                         android:textAppearance="?android:attr/textAppearanceSmall" />
 
                     <Button
-                        android:id="@+id/button1"
+                        android:id="@+id/button_profile_fragment_get_LKL"
                         style="?android:attr/buttonStyleSmall"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:background="@drawable/ic_launcher" />
+                        android:text="Get" />
                 </LinearLayout>
             </LinearLayout>
         </LinearLayout>
@@ -83,7 +83,7 @@
         android:orientation="vertical" >
 
         <Button
-            android:id="@+id/button_log_in_activity_register"
+            android:id="@+id/button_profile_fragment_UML"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal|center_vertical"
@@ -99,11 +99,11 @@
         android:orientation="vertical" >
 
         <TextView
-            android:id="@+id/textView3"
+            android:id="@+id/textView_profile_fragment_PWCSML"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:text="People who can see your location"
+            android:text="People who can see my location"
             android:textAppearance="?android:attr/textAppearanceMedium" />
 
         <LinearLayout
@@ -111,7 +111,7 @@
             android:layout_height="wrap_content" >
 
             <Button
-                android:id="@+id/button_log_in_activity_register"
+                android:id="@+id/button_profile_fragment_add_new"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
@@ -122,11 +122,34 @@
                 android:textColor="#ffffff" />
         </LinearLayout>
 
-        <ListView
-            android:id="@+id/listView1"
+        <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content" >
-        </ListView>
+
+            <ListView
+                android:id="@+id/listView_profile_fragment_PWCSML"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" >
+            </ListView>
+
+            <RelativeLayout
+                android:id="@+id/relativeLayout_profile_fragment_none"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:orientation="vertical"
+                android:background="@android:color/white" >
+
+                <ImageView
+                    android:id="@+id/imageView_profile_fragment_none"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/ic_latitude" />
+
+            </RelativeLayout>
+
+        </FrameLayout>
 
     </LinearLayout>
 

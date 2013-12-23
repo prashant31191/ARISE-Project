@@ -10,6 +10,9 @@
 
     <!-- GCM connects to Internet Services. -->
     <uses-permission android:name="android.permission.INTERNET" />
+    
+    <!-- Include next permission if you want to allow UIL to cache images on SD card -->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <!-- GCM requires a Google account. -->
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
@@ -34,12 +37,13 @@
     <uses-permission android:name="android.permission.VIBRATE" />
 
     <application
+        android:name="MyApplication"
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name="com.arise.ariseproject1.IndexActivity"
+            android:name="com.arise.ariseproject1.MainActivity"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -89,12 +93,16 @@
             android:label="@string/title_activity_last_known_location" >
         </activity>
         <activity
-            android:name="com.arise.ariseproject1.MainActivity"
+            android:name="com.arise.ariseproject1.IndexActivity"
             android:label="@string/title_activity_main" >
         </activity>
         <activity
             android:name="com.arise.ariseproject1.RegistrationResultActivity"
             android:label="@string/title_activity_registration_result" >
+        </activity>
+        <activity
+            android:name="com.arise.ariseproject1.ForgotPasswordActivity"
+            android:label="@string/title_activity_forgot_password" >
         </activity>
     </application>
 

@@ -52,5 +52,6 @@
     <string name="device_error">The current email account associated with this Device Settings is already registered with us!</string>
     <string name="password">Password</string>
     <string name="title_activity_registration_result">RegistrationResultActivity</string>
+    <string name="title_activity_forgot_password">ForgotPasswordActivity</string>
 
 </resources>

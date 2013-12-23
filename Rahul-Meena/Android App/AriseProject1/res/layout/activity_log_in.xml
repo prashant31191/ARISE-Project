@@ -22,7 +22,7 @@
             android:orientation="vertical" >
 
             <EditText
-                android:id="@+id/editText2"
+                android:id="@+id/editText_log_in_activity_email"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
@@ -40,7 +40,7 @@
             android:orientation="vertical" >
 
             <EditText
-                android:id="@+id/editText3"
+                android:id="@+id/editText_log_in_activity_password"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
@@ -55,7 +55,7 @@
             android:orientation="vertical" >
 
             <TextView
-                android:id="@+id/TextView1"
+                android:id="@+id/TextView_log_in_activity_forgot_password"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Forgot Password?" />
@@ -68,10 +68,18 @@
         android:layout_weight="1"
         android:orientation="vertical" >
 
+        <CheckBox
+            android:id="@+id/checkBox_log_in_activity_remember_me"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="Remember Me" />
+
         <Button
-            android:id="@+id/button_log_in_activity_register"
+            android:id="@+id/button_log_in_activity_log_in"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
             android:layout_gravity="center_horizontal|center_vertical"
             android:background="@drawable/selector_send_button"
             android:text="Log In"
