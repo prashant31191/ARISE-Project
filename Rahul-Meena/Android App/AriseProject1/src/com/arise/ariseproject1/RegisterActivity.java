@@ -1,10 +1,9 @@
 package com.arise.ariseproject1;
  
-import static com.arise.ariseproject1.CommonUtilities.DISPLAY_MESSAGE_ACTION;
-import static com.arise.ariseproject1.CommonUtilities.EXTRA_MESSAGE;
-import static com.arise.ariseproject1.CommonUtilities.SENDER_ID;
-import static com.arise.ariseproject1.CommonUtilities.SERVER_REGISTER_URL;
-import static com.arise.ariseproject1.CommonUtilities.SERVER_USER_EXIST_URL;
+import static com.arise.ariseproject1.classes.CommonUtilities.DISPLAY_MESSAGE_ACTION;
+import static com.arise.ariseproject1.classes.CommonUtilities.SENDER_ID;
+import static com.arise.ariseproject1.classes.CommonUtilities.SERVER_REGISTER_URL;
+import static com.arise.ariseproject1.classes.CommonUtilities.SERVER_USER_EXIST_URL;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,11 +13,15 @@ import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import com.arise.ariseproject1.classes.MessageReceiver;
+import com.arise.ariseproject1.classes.AlertDialogManager;
+import com.arise.ariseproject1.classes.ConnectionDetector;
+import com.arise.ariseproject1.classes.JSONParser;
+import com.arise.ariseproject1.classes.ServerUtilities;
 import com.google.android.gcm.GCMRegistrar;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
-import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
@@ -29,7 +32,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
  
 public class RegisterActivity extends Activity {
  
@@ -145,8 +147,8 @@ public class RegisterActivity extends Activity {
        GCMRegistrar.checkManifest(this);
 
   //     lblMessage = (TextView) findViewById(R.id.lblMessage);
-        
-       registerReceiver(mHandleMessageReceiver, new IntentFilter(
+       MessageReceiver mMessageReceiver = new MessageReceiver();
+       registerReceiver(mMessageReceiver, new IntentFilter(
                DISPLAY_MESSAGE_ACTION));
         
        // Get GCM registration id
@@ -164,31 +166,6 @@ public class RegisterActivity extends Activity {
            }
        }
     }   
-
-	/**
-     * Receiving push messages
-     * */
-    private final BroadcastReceiver mHandleMessageReceiver = new BroadcastReceiver() {
-        @Override
-        public void onReceive(Context context, Intent intent) {
-            String newMessage = intent.getExtras().getString(EXTRA_MESSAGE);
-            // Waking up mobile if it is sleeping
-            WakeLocker.acquire(getApplicationContext());
-             
-            /**
-             * Take appropriate action on this message
-             * depending upon your app requirement
-             * For now i am just displaying it on the screen
-             * */
-             
-            // Showing received message
-          //  lblMessage.append(newMessage + "\n");           
-            Toast.makeText(getApplicationContext(), "New Message: " + newMessage, Toast.LENGTH_LONG).show();
-             
-            // Releasing wake lock
-            WakeLocker.release();
-        }
-    };
    /*  
     @Override
     protected void onDestroy() {

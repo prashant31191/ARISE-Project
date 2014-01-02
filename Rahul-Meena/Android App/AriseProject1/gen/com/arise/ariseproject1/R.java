@@ -9,6 +9,165 @@ package com.arise.ariseproject1;
 
 public final class R {
     public static final class attr {
+        /** 
+    The size of the ad. It must be one of BANNER, FULL_BANNER, LEADERBOARD,
+    MEDIUM_RECTANGLE, SMART_BANNER, WIDE_SKYSCRAPER, or
+    &lt;width&gt;x&lt;height&gt;.
+    
+         <p>Must be a string value, using '\\;' to escape characters such as '\\n' or '\\uxxxx' for a unicode character.
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int adSize=0x7f010000;
+        /**  The ad unit ID. 
+         <p>Must be a string value, using '\\;' to escape characters such as '\\n' or '\\uxxxx' for a unicode character.
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int adUnitId=0x7f010001;
+        /** <p>Must be a floating point value, such as "<code>1.2</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int cameraBearing=0x7f010003;
+        /** <p>Must be a floating point value, such as "<code>1.2</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int cameraTargetLat=0x7f010004;
+        /** <p>Must be a floating point value, such as "<code>1.2</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int cameraTargetLng=0x7f010005;
+        /** <p>Must be a floating point value, such as "<code>1.2</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int cameraTilt=0x7f010006;
+        /** <p>Must be a floating point value, such as "<code>1.2</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int cameraZoom=0x7f010007;
+        /** <p>Must be one of the following constant values.</p>
+<table>
+<colgroup align="left" />
+<colgroup align="left" />
+<colgroup align="left" />
+<tr><th>Constant</th><th>Value</th><th>Description</th></tr>
+<tr><td><code>none</code></td><td>0</td><td></td></tr>
+<tr><td><code>normal</code></td><td>1</td><td></td></tr>
+<tr><td><code>satellite</code></td><td>2</td><td></td></tr>
+<tr><td><code>terrain</code></td><td>3</td><td></td></tr>
+<tr><td><code>hybrid</code></td><td>4</td><td></td></tr>
+</table>
+         */
+        public static final int mapType=0x7f010002;
+        /** <p>Must be a boolean value, either "<code>true</code>" or "<code>false</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int uiCompass=0x7f010008;
+        /** <p>Must be a boolean value, either "<code>true</code>" or "<code>false</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int uiRotateGestures=0x7f010009;
+        /** <p>Must be a boolean value, either "<code>true</code>" or "<code>false</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int uiScrollGestures=0x7f01000a;
+        /** <p>Must be a boolean value, either "<code>true</code>" or "<code>false</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int uiTiltGestures=0x7f01000b;
+        /** <p>Must be a boolean value, either "<code>true</code>" or "<code>false</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int uiZoomControls=0x7f01000c;
+        /** <p>Must be a boolean value, either "<code>true</code>" or "<code>false</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int uiZoomGestures=0x7f01000d;
+        /** <p>Must be a boolean value, either "<code>true</code>" or "<code>false</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int useViewLifecycle=0x7f01000e;
+        /** <p>Must be a boolean value, either "<code>true</code>" or "<code>false</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int zOrderOnTop=0x7f01000f;
+    }
+    public static final class color {
+        public static final int BLACK=0x7f04000b;
+        public static final int WHITE=0x7f04000c;
+        public static final int camera_orange=0x7f04000a;
+        public static final int common_action_bar_splitter=0x7f040009;
+        /**  Sign-in Button Colors 
+         */
+        public static final int common_signin_btn_dark_text_default=0x7f040000;
+        public static final int common_signin_btn_dark_text_disabled=0x7f040002;
+        public static final int common_signin_btn_dark_text_focused=0x7f040003;
+        public static final int common_signin_btn_dark_text_pressed=0x7f040001;
+        public static final int common_signin_btn_default_background=0x7f040008;
+        public static final int common_signin_btn_light_text_default=0x7f040004;
+        public static final int common_signin_btn_light_text_disabled=0x7f040006;
+        public static final int common_signin_btn_light_text_focused=0x7f040007;
+        public static final int common_signin_btn_light_text_pressed=0x7f040005;
+        public static final int common_signin_btn_text_dark=0x7f04000d;
+        public static final int common_signin_btn_text_light=0x7f04000e;
     }
     public static final class dimen {
         /**  Default screen margins, per the Android Design guidelines. 
@@ -17,159 +176,333 @@ public final class R {
          screen margins) for sw720dp devices (e.g. 10" tablets) in landscape here.
     
          */
-        public static final int activity_horizontal_margin=0x7f040000;
-        public static final int activity_vertical_margin=0x7f040001;
+        public static final int activity_horizontal_margin=0x7f080000;
+        public static final int activity_vertical_margin=0x7f080001;
     }
     public static final class drawable {
-        public static final int camera_orange=0x7f020012;
-        public static final int deep_sky_blue=0x7f020011;
-        public static final int dodger_blue=0x7f020010;
-        public static final int drawer_shadow=0x7f020000;
-        public static final int ic_action_direction=0x7f020001;
-        public static final int ic_action_help=0x7f020002;
-        public static final int ic_action_location_found=0x7f020003;
-        public static final int ic_action_place=0x7f020004;
-        public static final int ic_action_refresh=0x7f020005;
-        public static final int ic_action_search=0x7f020006;
-        public static final int ic_checkin=0x7f020007;
-        public static final int ic_drawer=0x7f020008;
-        public static final int ic_latitude=0x7f020009;
-        public static final int ic_launcher=0x7f02000a;
-        public static final int ic_location=0x7f02000b;
-        public static final int ic_my_places=0x7f02000c;
-        public static final int ico_actionbar=0x7f02000d;
-        public static final int selector_send_button=0x7f02000e;
-        public static final int tc=0x7f02000f;
+        public static final int bubble_green=0x7f020000;
+        public static final int bubble_yellow=0x7f020001;
+        public static final int common_signin_btn_icon_dark=0x7f020002;
+        public static final int common_signin_btn_icon_disabled_dark=0x7f020003;
+        public static final int common_signin_btn_icon_disabled_focus_dark=0x7f020004;
+        public static final int common_signin_btn_icon_disabled_focus_light=0x7f020005;
+        public static final int common_signin_btn_icon_disabled_light=0x7f020006;
+        public static final int common_signin_btn_icon_focus_dark=0x7f020007;
+        public static final int common_signin_btn_icon_focus_light=0x7f020008;
+        public static final int common_signin_btn_icon_light=0x7f020009;
+        public static final int common_signin_btn_icon_normal_dark=0x7f02000a;
+        public static final int common_signin_btn_icon_normal_light=0x7f02000b;
+        public static final int common_signin_btn_icon_pressed_dark=0x7f02000c;
+        public static final int common_signin_btn_icon_pressed_light=0x7f02000d;
+        public static final int common_signin_btn_text_dark=0x7f02000e;
+        public static final int common_signin_btn_text_disabled_dark=0x7f02000f;
+        public static final int common_signin_btn_text_disabled_focus_dark=0x7f020010;
+        public static final int common_signin_btn_text_disabled_focus_light=0x7f020011;
+        public static final int common_signin_btn_text_disabled_light=0x7f020012;
+        public static final int common_signin_btn_text_focus_dark=0x7f020013;
+        public static final int common_signin_btn_text_focus_light=0x7f020014;
+        public static final int common_signin_btn_text_light=0x7f020015;
+        public static final int common_signin_btn_text_normal_dark=0x7f020016;
+        public static final int common_signin_btn_text_normal_light=0x7f020017;
+        public static final int common_signin_btn_text_pressed_dark=0x7f020018;
+        public static final int common_signin_btn_text_pressed_light=0x7f020019;
+        public static final int custom_info_bubble=0x7f02001a;
+        public static final int deep_sky_blue=0x7f020031;
+        public static final int dodger_blue=0x7f020030;
+        public static final int drawer_shadow=0x7f02001b;
+        public static final int ic_action_direction=0x7f02001c;
+        public static final int ic_action_help=0x7f02001d;
+        public static final int ic_action_location_found=0x7f02001e;
+        public static final int ic_action_place=0x7f02001f;
+        public static final int ic_action_refresh=0x7f020020;
+        public static final int ic_action_search=0x7f020021;
+        public static final int ic_checkin=0x7f020022;
+        public static final int ic_drawer=0x7f020023;
+        public static final int ic_latitude=0x7f020024;
+        public static final int ic_launcher=0x7f020025;
+        public static final int ic_location=0x7f020026;
+        public static final int ic_my_places=0x7f020027;
+        public static final int ic_plusone_medium_off_client=0x7f020028;
+        public static final int ic_plusone_small_off_client=0x7f020029;
+        public static final int ic_plusone_standard_off_client=0x7f02002a;
+        public static final int ic_plusone_tall_off_client=0x7f02002b;
+        public static final int ico_actionbar=0x7f02002c;
+        public static final int selector_chat_tab=0x7f02002d;
+        public static final int selector_send_button=0x7f02002e;
+        public static final int tc=0x7f02002f;
     }
     public static final class id {
-        public static final int TextView_log_in_activity_forgot_password=0x7f08000a;
-        public static final int action_help=0x7f080027;
-        public static final int action_log_out=0x7f080025;
-        public static final int action_more=0x7f080024;
-        public static final int action_settings=0x7f080026;
-        public static final int button1=0x7f080002;
-        public static final int button2=0x7f080003;
-        public static final int button_index_activity_log_in=0x7f080006;
-        public static final int button_index_activity_register=0x7f080004;
-        public static final int button_log_in_activity_log_in=0x7f08000c;
-        public static final int button_log_in_activity_register=0x7f080007;
-        public static final int button_profile_fragment_UML=0x7f08001b;
-        public static final int button_profile_fragment_add_new=0x7f08001d;
-        public static final int button_profile_fragment_get_LKL=0x7f08001a;
-        public static final int button_register_activity_register=0x7f080014;
-        public static final int button_unregister=0x7f080005;
-        public static final int checkBox_log_in_activity_remember_me=0x7f08000b;
-        public static final int editText1=0x7f080001;
-        public static final int editText_log_in_activity_email=0x7f080008;
-        public static final int editText_log_in_activity_password=0x7f080009;
-        public static final int editText_register_activity_email=0x7f080011;
-        public static final int editText_register_activity_first_name=0x7f08000f;
-        public static final int editText_register_activity_last_name=0x7f080010;
-        public static final int editText_register_activity_password=0x7f080013;
-        public static final int imageView1=0x7f08000e;
-        public static final int imageView_item_lazy_people_dp=0x7f080022;
-        public static final int imageView_profile_fragment_image=0x7f080017;
-        public static final int imageView_profile_fragment_none=0x7f080020;
-        public static final int listView_profile_fragment_PWCSML=0x7f08001e;
-        public static final int pager=0x7f08000d;
-        public static final int relativeLayout_profile_fragment_none=0x7f08001f;
-        public static final int spinner1=0x7f080021;
-        public static final int textView1=0x7f080000;
-        public static final int textView_item_lazy_people_name=0x7f080023;
-        public static final int textView_profile_fragment_LKL=0x7f080019;
-        public static final int textView_profile_fragment_PWCSML=0x7f08001c;
-        public static final int textView_profile_fragment_name=0x7f080018;
-        public static final int textView_regsiter_activity_device_error=0x7f080015;
-        public static final int textView_regsiter_activity_email_error=0x7f080012;
-        public static final int textView_regsitration_result_output=0x7f080016;
+        public static final int TextView_log_in_activity_forgot_password=0x7f050015;
+        public static final int action_help=0x7f050041;
+        public static final int action_log_out=0x7f05003f;
+        public static final int action_more=0x7f05003e;
+        public static final int action_settings=0x7f050040;
+        public static final int button1=0x7f05000d;
+        public static final int button2=0x7f05000e;
+        public static final int button_chat_activity_add=0x7f050007;
+        public static final int button_chat_activity_send=0x7f05000a;
+        public static final int button_dialog_add_new_pwcsul_cancel=0x7f050024;
+        public static final int button_dialog_add_new_pwcsul_look=0x7f050025;
+        public static final int button_dialog_new_pwcsul_add=0x7f05002a;
+        public static final int button_dialog_new_pwcsul_cancel=0x7f050029;
+        public static final int button_index_activity_log_in=0x7f050011;
+        public static final int button_index_activity_register=0x7f05000f;
+        public static final int button_log_in_activity_log_in=0x7f050017;
+        public static final int button_log_in_activity_register=0x7f050012;
+        public static final int button_profile_fragment_UML=0x7f05002f;
+        public static final int button_profile_fragment_add_new=0x7f050031;
+        public static final int button_profile_fragment_get_LKL=0x7f05002e;
+        public static final int button_register_activity_register=0x7f050020;
+        public static final int button_unregister=0x7f050010;
+        public static final int checkBox_log_in_activity_remember_me=0x7f050016;
+        public static final int comment=0x7f05003d;
+        public static final int editText1=0x7f05000c;
+        public static final int editText_chat_activity_message=0x7f050009;
+        public static final int editText_dialog_add_new_pwcsul_email=0x7f050023;
+        public static final int editText_log_in_activity_email=0x7f050013;
+        public static final int editText_log_in_activity_password=0x7f050014;
+        public static final int editText_register_activity_email=0x7f05001d;
+        public static final int editText_register_activity_first_name=0x7f05001b;
+        public static final int editText_register_activity_last_name=0x7f05001c;
+        public static final int editText_register_activity_password=0x7f05001f;
+        public static final int hybrid=0x7f050004;
+        public static final int imageView1=0x7f05001a;
+        public static final int imageView_dialog_new_pwcsul_image=0x7f050027;
+        public static final int imageView_item_chat_tab_image=0x7f050037;
+        public static final int imageView_item_lazy_people_dp=0x7f050039;
+        public static final int imageView_item_map_marker_image=0x7f05003b;
+        public static final int imageView_profile_fragment_image=0x7f05002b;
+        public static final int imageView_profile_fragment_none=0x7f050034;
+        public static final int linearLayout_chat_activity_chatBar=0x7f050005;
+        public static final int listView_dialog_chat_user_list=0x7f050026;
+        public static final int listView_profile_fragment_PWCSML=0x7f050032;
+        public static final int map=0x7f050036;
+        public static final int myLocationMap=0x7f050019;
+        public static final int none=0x7f050000;
+        public static final int normal=0x7f050001;
+        public static final int pager=0x7f050018;
+        public static final int relativeLayout_profile_fragment_none=0x7f050033;
+        public static final int satellite=0x7f050002;
+        public static final int spinner_fragment_radar_pwlucs=0x7f050035;
+        public static final int terrain=0x7f050003;
+        public static final int textView1=0x7f05000b;
+        public static final int textView_dialog_new_pwcsul_name=0x7f050028;
+        public static final int textView_item_chat_tab_msg_count=0x7f050038;
+        public static final int textView_item_lazy_people_name=0x7f05003a;
+        public static final int textView_profile_fragment_LKL=0x7f05002d;
+        public static final int textView_profile_fragment_PWCSML=0x7f050030;
+        public static final int textView_profile_fragment_name=0x7f05002c;
+        public static final int textView_regsiter_activity_device_error=0x7f050021;
+        public static final int textView_regsiter_activity_email_error=0x7f05001e;
+        public static final int textView_regsitration_result_output=0x7f050022;
+        public static final int twoWayView_chat_activity_chatBar=0x7f050006;
+        public static final int viewPager_chat_activity=0x7f050008;
+        public static final int wrapper=0x7f05003c;
+    }
+    public static final class integer {
+        public static final int google_play_services_version=0x7f070000;
     }
     public static final class layout {
-        public static final int activity_forgot_password=0x7f030000;
-        public static final int activity_index=0x7f030001;
-        public static final int activity_last_known_location=0x7f030002;
-        public static final int activity_log_in=0x7f030003;
-        public static final int activity_main=0x7f030004;
-        public static final int activity_register=0x7f030005;
-        public static final int activity_registration_result=0x7f030006;
-        public static final int fragment_profile=0x7f030007;
-        public static final int fragment_radar=0x7f030008;
-        public static final int item_lazy_people=0x7f030009;
+        public static final int activity_chat=0x7f030000;
+        public static final int activity_forgot_password=0x7f030001;
+        public static final int activity_index=0x7f030002;
+        public static final int activity_last_known_location=0x7f030003;
+        public static final int activity_log_in=0x7f030004;
+        public static final int activity_main=0x7f030005;
+        public static final int activity_map=0x7f030006;
+        public static final int activity_register=0x7f030007;
+        public static final int activity_registration_result=0x7f030008;
+        public static final int activity_temp=0x7f030009;
+        public static final int dialog_add_new_pwcsul=0x7f03000a;
+        public static final int dialog_chat_user_list=0x7f03000b;
+        public static final int dialog_new_pwcsul=0x7f03000c;
+        public static final int dialog_person=0x7f03000d;
+        public static final int fragment_profile=0x7f03000e;
+        public static final int fragment_radar=0x7f03000f;
+        public static final int item_chat_tab=0x7f030010;
+        public static final int item_lazy_people=0x7f030011;
+        public static final int item_map_marker=0x7f030012;
+        public static final int listitem_discuss=0x7f030013;
     }
     public static final class menu {
-        public static final int activity_main_actions=0x7f070000;
-        public static final int forgot_password=0x7f070001;
-        public static final int index=0x7f070002;
-        public static final int last_known_location=0x7f070003;
-        public static final int log_in=0x7f070004;
-        public static final int main=0x7f070005;
-        public static final int profile=0x7f070006;
-        public static final int radar=0x7f070007;
-        public static final int register=0x7f070008;
-        public static final int registration_result=0x7f070009;
+        public static final int activity_main_actions=0x7f0a0000;
+        public static final int chat=0x7f0a0001;
+        public static final int forgot_password=0x7f0a0002;
+        public static final int index=0x7f0a0003;
+        public static final int last_known_location=0x7f0a0004;
+        public static final int log_in=0x7f0a0005;
+        public static final int main=0x7f0a0006;
+        public static final int map=0x7f0a0007;
+        public static final int profile=0x7f0a0008;
+        public static final int radar=0x7f0a0009;
+        public static final int register=0x7f0a000a;
+        public static final int registration_result=0x7f0a000b;
+        public static final int temp=0x7f0a000c;
     }
     public static final class string {
-        public static final int action_help=0x7f05001f;
-        public static final int action_log_out=0x7f05001d;
+        public static final int action_help=0x7f060039;
+        public static final int action_log_out=0x7f060037;
         /**  Action Bar action items 
          */
-        public static final int action_more=0x7f05001c;
-        public static final int action_settings=0x7f05001e;
-        public static final int already_registered=0x7f050005;
-        public static final int app_name=0x7f050000;
-        public static final int btn_send_message=0x7f05001b;
-        public static final int device_error=0x7f050028;
-        public static final int email=0x7f050026;
-        public static final int email_error=0x7f050027;
-        public static final int error_config=0x7f050004;
+        public static final int action_more=0x7f060036;
+        public static final int action_settings=0x7f060038;
+        public static final int already_registered=0x7f06001f;
+        public static final int app_name=0x7f06001a;
+        /**   Title for notification shown when GooglePlayServices needs to be
+        enabled for a application to work. [CHAR LIMIT=70] 
+         */
+        public static final int auth_client_needs_enabling_title=0x7f060015;
+        /**   Title for notification shown when GooglePlayServices needs to be
+        installed for a application to work. [CHAR LIMIT=70] 
+         */
+        public static final int auth_client_needs_installation_title=0x7f060016;
+        /**   Title for notification shown when GooglePlayServices needs to be
+        udpated for a application to work. [CHAR LIMIT=70] 
+         */
+        public static final int auth_client_needs_update_title=0x7f060017;
+        /**   Title for notification shown when GooglePlayServices is unavailable [CHAR LIMIT=42] 
+         */
+        public static final int auth_client_play_services_err_notification_msg=0x7f060018;
+        /**   Requested by string saying which app requested the notification. [CHAR LIMIT=42] 
+         */
+        public static final int auth_client_requested_by_msg=0x7f060019;
+        /**   Title for notification shown when a bad version of GooglePlayServices
+        has been installed and needs correction for an application to work.
+        [CHAR LIMIT=70] 
+         */
+        public static final int auth_client_using_bad_version_title=0x7f060014;
+        public static final int btn_send_message=0x7f060035;
+        /**  Button in confirmation dialog to enable Google Play services.  Clicking it
+        will direct user to application settings of Google Play services where they
+        can enable it [CHAR LIMIT=40] 
+         */
+        public static final int common_google_play_services_enable_button=0x7f060006;
+        /**  Message in confirmation dialog informing user they need to enable
+        Google Play services in application settings [CHAR LIMIT=NONE] 
+         */
+        public static final int common_google_play_services_enable_text=0x7f060005;
+        /**  Title of confirmation dialog informing user they need to enable
+        Google Play services in application settings [CHAR LIMIT=40] 
+         */
+        public static final int common_google_play_services_enable_title=0x7f060004;
+        /**  Button in confirmation dialog for installing Google Play services [CHAR LIMIT=40] 
+         */
+        public static final int common_google_play_services_install_button=0x7f060003;
+        /**  (For phones) Message in confirmation dialog informing user that
+        they need to install Google Play services (from Play Store) [CHAR LIMIT=NONE] 
+         */
+        public static final int common_google_play_services_install_text_phone=0x7f060001;
+        /**  (For tablets) Message in confirmation dialog informing user that
+        they need to install Google Play services (from Play Store) [CHAR LIMIT=NONE] 
+         */
+        public static final int common_google_play_services_install_text_tablet=0x7f060002;
+        /**  Title of confirmation dialog informing user that they need to install
+        Google Play services (from Play Store) [CHAR LIMIT=40] 
+         */
+        public static final int common_google_play_services_install_title=0x7f060000;
+        /**  Message in confirmation dialog informing the user that they provided an invalid account. [CHAR LIMIT=NONE] 
+         */
+        public static final int common_google_play_services_invalid_account_text=0x7f06000c;
+        /**  Title of confirmation dialog informing the user that they provided an invalid account. [CHAR LIMIT=40] 
+         */
+        public static final int common_google_play_services_invalid_account_title=0x7f06000b;
+        /**  Message in confirmation dialog informing the user that a network error occurred. [CHAR LIMIT=NONE] 
+         */
+        public static final int common_google_play_services_network_error_text=0x7f06000a;
+        /**  Title of confirmation dialog informing the user that a network error occurred. [CHAR LIMIT=40] 
+         */
+        public static final int common_google_play_services_network_error_title=0x7f060009;
+        /**  Message in confirmation dialog informing user there is an unknown issue in Google Play
+        services [CHAR LIMIT=NONE] 
+         */
+        public static final int common_google_play_services_unknown_issue=0x7f06000d;
+        /**  Message in confirmation dialog informing user that date on the device is not correct,
+    causing certificate checks to fail. [CHAR LIMIT=NONE] 
+         */
+        public static final int common_google_play_services_unsupported_date_text=0x7f060010;
+        /**  Message in confirmation dialog informing user that Google Play services is not supported on their device [CHAR LIMIT=NONE] 
+         */
+        public static final int common_google_play_services_unsupported_text=0x7f06000f;
+        /**  Title of confirmation dialog informing user that Google Play services is not supported on their device [CHAR LIMIT=40] 
+         */
+        public static final int common_google_play_services_unsupported_title=0x7f06000e;
+        /**  Button in confirmation dialog for updating Google Play services [CHAR LIMIT=40] 
+         */
+        public static final int common_google_play_services_update_button=0x7f060011;
+        /**  Message in confirmation dialog informing user that they need to update
+        Google Play services (from Play Store) [CHAR LIMIT=NONE] 
+         */
+        public static final int common_google_play_services_update_text=0x7f060008;
+        /**  Title of confirmation dialog informing user that they need to update
+        Google Play services (from Play Store) [CHAR LIMIT=40] 
+         */
+        public static final int common_google_play_services_update_title=0x7f060007;
+        /**  Sign-in button text [CHAR LIMIT=15] 
+         */
+        public static final int common_signin_button_text=0x7f060012;
+        /**  Long form sign-in button text [CHAR LIMIT=30] 
+         */
+        public static final int common_signin_button_text_long=0x7f060013;
+        public static final int device_error=0x7f060042;
+        public static final int email=0x7f060040;
+        public static final int email_error=0x7f060041;
+        public static final int error_config=0x7f06001e;
         /**  Register Activity 
          */
-        public static final int first_name=0x7f050024;
-        public static final int gcm_deleted=0x7f05000b;
-        public static final int gcm_error=0x7f050009;
-        public static final int gcm_message=0x7f050008;
-        public static final int gcm_recoverable_error=0x7f05000a;
-        public static final int gcm_registered=0x7f050006;
-        public static final int gcm_unregistered=0x7f050007;
-        public static final int hello_world=0x7f050001;
-        public static final int last_name=0x7f050025;
-        public static final int log_in=0x7f050023;
-        public static final int menu_settings=0x7f050002;
-        public static final int options_clear=0x7f050013;
-        public static final int options_exit=0x7f050014;
-        public static final int options_register=0x7f050011;
-        public static final int options_unregister=0x7f050012;
-        public static final int password=0x7f050029;
+        public static final int first_name=0x7f06003e;
+        public static final int gcm_deleted=0x7f060025;
+        public static final int gcm_error=0x7f060023;
+        public static final int gcm_message=0x7f060022;
+        public static final int gcm_recoverable_error=0x7f060024;
+        public static final int gcm_registered=0x7f060020;
+        public static final int gcm_unregistered=0x7f060021;
+        public static final int hello_world=0x7f06001b;
+        public static final int last_name=0x7f06003f;
+        public static final int log_in=0x7f06003d;
+        public static final int menu_settings=0x7f06001c;
+        public static final int options_clear=0x7f06002d;
+        public static final int options_exit=0x7f06002e;
+        public static final int options_register=0x7f06002b;
+        public static final int options_unregister=0x7f06002c;
+        public static final int password=0x7f060043;
         /**  Index Activity 
          */
-        public static final int register=0x7f050022;
+        public static final int register=0x7f06003c;
         /**  Search 
          */
-        public static final int search_hint=0x7f050020;
-        public static final int server_register_error=0x7f05000f;
-        public static final int server_registered=0x7f05000d;
-        public static final int server_registering=0x7f05000c;
-        public static final int server_unregister_error=0x7f050010;
-        public static final int server_unregistered=0x7f05000e;
-        public static final int title_activity_forgot_password=0x7f05002b;
-        public static final int title_activity_index=0x7f050021;
-        public static final int title_activity_last_known_location=0x7f05001a;
-        public static final int title_activity_log_in=0x7f050017;
-        public static final int title_activity_main=0x7f050003;
-        public static final int title_activity_profile=0x7f050018;
-        public static final int title_activity_radar=0x7f050019;
-        public static final int title_activity_register=0x7f050015;
-        public static final int title_activity_registration_result=0x7f05002a;
-        public static final int title_activity_temp_main=0x7f050016;
+        public static final int search_hint=0x7f06003a;
+        public static final int server_register_error=0x7f060029;
+        public static final int server_registered=0x7f060027;
+        public static final int server_registering=0x7f060026;
+        public static final int server_unregister_error=0x7f06002a;
+        public static final int server_unregistered=0x7f060028;
+        public static final int title_activity_chat=0x7f060046;
+        public static final int title_activity_forgot_password=0x7f060045;
+        public static final int title_activity_index=0x7f06003b;
+        public static final int title_activity_last_known_location=0x7f060034;
+        public static final int title_activity_log_in=0x7f060031;
+        public static final int title_activity_main=0x7f06001d;
+        public static final int title_activity_map=0x7f060048;
+        public static final int title_activity_profile=0x7f060032;
+        public static final int title_activity_radar=0x7f060033;
+        public static final int title_activity_register=0x7f06002f;
+        public static final int title_activity_registration_result=0x7f060044;
+        public static final int title_activity_temp=0x7f060047;
+        public static final int title_activity_temp_main=0x7f060030;
     }
     public static final class style {
         /** 
         Base application theme, dependent on API level. This theme is replaced
         by AppBaseTheme from res/values-vXX/styles.xml on newer devices.
+
+
     
 
             Theme customizations available in newer API levels can go in
             res/values-vXX/styles.xml, while customizations related to
             backward-compatibility can go here.
+
+
         
 
         Base application theme for API 11+. This theme completely replaces
@@ -183,10 +516,903 @@ public final class R {
     
  API 14 theme customizations can go here. 
          */
-        public static final int AppBaseTheme=0x7f060000;
+        public static final int AppBaseTheme=0x7f090000;
         /**  Application theme. 
  All customizations that are NOT specific to a particular API-level can go here. 
          */
-        public static final int AppTheme=0x7f060001;
+        public static final int AppTheme=0x7f090001;
+        public static final int TwoWayView=0x7f090002;
     }
+    public static final class styleable {
+        /** Attributes that can be used with a AdsAttrs.
+           <p>Includes the following attributes:</p>
+           <table>
+           <colgroup align="left" />
+           <colgroup align="left" />
+           <tr><th>Attribute</th><th>Description</th></tr>
+           <tr><td><code>{@link #AdsAttrs_adSize com.arise.ariseproject1:adSize}</code></td><td>
+    The size of the ad.</td></tr>
+           <tr><td><code>{@link #AdsAttrs_adUnitId com.arise.ariseproject1:adUnitId}</code></td><td> The ad unit ID.</td></tr>
+           </table>
+           @see #AdsAttrs_adSize
+           @see #AdsAttrs_adUnitId
+         */
+        public static final int[] AdsAttrs = {
+            0x7f010000, 0x7f010001
+        };
+        /**
+          <p>
+          @attr description
+          
+    The size of the ad. It must be one of BANNER, FULL_BANNER, LEADERBOARD,
+    MEDIUM_RECTANGLE, SMART_BANNER, WIDE_SKYSCRAPER, or
+    &lt;width&gt;x&lt;height&gt;.
+    
+
+
+          <p>Must be a string value, using '\\;' to escape characters such as '\\n' or '\\uxxxx' for a unicode character.
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          <p>This is a private symbol.
+          @attr name android:adSize
+        */
+        public static final int AdsAttrs_adSize = 0;
+        /**
+          <p>
+          @attr description
+           The ad unit ID. 
+
+
+          <p>Must be a string value, using '\\;' to escape characters such as '\\n' or '\\uxxxx' for a unicode character.
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          <p>This is a private symbol.
+          @attr name android:adUnitId
+        */
+        public static final int AdsAttrs_adUnitId = 1;
+        /** Attributes that can be used with a MapAttrs.
+           <p>Includes the following attributes:</p>
+           <table>
+           <colgroup align="left" />
+           <colgroup align="left" />
+           <tr><th>Attribute</th><th>Description</th></tr>
+           <tr><td><code>{@link #MapAttrs_cameraBearing com.arise.ariseproject1:cameraBearing}</code></td><td></td></tr>
+           <tr><td><code>{@link #MapAttrs_cameraTargetLat com.arise.ariseproject1:cameraTargetLat}</code></td><td></td></tr>
+           <tr><td><code>{@link #MapAttrs_cameraTargetLng com.arise.ariseproject1:cameraTargetLng}</code></td><td></td></tr>
+           <tr><td><code>{@link #MapAttrs_cameraTilt com.arise.ariseproject1:cameraTilt}</code></td><td></td></tr>
+           <tr><td><code>{@link #MapAttrs_cameraZoom com.arise.ariseproject1:cameraZoom}</code></td><td></td></tr>
+           <tr><td><code>{@link #MapAttrs_mapType com.arise.ariseproject1:mapType}</code></td><td></td></tr>
+           <tr><td><code>{@link #MapAttrs_uiCompass com.arise.ariseproject1:uiCompass}</code></td><td></td></tr>
+           <tr><td><code>{@link #MapAttrs_uiRotateGestures com.arise.ariseproject1:uiRotateGestures}</code></td><td></td></tr>
+           <tr><td><code>{@link #MapAttrs_uiScrollGestures com.arise.ariseproject1:uiScrollGestures}</code></td><td></td></tr>
+           <tr><td><code>{@link #MapAttrs_uiTiltGestures com.arise.ariseproject1:uiTiltGestures}</code></td><td></td></tr>
+           <tr><td><code>{@link #MapAttrs_uiZoomControls com.arise.ariseproject1:uiZoomControls}</code></td><td></td></tr>
+           <tr><td><code>{@link #MapAttrs_uiZoomGestures com.arise.ariseproject1:uiZoomGestures}</code></td><td></td></tr>
+           <tr><td><code>{@link #MapAttrs_useViewLifecycle com.arise.ariseproject1:useViewLifecycle}</code></td><td></td></tr>
+           <tr><td><code>{@link #MapAttrs_zOrderOnTop com.arise.ariseproject1:zOrderOnTop}</code></td><td></td></tr>
+           </table>
+           @see #MapAttrs_cameraBearing
+           @see #MapAttrs_cameraTargetLat
+           @see #MapAttrs_cameraTargetLng
+           @see #MapAttrs_cameraTilt
+           @see #MapAttrs_cameraZoom
+           @see #MapAttrs_mapType
+           @see #MapAttrs_uiCompass
+           @see #MapAttrs_uiRotateGestures
+           @see #MapAttrs_uiScrollGestures
+           @see #MapAttrs_uiTiltGestures
+           @see #MapAttrs_uiZoomControls
+           @see #MapAttrs_uiZoomGestures
+           @see #MapAttrs_useViewLifecycle
+           @see #MapAttrs_zOrderOnTop
+         */
+        public static final int[] MapAttrs = {
+            0x7f010002, 0x7f010003, 0x7f010004, 0x7f010005,
+            0x7f010006, 0x7f010007, 0x7f010008, 0x7f010009,
+            0x7f01000a, 0x7f01000b, 0x7f01000c, 0x7f01000d,
+            0x7f01000e, 0x7f01000f
+        };
+        /**
+          <p>This symbol is the offset where the {@link com.arise.ariseproject1.R.attr#cameraBearing}
+          attribute's value can be found in the {@link #MapAttrs} array.
+
+
+          <p>Must be a floating point value, such as "<code>1.2</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name android:cameraBearing
+        */
+        public static final int MapAttrs_cameraBearing = 1;
+        /**
+          <p>This symbol is the offset where the {@link com.arise.ariseproject1.R.attr#cameraTargetLat}
+          attribute's value can be found in the {@link #MapAttrs} array.
+
+
+          <p>Must be a floating point value, such as "<code>1.2</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name android:cameraTargetLat
+        */
+        public static final int MapAttrs_cameraTargetLat = 2;
+        /**
+          <p>This symbol is the offset where the {@link com.arise.ariseproject1.R.attr#cameraTargetLng}
+          attribute's value can be found in the {@link #MapAttrs} array.
+
+
+          <p>Must be a floating point value, such as "<code>1.2</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name android:cameraTargetLng
+        */
+        public static final int MapAttrs_cameraTargetLng = 3;
+        /**
+          <p>This symbol is the offset where the {@link com.arise.ariseproject1.R.attr#cameraTilt}
+          attribute's value can be found in the {@link #MapAttrs} array.
+
+
+          <p>Must be a floating point value, such as "<code>1.2</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name android:cameraTilt
+        */
+        public static final int MapAttrs_cameraTilt = 4;
+        /**
+          <p>This symbol is the offset where the {@link com.arise.ariseproject1.R.attr#cameraZoom}
+          attribute's value can be found in the {@link #MapAttrs} array.
+
+
+          <p>Must be a floating point value, such as "<code>1.2</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name android:cameraZoom
+        */
+        public static final int MapAttrs_cameraZoom = 5;
+        /**
+          <p>This symbol is the offset where the {@link com.arise.ariseproject1.R.attr#mapType}
+          attribute's value can be found in the {@link #MapAttrs} array.
+
+
+          <p>Must be one of the following constant values.</p>
+<table>
+<colgroup align="left" />
+<colgroup align="left" />
+<colgroup align="left" />
+<tr><th>Constant</th><th>Value</th><th>Description</th></tr>
+<tr><td><code>none</code></td><td>0</td><td></td></tr>
+<tr><td><code>normal</code></td><td>1</td><td></td></tr>
+<tr><td><code>satellite</code></td><td>2</td><td></td></tr>
+<tr><td><code>terrain</code></td><td>3</td><td></td></tr>
+<tr><td><code>hybrid</code></td><td>4</td><td></td></tr>
+</table>
+          @attr name android:mapType
+        */
+        public static final int MapAttrs_mapType = 0;
+        /**
+          <p>This symbol is the offset where the {@link com.arise.ariseproject1.R.attr#uiCompass}
+          attribute's value can be found in the {@link #MapAttrs} array.
+
+
+          <p>Must be a boolean value, either "<code>true</code>" or "<code>false</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name android:uiCompass
+        */
+        public static final int MapAttrs_uiCompass = 6;
+        /**
+          <p>This symbol is the offset where the {@link com.arise.ariseproject1.R.attr#uiRotateGestures}
+          attribute's value can be found in the {@link #MapAttrs} array.
+
+
+          <p>Must be a boolean value, either "<code>true</code>" or "<code>false</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name android:uiRotateGestures
+        */
+        public static final int MapAttrs_uiRotateGestures = 7;
+        /**
+          <p>This symbol is the offset where the {@link com.arise.ariseproject1.R.attr#uiScrollGestures}
+          attribute's value can be found in the {@link #MapAttrs} array.
+
+
+          <p>Must be a boolean value, either "<code>true</code>" or "<code>false</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name android:uiScrollGestures
+        */
+        public static final int MapAttrs_uiScrollGestures = 8;
+        /**
+          <p>This symbol is the offset where the {@link com.arise.ariseproject1.R.attr#uiTiltGestures}
+          attribute's value can be found in the {@link #MapAttrs} array.
+
+
+          <p>Must be a boolean value, either "<code>true</code>" or "<code>false</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name android:uiTiltGestures
+        */
+        public static final int MapAttrs_uiTiltGestures = 9;
+        /**
+          <p>This symbol is the offset where the {@link com.arise.ariseproject1.R.attr#uiZoomControls}
+          attribute's value can be found in the {@link #MapAttrs} array.
+
+
+          <p>Must be a boolean value, either "<code>true</code>" or "<code>false</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name android:uiZoomControls
+        */
+        public static final int MapAttrs_uiZoomControls = 10;
+        /**
+          <p>This symbol is the offset where the {@link com.arise.ariseproject1.R.attr#uiZoomGestures}
+          attribute's value can be found in the {@link #MapAttrs} array.
+
+
+          <p>Must be a boolean value, either "<code>true</code>" or "<code>false</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name android:uiZoomGestures
+        */
+        public static final int MapAttrs_uiZoomGestures = 11;
+        /**
+          <p>This symbol is the offset where the {@link com.arise.ariseproject1.R.attr#useViewLifecycle}
+          attribute's value can be found in the {@link #MapAttrs} array.
+
+
+          <p>Must be a boolean value, either "<code>true</code>" or "<code>false</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name android:useViewLifecycle
+        */
+        public static final int MapAttrs_useViewLifecycle = 12;
+        /**
+          <p>This symbol is the offset where the {@link com.arise.ariseproject1.R.attr#zOrderOnTop}
+          attribute's value can be found in the {@link #MapAttrs} array.
+
+
+          <p>Must be a boolean value, either "<code>true</code>" or "<code>false</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name android:zOrderOnTop
+        */
+        public static final int MapAttrs_zOrderOnTop = 13;
+        /** Attributes that can be used with a TwoWayView.
+           <p>Includes the following attributes:</p>
+           <table>
+           <colgroup align="left" />
+           <colgroup align="left" />
+           <tr><th>Attribute</th><th>Description</th></tr>
+           <tr><td><code>{@link #TwoWayView_android_alpha com.arise.ariseproject1:android_alpha}</code></td><td></td></tr>
+           <tr><td><code>{@link #TwoWayView_android_background com.arise.ariseproject1:android_background}</code></td><td></td></tr>
+           <tr><td><code>{@link #TwoWayView_android_choiceMode com.arise.ariseproject1:android_choiceMode}</code></td><td> Imported from AbsListView </td></tr>
+           <tr><td><code>{@link #TwoWayView_android_clickable com.arise.ariseproject1:android_clickable}</code></td><td></td></tr>
+           <tr><td><code>{@link #TwoWayView_android_contentDescription com.arise.ariseproject1:android_contentDescription}</code></td><td></td></tr>
+           <tr><td><code>{@link #TwoWayView_android_drawSelectorOnTop com.arise.ariseproject1:android_drawSelectorOnTop}</code></td><td></td></tr>
+           <tr><td><code>{@link #TwoWayView_android_drawingCacheQuality com.arise.ariseproject1:android_drawingCacheQuality}</code></td><td></td></tr>
+           <tr><td><code>{@link #TwoWayView_android_duplicateParentState com.arise.ariseproject1:android_duplicateParentState}</code></td><td></td></tr>
+           <tr><td><code>{@link #TwoWayView_android_fadeScrollbars com.arise.ariseproject1:android_fadeScrollbars}</code></td><td></td></tr>
+           <tr><td><code>{@link #TwoWayView_android_fadingEdge com.arise.ariseproject1:android_fadingEdge}</code></td><td></td></tr>
+           <tr><td><code>{@link #TwoWayView_android_fadingEdgeLength com.arise.ariseproject1:android_fadingEdgeLength}</code></td><td></td></tr>
+           <tr><td><code>{@link #TwoWayView_android_filterTouchesWhenObscured com.arise.ariseproject1:android_filterTouchesWhenObscured}</code></td><td></td></tr>
+           <tr><td><code>{@link #TwoWayView_android_fitsSystemWindows com.arise.ariseproject1:android_fitsSystemWindows}</code></td><td></td></tr>
+           <tr><td><code>{@link #TwoWayView_android_focusable com.arise.ariseproject1:android_focusable}</code></td><td></td></tr>
+           <tr><td><code>{@link #TwoWayView_android_focusableInTouchMode com.arise.ariseproject1:android_focusableInTouchMode}</code></td><td></td></tr>
+           <tr><td><code>{@link #TwoWayView_android_hapticFeedbackEnabled com.arise.ariseproject1:android_hapticFeedbackEnabled}</code></td><td></td></tr>
+           <tr><td><code>{@link #TwoWayView_android_id com.arise.ariseproject1:android_id}</code></td><td> Imported from View </td></tr>
+           <tr><td><code>{@link #TwoWayView_android_isScrollContainer com.arise.ariseproject1:android_isScrollContainer}</code></td><td></td></tr>
+           <tr><td><code>{@link #TwoWayView_android_keepScreenOn com.arise.ariseproject1:android_keepScreenOn}</code></td><td></td></tr>
+           <tr><td><code>{@link #TwoWayView_android_layerType com.arise.ariseproject1:android_layerType}</code></td><td></td></tr>
+           <tr><td><code>{@link #TwoWayView_android_layoutDirection com.arise.ariseproject1:android_layoutDirection}</code></td><td></td></tr>
+           <tr><td><code>{@link #TwoWayView_android_listSelector com.arise.ariseproject1:android_listSelector}</code></td><td></td></tr>
+           <tr><td><code>{@link #TwoWayView_android_longClickable com.arise.ariseproject1:android_longClickable}</code></td><td></td></tr>
+           <tr><td><code>{@link #TwoWayView_android_minHeight com.arise.ariseproject1:android_minHeight}</code></td><td></td></tr>
+           <tr><td><code>{@link #TwoWayView_android_minWidth com.arise.ariseproject1:android_minWidth}</code></td><td></td></tr>
+           <tr><td><code>{@link #TwoWayView_android_nextFocusDown com.arise.ariseproject1:android_nextFocusDown}</code></td><td></td></tr>
+           <tr><td><code>{@link #TwoWayView_android_nextFocusForward com.arise.ariseproject1:android_nextFocusForward}</code></td><td></td></tr>
+           <tr><td><code>{@link #TwoWayView_android_nextFocusLeft com.arise.ariseproject1:android_nextFocusLeft}</code></td><td></td></tr>
+           <tr><td><code>{@link #TwoWayView_android_nextFocusRight com.arise.ariseproject1:android_nextFocusRight}</code></td><td></td></tr>
+           <tr><td><code>{@link #TwoWayView_android_nextFocusUp com.arise.ariseproject1:android_nextFocusUp}</code></td><td></td></tr>
+           <tr><td><code>{@link #TwoWayView_android_onClick com.arise.ariseproject1:android_onClick}</code></td><td></td></tr>
+           <tr><td><code>{@link #TwoWayView_android_orientation com.arise.ariseproject1:android_orientation}</code></td><td> Imported from Android </td></tr>
+           <tr><td><code>{@link #TwoWayView_android_overScrollMode com.arise.ariseproject1:android_overScrollMode}</code></td><td></td></tr>
+           <tr><td><code>{@link #TwoWayView_android_padding com.arise.ariseproject1:android_padding}</code></td><td></td></tr>
+           <tr><td><code>{@link #TwoWayView_android_paddingBottom com.arise.ariseproject1:android_paddingBottom}</code></td><td></td></tr>
+           <tr><td><code>{@link #TwoWayView_android_paddingEnd com.arise.ariseproject1:android_paddingEnd}</code></td><td></td></tr>
+           <tr><td><code>{@link #TwoWayView_android_paddingLeft com.arise.ariseproject1:android_paddingLeft}</code></td><td></td></tr>
+           <tr><td><code>{@link #TwoWayView_android_paddingRight com.arise.ariseproject1:android_paddingRight}</code></td><td></td></tr>
+           <tr><td><code>{@link #TwoWayView_android_paddingStart com.arise.ariseproject1:android_paddingStart}</code></td><td></td></tr>
+           <tr><td><code>{@link #TwoWayView_android_paddingTop com.arise.ariseproject1:android_paddingTop}</code></td><td></td></tr>
+           <tr><td><code>{@link #TwoWayView_android_requiresFadingEdge com.arise.ariseproject1:android_requiresFadingEdge}</code></td><td></td></tr>
+           <tr><td><code>{@link #TwoWayView_android_rotation com.arise.ariseproject1:android_rotation}</code></td><td></td></tr>
+           <tr><td><code>{@link #TwoWayView_android_rotationX com.arise.ariseproject1:android_rotationX}</code></td><td></td></tr>
+           <tr><td><code>{@link #TwoWayView_android_rotationY com.arise.ariseproject1:android_rotationY}</code></td><td></td></tr>
+           <tr><td><code>{@link #TwoWayView_android_saveEnabled com.arise.ariseproject1:android_saveEnabled}</code></td><td></td></tr>
+           <tr><td><code>{@link #TwoWayView_android_scaleX com.arise.ariseproject1:android_scaleX}</code></td><td></td></tr>
+           <tr><td><code>{@link #TwoWayView_android_scaleY com.arise.ariseproject1:android_scaleY}</code></td><td></td></tr>
+           <tr><td><code>{@link #TwoWayView_android_scrollX com.arise.ariseproject1:android_scrollX}</code></td><td></td></tr>
+           <tr><td><code>{@link #TwoWayView_android_scrollY com.arise.ariseproject1:android_scrollY}</code></td><td></td></tr>
+           <tr><td><code>{@link #TwoWayView_android_scrollbarAlwaysDrawHorizontalTrack com.arise.ariseproject1:android_scrollbarAlwaysDrawHorizontalTrack}</code></td><td></td></tr>
+           <tr><td><code>{@link #TwoWayView_android_scrollbarAlwaysDrawVerticalTrack com.arise.ariseproject1:android_scrollbarAlwaysDrawVerticalTrack}</code></td><td></td></tr>
+           <tr><td><code>{@link #TwoWayView_android_scrollbarDefaultDelayBeforeFade com.arise.ariseproject1:android_scrollbarDefaultDelayBeforeFade}</code></td><td></td></tr>
+           <tr><td><code>{@link #TwoWayView_android_scrollbarFadeDuration com.arise.ariseproject1:android_scrollbarFadeDuration}</code></td><td></td></tr>
+           <tr><td><code>{@link #TwoWayView_android_scrollbarSize com.arise.ariseproject1:android_scrollbarSize}</code></td><td></td></tr>
+           <tr><td><code>{@link #TwoWayView_android_scrollbarStyle com.arise.ariseproject1:android_scrollbarStyle}</code></td><td></td></tr>
+           <tr><td><code>{@link #TwoWayView_android_scrollbarThumbHorizontal com.arise.ariseproject1:android_scrollbarThumbHorizontal}</code></td><td></td></tr>
+           <tr><td><code>{@link #TwoWayView_android_scrollbarThumbVertical com.arise.ariseproject1:android_scrollbarThumbVertical}</code></td><td></td></tr>
+           <tr><td><code>{@link #TwoWayView_android_scrollbarTrackHorizontal com.arise.ariseproject1:android_scrollbarTrackHorizontal}</code></td><td></td></tr>
+           <tr><td><code>{@link #TwoWayView_android_scrollbarTrackVertical com.arise.ariseproject1:android_scrollbarTrackVertical}</code></td><td></td></tr>
+           <tr><td><code>{@link #TwoWayView_android_scrollbars com.arise.ariseproject1:android_scrollbars}</code></td><td></td></tr>
+           <tr><td><code>{@link #TwoWayView_android_soundEffectsEnabled com.arise.ariseproject1:android_soundEffectsEnabled}</code></td><td></td></tr>
+           <tr><td><code>{@link #TwoWayView_android_tag com.arise.ariseproject1:android_tag}</code></td><td></td></tr>
+           <tr><td><code>{@link #TwoWayView_android_textAlignment com.arise.ariseproject1:android_textAlignment}</code></td><td></td></tr>
+           <tr><td><code>{@link #TwoWayView_android_textDirection com.arise.ariseproject1:android_textDirection}</code></td><td></td></tr>
+           <tr><td><code>{@link #TwoWayView_android_transformPivotX com.arise.ariseproject1:android_transformPivotX}</code></td><td></td></tr>
+           <tr><td><code>{@link #TwoWayView_android_transformPivotY com.arise.ariseproject1:android_transformPivotY}</code></td><td></td></tr>
+           <tr><td><code>{@link #TwoWayView_android_translationX com.arise.ariseproject1:android_translationX}</code></td><td></td></tr>
+           <tr><td><code>{@link #TwoWayView_android_translationY com.arise.ariseproject1:android_translationY}</code></td><td></td></tr>
+           <tr><td><code>{@link #TwoWayView_android_verticalScrollbarPosition com.arise.ariseproject1:android_verticalScrollbarPosition}</code></td><td></td></tr>
+           <tr><td><code>{@link #TwoWayView_android_visibility com.arise.ariseproject1:android_visibility}</code></td><td></td></tr>
+           </table>
+           @see #TwoWayView_android_alpha
+           @see #TwoWayView_android_background
+           @see #TwoWayView_android_choiceMode
+           @see #TwoWayView_android_clickable
+           @see #TwoWayView_android_contentDescription
+           @see #TwoWayView_android_drawSelectorOnTop
+           @see #TwoWayView_android_drawingCacheQuality
+           @see #TwoWayView_android_duplicateParentState
+           @see #TwoWayView_android_fadeScrollbars
+           @see #TwoWayView_android_fadingEdge
+           @see #TwoWayView_android_fadingEdgeLength
+           @see #TwoWayView_android_filterTouchesWhenObscured
+           @see #TwoWayView_android_fitsSystemWindows
+           @see #TwoWayView_android_focusable
+           @see #TwoWayView_android_focusableInTouchMode
+           @see #TwoWayView_android_hapticFeedbackEnabled
+           @see #TwoWayView_android_id
+           @see #TwoWayView_android_isScrollContainer
+           @see #TwoWayView_android_keepScreenOn
+           @see #TwoWayView_android_layerType
+           @see #TwoWayView_android_layoutDirection
+           @see #TwoWayView_android_listSelector
+           @see #TwoWayView_android_longClickable
+           @see #TwoWayView_android_minHeight
+           @see #TwoWayView_android_minWidth
+           @see #TwoWayView_android_nextFocusDown
+           @see #TwoWayView_android_nextFocusForward
+           @see #TwoWayView_android_nextFocusLeft
+           @see #TwoWayView_android_nextFocusRight
+           @see #TwoWayView_android_nextFocusUp
+           @see #TwoWayView_android_onClick
+           @see #TwoWayView_android_orientation
+           @see #TwoWayView_android_overScrollMode
+           @see #TwoWayView_android_padding
+           @see #TwoWayView_android_paddingBottom
+           @see #TwoWayView_android_paddingEnd
+           @see #TwoWayView_android_paddingLeft
+           @see #TwoWayView_android_paddingRight
+           @see #TwoWayView_android_paddingStart
+           @see #TwoWayView_android_paddingTop
+           @see #TwoWayView_android_requiresFadingEdge
+           @see #TwoWayView_android_rotation
+           @see #TwoWayView_android_rotationX
+           @see #TwoWayView_android_rotationY
+           @see #TwoWayView_android_saveEnabled
+           @see #TwoWayView_android_scaleX
+           @see #TwoWayView_android_scaleY
+           @see #TwoWayView_android_scrollX
+           @see #TwoWayView_android_scrollY
+           @see #TwoWayView_android_scrollbarAlwaysDrawHorizontalTrack
+           @see #TwoWayView_android_scrollbarAlwaysDrawVerticalTrack
+           @see #TwoWayView_android_scrollbarDefaultDelayBeforeFade
+           @see #TwoWayView_android_scrollbarFadeDuration
+           @see #TwoWayView_android_scrollbarSize
+           @see #TwoWayView_android_scrollbarStyle
+           @see #TwoWayView_android_scrollbarThumbHorizontal
+           @see #TwoWayView_android_scrollbarThumbVertical
+           @see #TwoWayView_android_scrollbarTrackHorizontal
+           @see #TwoWayView_android_scrollbarTrackVertical
+           @see #TwoWayView_android_scrollbars
+           @see #TwoWayView_android_soundEffectsEnabled
+           @see #TwoWayView_android_tag
+           @see #TwoWayView_android_textAlignment
+           @see #TwoWayView_android_textDirection
+           @see #TwoWayView_android_transformPivotX
+           @see #TwoWayView_android_transformPivotY
+           @see #TwoWayView_android_translationX
+           @see #TwoWayView_android_translationY
+           @see #TwoWayView_android_verticalScrollbarPosition
+           @see #TwoWayView_android_visibility
+         */
+        public static final int[] TwoWayView = {
+            0x01010063, 0x01010064, 0x01010065, 0x01010066,
+            0x01010067, 0x01010068, 0x01010069, 0x0101007f,
+            0x010100c4, 0x010100d0, 0x010100d1, 0x010100d2,
+            0x010100d3, 0x010100d4, 0x010100d5, 0x010100d6,
+            0x010100d7, 0x010100d8, 0x010100d9, 0x010100da,
+            0x010100db, 0x010100dc, 0x010100dd, 0x010100de,
+            0x010100df, 0x010100e0, 0x010100e1, 0x010100e2,
+            0x010100e3, 0x010100e4, 0x010100e5, 0x010100e6,
+            0x010100e7, 0x010100e8, 0x010100e9, 0x010100fb,
+            0x010100fc, 0x0101012b, 0x0101013f, 0x01010140,
+            0x01010215, 0x01010216, 0x0101024e, 0x0101025e,
+            0x0101026f, 0x01010273, 0x010102a8, 0x010102a9,
+            0x010102aa, 0x010102c1, 0x010102c4, 0x0101031f,
+            0x01010320, 0x01010321, 0x01010322, 0x01010323,
+            0x01010324, 0x01010325, 0x01010326, 0x01010327,
+            0x01010328, 0x01010334, 0x0101033c, 0x01010354,
+            0x010103a5, 0x010103b0, 0x010103b1, 0x010103b2,
+            0x010103b3, 0x010103b4
+        };
+        /**
+          <p>This symbol is the offset where the {@link com.arise.ariseproject1.R.attr#android_alpha}
+          attribute's value can be found in the {@link #TwoWayView} array.
+          @attr name android:android_alpha
+        */
+        public static final int TwoWayView_android_alpha = 51;
+        /**
+          <p>This symbol is the offset where the {@link com.arise.ariseproject1.R.attr#android_background}
+          attribute's value can be found in the {@link #TwoWayView} array.
+          @attr name android:android_background
+        */
+        public static final int TwoWayView_android_background = 13;
+        /**
+          <p>
+          @attr description
+           Imported from AbsListView 
+          <p>This corresponds to the global attribute          resource symbol {@link com.arise.ariseproject1.R.attr#android_choiceMode}.
+          @attr name android:android_choiceMode
+        */
+        public static final int TwoWayView_android_choiceMode = 37;
+        /**
+          <p>This symbol is the offset where the {@link com.arise.ariseproject1.R.attr#android_clickable}
+          attribute's value can be found in the {@link #TwoWayView} array.
+          @attr name android:android_clickable
+        */
+        public static final int TwoWayView_android_clickable = 30;
+        /**
+          <p>This symbol is the offset where the {@link com.arise.ariseproject1.R.attr#android_contentDescription}
+          attribute's value can be found in the {@link #TwoWayView} array.
+          @attr name android:android_contentDescription
+        */
+        public static final int TwoWayView_android_contentDescription = 45;
+        /**
+          <p>This symbol is the offset where the {@link com.arise.ariseproject1.R.attr#android_drawSelectorOnTop}
+          attribute's value can be found in the {@link #TwoWayView} array.
+          @attr name android:android_drawSelectorOnTop
+        */
+        public static final int TwoWayView_android_drawSelectorOnTop = 36;
+        /**
+          <p>This symbol is the offset where the {@link com.arise.ariseproject1.R.attr#android_drawingCacheQuality}
+          attribute's value can be found in the {@link #TwoWayView} array.
+          @attr name android:android_drawingCacheQuality
+        */
+        public static final int TwoWayView_android_drawingCacheQuality = 33;
+        /**
+          <p>This symbol is the offset where the {@link com.arise.ariseproject1.R.attr#android_duplicateParentState}
+          attribute's value can be found in the {@link #TwoWayView} array.
+          @attr name android:android_duplicateParentState
+        */
+        public static final int TwoWayView_android_duplicateParentState = 34;
+        /**
+          <p>This symbol is the offset where the {@link com.arise.ariseproject1.R.attr#android_fadeScrollbars}
+          attribute's value can be found in the {@link #TwoWayView} array.
+          @attr name android:android_fadeScrollbars
+        */
+        public static final int TwoWayView_android_fadeScrollbars = 48;
+        /**
+          <p>This symbol is the offset where the {@link com.arise.ariseproject1.R.attr#android_fadingEdge}
+          attribute's value can be found in the {@link #TwoWayView} array.
+          @attr name android:android_fadingEdge
+        */
+        public static final int TwoWayView_android_fadingEdge = 24;
+        /**
+          <p>This symbol is the offset where the {@link com.arise.ariseproject1.R.attr#android_fadingEdgeLength}
+          attribute's value can be found in the {@link #TwoWayView} array.
+          @attr name android:android_fadingEdgeLength
+        */
+        public static final int TwoWayView_android_fadingEdgeLength = 25;
+        /**
+          <p>This symbol is the offset where the {@link com.arise.ariseproject1.R.attr#android_filterTouchesWhenObscured}
+          attribute's value can be found in the {@link #TwoWayView} array.
+          @attr name android:android_filterTouchesWhenObscured
+        */
+        public static final int TwoWayView_android_filterTouchesWhenObscured = 50;
+        /**
+          <p>This symbol is the offset where the {@link com.arise.ariseproject1.R.attr#android_fitsSystemWindows}
+          attribute's value can be found in the {@link #TwoWayView} array.
+          @attr name android:android_fitsSystemWindows
+        */
+        public static final int TwoWayView_android_fitsSystemWindows = 22;
+        /**
+          <p>This symbol is the offset where the {@link com.arise.ariseproject1.R.attr#android_focusable}
+          attribute's value can be found in the {@link #TwoWayView} array.
+          @attr name android:android_focusable
+        */
+        public static final int TwoWayView_android_focusable = 19;
+        /**
+          <p>This symbol is the offset where the {@link com.arise.ariseproject1.R.attr#android_focusableInTouchMode}
+          attribute's value can be found in the {@link #TwoWayView} array.
+          @attr name android:android_focusableInTouchMode
+        */
+        public static final int TwoWayView_android_focusableInTouchMode = 20;
+        /**
+          <p>This symbol is the offset where the {@link com.arise.ariseproject1.R.attr#android_hapticFeedbackEnabled}
+          attribute's value can be found in the {@link #TwoWayView} array.
+          @attr name android:android_hapticFeedbackEnabled
+        */
+        public static final int TwoWayView_android_hapticFeedbackEnabled = 43;
+        /**
+          <p>
+          @attr description
+           Imported from View 
+          <p>This corresponds to the global attribute          resource symbol {@link com.arise.ariseproject1.R.attr#android_id}.
+          @attr name android:android_id
+        */
+        public static final int TwoWayView_android_id = 9;
+        /**
+          <p>This symbol is the offset where the {@link com.arise.ariseproject1.R.attr#android_isScrollContainer}
+          attribute's value can be found in the {@link #TwoWayView} array.
+          @attr name android:android_isScrollContainer
+        */
+        public static final int TwoWayView_android_isScrollContainer = 42;
+        /**
+          <p>This symbol is the offset where the {@link com.arise.ariseproject1.R.attr#android_keepScreenOn}
+          attribute's value can be found in the {@link #TwoWayView} array.
+          @attr name android:android_keepScreenOn
+        */
+        public static final int TwoWayView_android_keepScreenOn = 41;
+        /**
+          <p>This symbol is the offset where the {@link com.arise.ariseproject1.R.attr#android_layerType}
+          attribute's value can be found in the {@link #TwoWayView} array.
+          @attr name android:android_layerType
+        */
+        public static final int TwoWayView_android_layerType = 63;
+        /**
+          <p>This symbol is the offset where the {@link com.arise.ariseproject1.R.attr#android_layoutDirection}
+          attribute's value can be found in the {@link #TwoWayView} array.
+          @attr name android:android_layoutDirection
+        */
+        public static final int TwoWayView_android_layoutDirection = 67;
+        /**
+          <p>This symbol is the offset where the {@link com.arise.ariseproject1.R.attr#android_listSelector}
+          attribute's value can be found in the {@link #TwoWayView} array.
+          @attr name android:android_listSelector
+        */
+        public static final int TwoWayView_android_listSelector = 35;
+        /**
+          <p>This symbol is the offset where the {@link com.arise.ariseproject1.R.attr#android_longClickable}
+          attribute's value can be found in the {@link #TwoWayView} array.
+          @attr name android:android_longClickable
+        */
+        public static final int TwoWayView_android_longClickable = 31;
+        /**
+          <p>This symbol is the offset where the {@link com.arise.ariseproject1.R.attr#android_minHeight}
+          attribute's value can be found in the {@link #TwoWayView} array.
+          @attr name android:android_minHeight
+        */
+        public static final int TwoWayView_android_minHeight = 39;
+        /**
+          <p>This symbol is the offset where the {@link com.arise.ariseproject1.R.attr#android_minWidth}
+          attribute's value can be found in the {@link #TwoWayView} array.
+          @attr name android:android_minWidth
+        */
+        public static final int TwoWayView_android_minWidth = 38;
+        /**
+          <p>This symbol is the offset where the {@link com.arise.ariseproject1.R.attr#android_nextFocusDown}
+          attribute's value can be found in the {@link #TwoWayView} array.
+          @attr name android:android_nextFocusDown
+        */
+        public static final int TwoWayView_android_nextFocusDown = 29;
+        /**
+          <p>This symbol is the offset where the {@link com.arise.ariseproject1.R.attr#android_nextFocusForward}
+          attribute's value can be found in the {@link #TwoWayView} array.
+          @attr name android:android_nextFocusForward
+        */
+        public static final int TwoWayView_android_nextFocusForward = 62;
+        /**
+          <p>This symbol is the offset where the {@link com.arise.ariseproject1.R.attr#android_nextFocusLeft}
+          attribute's value can be found in the {@link #TwoWayView} array.
+          @attr name android:android_nextFocusLeft
+        */
+        public static final int TwoWayView_android_nextFocusLeft = 26;
+        /**
+          <p>This symbol is the offset where the {@link com.arise.ariseproject1.R.attr#android_nextFocusRight}
+          attribute's value can be found in the {@link #TwoWayView} array.
+          @attr name android:android_nextFocusRight
+        */
+        public static final int TwoWayView_android_nextFocusRight = 27;
+        /**
+          <p>This symbol is the offset where the {@link com.arise.ariseproject1.R.attr#android_nextFocusUp}
+          attribute's value can be found in the {@link #TwoWayView} array.
+          @attr name android:android_nextFocusUp
+        */
+        public static final int TwoWayView_android_nextFocusUp = 28;
+        /**
+          <p>This symbol is the offset where the {@link com.arise.ariseproject1.R.attr#android_onClick}
+          attribute's value can be found in the {@link #TwoWayView} array.
+          @attr name android:android_onClick
+        */
+        public static final int TwoWayView_android_onClick = 44;
+        /**
+          <p>
+          @attr description
+           Imported from Android 
+          <p>This corresponds to the global attribute          resource symbol {@link com.arise.ariseproject1.R.attr#android_orientation}.
+          @attr name android:android_orientation
+        */
+        public static final int TwoWayView_android_orientation = 8;
+        /**
+          <p>This symbol is the offset where the {@link com.arise.ariseproject1.R.attr#android_overScrollMode}
+          attribute's value can be found in the {@link #TwoWayView} array.
+          @attr name android:android_overScrollMode
+        */
+        public static final int TwoWayView_android_overScrollMode = 49;
+        /**
+          <p>This symbol is the offset where the {@link com.arise.ariseproject1.R.attr#android_padding}
+          attribute's value can be found in the {@link #TwoWayView} array.
+          @attr name android:android_padding
+        */
+        public static final int TwoWayView_android_padding = 14;
+        /**
+          <p>This symbol is the offset where the {@link com.arise.ariseproject1.R.attr#android_paddingBottom}
+          attribute's value can be found in the {@link #TwoWayView} array.
+          @attr name android:android_paddingBottom
+        */
+        public static final int TwoWayView_android_paddingBottom = 18;
+        /**
+          <p>This symbol is the offset where the {@link com.arise.ariseproject1.R.attr#android_paddingEnd}
+          attribute's value can be found in the {@link #TwoWayView} array.
+          @attr name android:android_paddingEnd
+        */
+        public static final int TwoWayView_android_paddingEnd = 69;
+        /**
+          <p>This symbol is the offset where the {@link com.arise.ariseproject1.R.attr#android_paddingLeft}
+          attribute's value can be found in the {@link #TwoWayView} array.
+          @attr name android:android_paddingLeft
+        */
+        public static final int TwoWayView_android_paddingLeft = 15;
+        /**
+          <p>This symbol is the offset where the {@link com.arise.ariseproject1.R.attr#android_paddingRight}
+          attribute's value can be found in the {@link #TwoWayView} array.
+          @attr name android:android_paddingRight
+        */
+        public static final int TwoWayView_android_paddingRight = 17;
+        /**
+          <p>This symbol is the offset where the {@link com.arise.ariseproject1.R.attr#android_paddingStart}
+          attribute's value can be found in the {@link #TwoWayView} array.
+          @attr name android:android_paddingStart
+        */
+        public static final int TwoWayView_android_paddingStart = 68;
+        /**
+          <p>This symbol is the offset where the {@link com.arise.ariseproject1.R.attr#android_paddingTop}
+          attribute's value can be found in the {@link #TwoWayView} array.
+          @attr name android:android_paddingTop
+        */
+        public static final int TwoWayView_android_paddingTop = 16;
+        /**
+          <p>This symbol is the offset where the {@link com.arise.ariseproject1.R.attr#android_requiresFadingEdge}
+          attribute's value can be found in the {@link #TwoWayView} array.
+          @attr name android:android_requiresFadingEdge
+        */
+        public static final int TwoWayView_android_requiresFadingEdge = 64;
+        /**
+          <p>This symbol is the offset where the {@link com.arise.ariseproject1.R.attr#android_rotation}
+          attribute's value can be found in the {@link #TwoWayView} array.
+          @attr name android:android_rotation
+        */
+        public static final int TwoWayView_android_rotation = 58;
+        /**
+          <p>This symbol is the offset where the {@link com.arise.ariseproject1.R.attr#android_rotationX}
+          attribute's value can be found in the {@link #TwoWayView} array.
+          @attr name android:android_rotationX
+        */
+        public static final int TwoWayView_android_rotationX = 59;
+        /**
+          <p>This symbol is the offset where the {@link com.arise.ariseproject1.R.attr#android_rotationY}
+          attribute's value can be found in the {@link #TwoWayView} array.
+          @attr name android:android_rotationY
+        */
+        public static final int TwoWayView_android_rotationY = 60;
+        /**
+          <p>This symbol is the offset where the {@link com.arise.ariseproject1.R.attr#android_saveEnabled}
+          attribute's value can be found in the {@link #TwoWayView} array.
+          @attr name android:android_saveEnabled
+        */
+        public static final int TwoWayView_android_saveEnabled = 32;
+        /**
+          <p>This symbol is the offset where the {@link com.arise.ariseproject1.R.attr#android_scaleX}
+          attribute's value can be found in the {@link #TwoWayView} array.
+          @attr name android:android_scaleX
+        */
+        public static final int TwoWayView_android_scaleX = 56;
+        /**
+          <p>This symbol is the offset where the {@link com.arise.ariseproject1.R.attr#android_scaleY}
+          attribute's value can be found in the {@link #TwoWayView} array.
+          @attr name android:android_scaleY
+        */
+        public static final int TwoWayView_android_scaleY = 57;
+        /**
+          <p>This symbol is the offset where the {@link com.arise.ariseproject1.R.attr#android_scrollX}
+          attribute's value can be found in the {@link #TwoWayView} array.
+          @attr name android:android_scrollX
+        */
+        public static final int TwoWayView_android_scrollX = 11;
+        /**
+          <p>This symbol is the offset where the {@link com.arise.ariseproject1.R.attr#android_scrollY}
+          attribute's value can be found in the {@link #TwoWayView} array.
+          @attr name android:android_scrollY
+        */
+        public static final int TwoWayView_android_scrollY = 12;
+        /**
+          <p>This symbol is the offset where the {@link com.arise.ariseproject1.R.attr#android_scrollbarAlwaysDrawHorizontalTrack}
+          attribute's value can be found in the {@link #TwoWayView} array.
+          @attr name android:android_scrollbarAlwaysDrawHorizontalTrack
+        */
+        public static final int TwoWayView_android_scrollbarAlwaysDrawHorizontalTrack = 5;
+        /**
+          <p>This symbol is the offset where the {@link com.arise.ariseproject1.R.attr#android_scrollbarAlwaysDrawVerticalTrack}
+          attribute's value can be found in the {@link #TwoWayView} array.
+          @attr name android:android_scrollbarAlwaysDrawVerticalTrack
+        */
+        public static final int TwoWayView_android_scrollbarAlwaysDrawVerticalTrack = 6;
+        /**
+          <p>This symbol is the offset where the {@link com.arise.ariseproject1.R.attr#android_scrollbarDefaultDelayBeforeFade}
+          attribute's value can be found in the {@link #TwoWayView} array.
+          @attr name android:android_scrollbarDefaultDelayBeforeFade
+        */
+        public static final int TwoWayView_android_scrollbarDefaultDelayBeforeFade = 47;
+        /**
+          <p>This symbol is the offset where the {@link com.arise.ariseproject1.R.attr#android_scrollbarFadeDuration}
+          attribute's value can be found in the {@link #TwoWayView} array.
+          @attr name android:android_scrollbarFadeDuration
+        */
+        public static final int TwoWayView_android_scrollbarFadeDuration = 46;
+        /**
+          <p>This symbol is the offset where the {@link com.arise.ariseproject1.R.attr#android_scrollbarSize}
+          attribute's value can be found in the {@link #TwoWayView} array.
+          @attr name android:android_scrollbarSize
+        */
+        public static final int TwoWayView_android_scrollbarSize = 0;
+        /**
+          <p>This symbol is the offset where the {@link com.arise.ariseproject1.R.attr#android_scrollbarStyle}
+          attribute's value can be found in the {@link #TwoWayView} array.
+          @attr name android:android_scrollbarStyle
+        */
+        public static final int TwoWayView_android_scrollbarStyle = 7;
+        /**
+          <p>This symbol is the offset where the {@link com.arise.ariseproject1.R.attr#android_scrollbarThumbHorizontal}
+          attribute's value can be found in the {@link #TwoWayView} array.
+          @attr name android:android_scrollbarThumbHorizontal
+        */
+        public static final int TwoWayView_android_scrollbarThumbHorizontal = 1;
+        /**
+          <p>This symbol is the offset where the {@link com.arise.ariseproject1.R.attr#android_scrollbarThumbVertical}
+          attribute's value can be found in the {@link #TwoWayView} array.
+          @attr name android:android_scrollbarThumbVertical
+        */
+        public static final int TwoWayView_android_scrollbarThumbVertical = 2;
+        /**
+          <p>This symbol is the offset where the {@link com.arise.ariseproject1.R.attr#android_scrollbarTrackHorizontal}
+          attribute's value can be found in the {@link #TwoWayView} array.
+          @attr name android:android_scrollbarTrackHorizontal
+        */
+        public static final int TwoWayView_android_scrollbarTrackHorizontal = 3;
+        /**
+          <p>This symbol is the offset where the {@link com.arise.ariseproject1.R.attr#android_scrollbarTrackVertical}
+          attribute's value can be found in the {@link #TwoWayView} array.
+          @attr name android:android_scrollbarTrackVertical
+        */
+        public static final int TwoWayView_android_scrollbarTrackVertical = 4;
+        /**
+          <p>This symbol is the offset where the {@link com.arise.ariseproject1.R.attr#android_scrollbars}
+          attribute's value can be found in the {@link #TwoWayView} array.
+          @attr name android:android_scrollbars
+        */
+        public static final int TwoWayView_android_scrollbars = 23;
+        /**
+          <p>This symbol is the offset where the {@link com.arise.ariseproject1.R.attr#android_soundEffectsEnabled}
+          attribute's value can be found in the {@link #TwoWayView} array.
+          @attr name android:android_soundEffectsEnabled
+        */
+        public static final int TwoWayView_android_soundEffectsEnabled = 40;
+        /**
+          <p>This symbol is the offset where the {@link com.arise.ariseproject1.R.attr#android_tag}
+          attribute's value can be found in the {@link #TwoWayView} array.
+          @attr name android:android_tag
+        */
+        public static final int TwoWayView_android_tag = 10;
+        /**
+          <p>This symbol is the offset where the {@link com.arise.ariseproject1.R.attr#android_textAlignment}
+          attribute's value can be found in the {@link #TwoWayView} array.
+          @attr name android:android_textAlignment
+        */
+        public static final int TwoWayView_android_textAlignment = 66;
+        /**
+          <p>This symbol is the offset where the {@link com.arise.ariseproject1.R.attr#android_textDirection}
+          attribute's value can be found in the {@link #TwoWayView} array.
+          @attr name android:android_textDirection
+        */
+        public static final int TwoWayView_android_textDirection = 65;
+        /**
+          <p>This symbol is the offset where the {@link com.arise.ariseproject1.R.attr#android_transformPivotX}
+          attribute's value can be found in the {@link #TwoWayView} array.
+          @attr name android:android_transformPivotX
+        */
+        public static final int TwoWayView_android_transformPivotX = 52;
+        /**
+          <p>This symbol is the offset where the {@link com.arise.ariseproject1.R.attr#android_transformPivotY}
+          attribute's value can be found in the {@link #TwoWayView} array.
+          @attr name android:android_transformPivotY
+        */
+        public static final int TwoWayView_android_transformPivotY = 53;
+        /**
+          <p>This symbol is the offset where the {@link com.arise.ariseproject1.R.attr#android_translationX}
+          attribute's value can be found in the {@link #TwoWayView} array.
+          @attr name android:android_translationX
+        */
+        public static final int TwoWayView_android_translationX = 54;
+        /**
+          <p>This symbol is the offset where the {@link com.arise.ariseproject1.R.attr#android_translationY}
+          attribute's value can be found in the {@link #TwoWayView} array.
+          @attr name android:android_translationY
+        */
+        public static final int TwoWayView_android_translationY = 55;
+        /**
+          <p>This symbol is the offset where the {@link com.arise.ariseproject1.R.attr#android_verticalScrollbarPosition}
+          attribute's value can be found in the {@link #TwoWayView} array.
+          @attr name android:android_verticalScrollbarPosition
+        */
+        public static final int TwoWayView_android_verticalScrollbarPosition = 61;
+        /**
+          <p>This symbol is the offset where the {@link com.arise.ariseproject1.R.attr#android_visibility}
+          attribute's value can be found in the {@link #TwoWayView} array.
+          @attr name android:android_visibility
+        */
+        public static final int TwoWayView_android_visibility = 21;
+    };
 }

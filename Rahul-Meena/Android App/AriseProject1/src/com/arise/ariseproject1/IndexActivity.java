@@ -1,5 +1,6 @@
 package com.arise.ariseproject1;
 
+import com.arise.ariseproject1.classes.SessionManager;
 import com.google.android.gcm.GCMRegistrar;
 
 import android.os.Bundle;

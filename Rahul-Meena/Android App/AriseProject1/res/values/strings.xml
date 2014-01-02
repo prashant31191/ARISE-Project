@@ -53,5 +53,8 @@
     <string name="password">Password</string>
     <string name="title_activity_registration_result">RegistrationResultActivity</string>
     <string name="title_activity_forgot_password">ForgotPasswordActivity</string>
+    <string name="title_activity_chat">ChatActivity</string>
+    <string name="title_activity_temp">TempActivity</string>
+    <string name="title_activity_map">MapActivity</string>
 
 </resources>

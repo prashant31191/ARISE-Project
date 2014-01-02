@@ -1,9 +1,13 @@
 package com.arise.ariseproject1;
 
 import com.arise.ariseproject1.adapter.TabsPagerAdapter;
+import com.arise.ariseproject1.classes.SessionManager;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.MapFragment;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
 import android.view.Menu;
@@ -31,9 +35,11 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
         viewPager = (ViewPager) findViewById(R.id.pager);
         actionBar = getActionBar();
         mAdapter = new TabsPagerAdapter(getSupportFragmentManager());
- 
+        
         viewPager.setAdapter(mAdapter);
-      //actionBar.setHomeButtonEnabled(false);
+        // page limit 2 to accommodate both profile and radar fragment always
+        viewPager.setOffscreenPageLimit(2);
+        //actionBar.setHomeButtonEnabled(false);
         actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);        
  
         // Adding Tabs
@@ -63,12 +69,6 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
         });
         
     }
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.activity_main_actions, menu);
-        return super.onCreateOptionsMenu(menu);
-	}
 
 	@Override
 	public void onTabReselected(Tab tab, FragmentTransaction arg1) {
@@ -88,5 +88,11 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
 	public void onTabUnselected(Tab tab, FragmentTransaction arg1) {
 		// TODO Auto-generated method stub
 		
+	}
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		// Inflate the menu; this adds items to the action bar if it is present.
+		getMenuInflater().inflate(R.menu.activity_main_actions, menu);
+        return super.onCreateOptionsMenu(menu);
 	}
 }

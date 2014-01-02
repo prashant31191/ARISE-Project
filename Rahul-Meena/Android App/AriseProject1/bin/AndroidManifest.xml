@@ -8,9 +8,13 @@
         android:minSdkVersion="11"
         android:targetSdkVersion="18" />
 
+    <uses-feature
+        android:glEsVersion="0x00020000"
+        android:required="true" />
+
     <!-- GCM connects to Internet Services. -->
     <uses-permission android:name="android.permission.INTERNET" />
-    
+
     <!-- Include next permission if you want to allow UIL to cache images on SD card -->
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
@@ -33,17 +37,26 @@
     <!-- Network State Permissions to detect Internet status -->
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
+    <!-- Allows the API to access Google web-based services -->
+    <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES" />
+    <!--
+     The following two permissions are not required to use
+     Google Maps Android API v2, but are recommended.
+    -->
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+
     <!-- Permission to vibrate -->
     <uses-permission android:name="android.permission.VIBRATE" />
 
     <application
-        android:name="MyApplication"
+        android:name="com.arise.ariseproject1.MyApplication"
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name="com.arise.ariseproject1.MainActivity"
+            android:name="com.arise.ariseproject1.ChatActivity"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -103,6 +116,26 @@
         <activity
             android:name="com.arise.ariseproject1.ForgotPasswordActivity"
             android:label="@string/title_activity_forgot_password" >
+        </activity>
+
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
+        <meta-data
+            android:name="com.google.android.maps.v2.API_KEY"
+            android:value="AIzaSyCcdlnNEYQ0j7dE0qEK5nfNIYjoPGynxk4" />
+
+        <activity
+            android:name="com.arise.ariseproject1.MainActivity"
+            android:label="@string/title_activity_chat" >
+        </activity>
+        <activity
+            android:name="com.arise.ariseproject1.TempActivity"
+            android:label="@string/title_activity_temp" >
+        </activity>
+        <activity
+            android:name="com.arise.ariseproject1.MapActivity"
+            android:label="@string/title_activity_map" >
         </activity>
     </application>
 

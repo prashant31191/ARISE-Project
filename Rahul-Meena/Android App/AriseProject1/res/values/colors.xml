@@ -2,5 +2,7 @@
 <resources>
     <drawable name="dodger_blue">#1589FF</drawable>
     <drawable name="deep_sky_blue">#3BB9FF</drawable>
-    <drawable name="camera_orange">#FF6702</drawable>
+    <color name="camera_orange">#FF6702</color>
+    <color name="BLACK">#000000</color>
+    <color name="WHITE">#FFFFFF</color>
 </resources>

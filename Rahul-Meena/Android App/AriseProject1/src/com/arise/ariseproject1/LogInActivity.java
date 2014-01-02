@@ -1,24 +1,12 @@
 package com.arise.ariseproject1;
 
-import static com.arise.ariseproject1.CommonUtilities.SERVER_LOG_IN_URL;
-
-import java.util.ArrayList;
-import java.util.List;
-
-import org.apache.http.NameValuePair;
-import org.apache.http.message.BasicNameValuePair;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import com.google.android.gcm.GCMRegistrar;
-
-import android.os.AsyncTask;
+import com.arise.ariseproject1.classes.AlertDialogManager;
+import com.arise.ariseproject1.classes.JSONParser;
+import com.arise.ariseproject1.classes.SessionManager;
 import android.os.Bundle;
 import android.app.Activity;
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.Intent;
-import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
