@@ -13,6 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
+        android:layout_marginTop="50dp"
         android:orientation="vertical" >
 
         <LinearLayout
@@ -26,7 +27,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:hint="Email"
+                android:hint="@string/email"
+                android:layout_gravity="center_vertical"
                 android:inputType="textEmailAddress" >
 
                 <requestFocus />
@@ -44,7 +46,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:hint="Password"
+                android:hint="@string/password"
                 android:inputType="textPassword" />
         </LinearLayout>
 
@@ -57,8 +59,10 @@
             <TextView
                 android:id="@+id/TextView_log_in_activity_forgot_password"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Forgot Password?" />
+                android:layout_height="match_parent"
+                android:text="@string/forgot_password"
+                android:gravity="center_horizontal|center_vertical" />
+
         </LinearLayout>
     </LinearLayout>
 
@@ -68,13 +72,6 @@
         android:layout_weight="1"
         android:orientation="vertical" >
 
-        <CheckBox
-            android:id="@+id/checkBox_log_in_activity_remember_me"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:text="Remember Me" />
-
         <Button
             android:id="@+id/button_log_in_activity_log_in"
             android:layout_width="match_parent"
@@ -82,7 +79,7 @@
             android:layout_marginTop="20dp"
             android:layout_gravity="center_horizontal|center_vertical"
             android:background="@drawable/selector_send_button"
-            android:text="Log In"
+            android:text="@string/log_in"
             android:textColor="#ffffff" />
     </LinearLayout>
 

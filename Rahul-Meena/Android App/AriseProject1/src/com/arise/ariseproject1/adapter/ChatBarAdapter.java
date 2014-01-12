@@ -33,15 +33,19 @@ public class ChatBarAdapter extends ArrayAdapter<ChatUser> {
 		this.imageLoader = imageLoader;
 		this.dioptions = diOptions;
 	}
+
+	public List<ChatUser> getChatUserList() {
+		return ChatBarAdapter.chatUsers;
+	}
 	
 	@Override
 	public int getCount() {
-		return this.chatUsers.size();
+		return ChatBarAdapter.chatUsers.size();
 	}
 	
 	@Override
 	public ChatUser getItem(int index) {
-		return this.chatUsers.get(index);
+		return ChatBarAdapter.chatUsers.get(index);
 	}
 
 	@Override
@@ -57,6 +61,7 @@ public class ChatBarAdapter extends ArrayAdapter<ChatUser> {
 
 		ChatUser user = getItem(position);
 		iv_image.setImageResource(R.drawable.tc);
+		imageLoader.displayImage(user.getImage(), iv_image, dioptions);
 		
 		int noOfMsgs = user.getNoOfMsgs();
 		if(noOfMsgs == 0){

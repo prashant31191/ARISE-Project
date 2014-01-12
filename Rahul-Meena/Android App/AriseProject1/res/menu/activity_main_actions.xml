@@ -8,17 +8,17 @@
           android:showAsAction="always" >
     <menu >
      
-    <!-- Log out -->
-    <item android:id="@+id/action_log_out"
-          android:title="@string/action_log_out" />
+    <!-- Help -->
+    <item android:id="@+id/action_help"
+          android:title="@string/action_help"/>
      
     <!-- Settings -->
     <item android:id="@+id/action_settings"
           android:title="@string/action_settings" />
      
-    <!-- Help -->
-    <item android:id="@+id/action_help"
-          android:title="@string/action_help"/>
+    <!-- Log out -->
+    <item android:id="@+id/action_log_out"
+          android:title="@string/action_log_out" />
     </menu>
     </item>
 </menu>

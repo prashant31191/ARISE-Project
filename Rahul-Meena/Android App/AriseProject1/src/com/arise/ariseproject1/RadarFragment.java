@@ -94,7 +94,6 @@ public class RadarFragment extends Fragment{
         if(session.getPDValue() == 1){
         	loadRadar(session.getPWLUCS());
         }
-
 	}
 	
 	public void loadRadar(List<PWLUCS> list){
@@ -139,6 +138,8 @@ public class RadarFragment extends Fragment{
 			PWLUCS p = pwlucs.get(i);
     		map.addMarker(new MarkerOptions()
     		.icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_latitude))
+            .title(p.getName())
+            .snippet("At: "+p.getLocTime())
     		.anchor(0.0f, 1.0f) // Anchors the marker on the bottom left
     		.position(new LatLng(p.getLocLat(), p.getLoclong())));
     	}
@@ -157,6 +158,8 @@ public class RadarFragment extends Fragment{
                 	map.clear();
                 	map.addMarker(new MarkerOptions()
 					.icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_latitude))
+		            .title(person.getName())
+		            .snippet("At: "+person.getLocTime())
 					.anchor(0.0f, 1.0f) // Anchors the marker on the bottom left
 					.position(new LatLng(person.getLoclong(), person.getLocLat())));
         

@@ -2,18 +2,15 @@ package com.arise.ariseproject1;
 
 import com.arise.ariseproject1.adapter.TabsPagerAdapter;
 import com.arise.ariseproject1.classes.SessionManager;
-import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.MapFragment;
-import com.nostra13.universalimageloader.core.ImageLoader;
-
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.app.ActionBar;
 import android.app.ActionBar.Tab;
 import android.app.FragmentTransaction;
+import android.content.Intent;
 
 public class MainActivity extends FragmentActivity implements ActionBar.TabListener {
 	
@@ -24,7 +21,7 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
     private String[] tabs = { "Profile", "Radar" };
 	
     // Session Manager Class
-    SessionManager session;
+    private SessionManager session;
  
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,7 +37,7 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
         // page limit 2 to accommodate both profile and radar fragment always
         viewPager.setOffscreenPageLimit(2);
         //actionBar.setHomeButtonEnabled(false);
-        actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);        
+        actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
  
         // Adding Tabs
         for (String tab_name : tabs) {
@@ -94,5 +91,40 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.activity_main_actions, menu);
         return super.onCreateOptionsMenu(menu);
-	}
+	}/**
+     * On selecting action bar icons
+     * */
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Take appropriate action for each action item click
+        switch (item.getItemId()) {
+        case R.id.action_settings:
+            LaunchSettingsScreen();
+            return true;
+        case R.id.action_help:
+            LaunchHelpScreen();
+            return true;
+        case R.id.action_log_out:
+        	session.logoutUser();
+            return true;
+        default:
+            return super.onOptionsItemSelected(item);
+        }
+    }
+ 
+    /**
+     * Launching new activity
+     * */
+    private void LaunchSettingsScreen() {
+        Intent i = new Intent(MainActivity.this, SettingsActivity.class);
+        startActivity(i);
+    }
+ 
+    /**
+     * Launching new activity
+     * */
+    private void LaunchHelpScreen() {
+        Intent i = new Intent(MainActivity.this, HelpActivity.class);
+        startActivity(i);
+    }
 }

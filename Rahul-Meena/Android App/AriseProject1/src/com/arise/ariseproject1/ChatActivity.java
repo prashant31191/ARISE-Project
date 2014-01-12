@@ -1,28 +1,23 @@
 package com.arise.ariseproject1;
 
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.lucasr.twowayview.TwoWayView;
 import org.lucasr.twowayview.TwoWayView.ChoiceMode;
 
-import com.arise.ariseproject1.ProfileFragment.AddNewPWCSULOption;
 import com.arise.ariseproject1.adapter.ChatBarAdapter;
 import com.arise.ariseproject1.adapter.ChatPagerAdapter;
-import com.arise.ariseproject1.adapter.LazyPWCSULAdapter;
 import com.arise.ariseproject1.adapter.LazyPWLUCSAdapter;
 import com.arise.ariseproject1.classes.ChatUser;
 import com.arise.ariseproject1.classes.CommonUtilities;
 import com.arise.ariseproject1.classes.PWLUCS;
 import com.arise.ariseproject1.classes.SessionManager;
-import com.arise.ariseproject1.classes.WakeLocker;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
+import android.app.ActionBar;
 import android.app.Dialog;
-import android.content.BroadcastReceiver;
-import android.content.Context;
-import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
-import android.os.Message;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
 import android.view.Menu;
@@ -30,12 +25,9 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.TextView;
-import android.widget.Toast;
 
 public class ChatActivity extends FragmentActivity implements OnClickListener{
 
@@ -43,9 +35,9 @@ public class ChatActivity extends FragmentActivity implements OnClickListener{
 	private EditText et_myMsg;
 	private TwoWayView chatBar;
 	private SessionManager session;
-	private ChatBarAdapter chatBarAdapter;
-    private ViewPager viewPager;
-    private ChatPagerAdapter cpAdapter;
+	private static ChatBarAdapter chatBarAdapter;
+    private static ViewPager viewPager;
+    private static ChatPagerAdapter cpAdapter;
 	private DisplayImageOptions dioptions;
 	private ImageLoader imageLoader = ImageLoader.getInstance();
 	
@@ -59,12 +51,19 @@ public class ChatActivity extends FragmentActivity implements OnClickListener{
 		String name = getIntent().getExtras().getString(CommonUtilities.TAG_NAME);
 		String image = getIntent().getExtras().getString(CommonUtilities.TAG_IMAGE);
 		long uid = getIntent().getExtras().getLong(CommonUtilities.TAG_UID);
+		long cpid = getIntent().getExtras().getLong(CommonUtilities.TAG_MESSAGE_CPID);
 		
 		b_add = (Button)findViewById(R.id.button_chat_activity_add);
 		b_send = (Button)findViewById(R.id.button_chat_activity_send);
 		et_myMsg = (EditText)findViewById(R.id.editText_chat_activity_message);
 		chatBar = (TwoWayView)findViewById(R.id.twoWayView_chat_activity_chatBar);
 		viewPager = (ViewPager)findViewById(R.id.viewPager_chat_activity);
+ 
+        // get action bar   
+        ActionBar actionBar = getActionBar();
+ 
+        // Enabling Up / Back navigation
+        actionBar.setDisplayHomeAsUpEnabled(true);
 		
 		
         // Initialization
@@ -77,7 +76,7 @@ public class ChatActivity extends FragmentActivity implements OnClickListener{
         
 		if(chatCase == 1){
         cpAdapter.addNewListFragment();
-        chatBarAdapter.add(new ChatUser(name,image, uid, 10));
+        chatBarAdapter.add(new ChatUser(name,image, uid,cpid,1));
 		}
         
         /**
@@ -90,7 +89,7 @@ public class ChatActivity extends FragmentActivity implements OnClickListener{
 					long id) {
 				
 				viewPager.setCurrentItem(position);
-				removeNewMsgCount(position);
+				resetNewMsgCount(position);
 				
 			}
 		});
@@ -123,14 +122,45 @@ public class ChatActivity extends FragmentActivity implements OnClickListener{
 
 	}
 
-	private void removeNewMsgCount(int position) {
+	private static void resetNewMsgCount(int position) {
 		
         chatBarAdapter.getItem(position).setNoOfMsgs(0);
         chatBarAdapter.notifyDataSetChanged();
 		
 	}
+
+	private static void setNewMsgCount(int position) {
+
+		chatBarAdapter.getItem(position).setNoOfMsgs((chatBarAdapter.getItem(position).getNoOfMsgs()+1));
+        chatBarAdapter.notifyDataSetChanged();
+		
+	}
 	
-	public static void newMessageReceived(String message){
+	public static void newMessageReceived(String message) throws JSONException{
+    	
+		JSONObject jObject = new JSONObject(message);
+		long from_uid = Long.valueOf(jObject.getString(CommonUtilities.TAG_MESSAGE_FROM_UID));
+		String from_image = jObject.getString(CommonUtilities.TAG_MESSAGE_FROM_IMAGE);
+		String from_name = jObject.getString(CommonUtilities.TAG_MESSAGE_FROM_NAME);
+		long cpid = Long.valueOf(jObject.getString(CommonUtilities.TAG_MESSAGE_CPID));
+		String content = jObject.getString(CommonUtilities.TAG_MESSAGE_CONTENT);
+		//String time = jObject.getString(CommonUtilities.TAG_MESSAGE_FROM_UID);
+		
+		for(int i=0; i<chatBarAdapter.getCount();i++){
+			if(from_uid == chatBarAdapter.getChatUserList().get(i).getUid()){
+				setNewMsgCount(i);
+				cpAdapter.getItem(i).receive(content);
+				break;
+			}
+			if(i == (chatBarAdapter.getCount()-1)){
+				
+				chatBarAdapter.add(new ChatUser(from_name, from_image, from_uid, cpid, 1));
+				chatBarAdapter.notifyDataSetChanged();
+		        cpAdapter.addNewListFragment();
+		        cpAdapter.notifyDataSetChanged();
+				
+			}
+		}
 		
 	}
 
@@ -145,7 +175,8 @@ public class ChatActivity extends FragmentActivity implements OnClickListener{
 		break;
 		
 		case R.id.button_chat_activity_send:{
-			cpAdapter.getItem(viewPager.getCurrentItem()).send(et_myMsg.getText().toString());
+			
+			cpAdapter.getItem(viewPager.getCurrentItem()).send(et_myMsg.getText().toString(),chatBarAdapter.getItem(chatBar.getSelectedItemPosition()).getCpid());
 			et_myMsg.setText("");
 		}
 		break;
@@ -198,7 +229,8 @@ public class ChatActivity extends FragmentActivity implements OnClickListener{
 				    String name = person.getName();
 				    String image = person.getImage();
 				    long uid = person.getUid();
-					chatBarAdapter.add(new ChatUser(name, image, uid, 0));
+				    long cpid = person.getCpid();
+					chatBarAdapter.add(new ChatUser(name, image, uid, cpid, 0));
 					int size = chatBarAdapter.getCount();
 					size--;
 					chatBarAdapter.notifyDataSetChanged();
@@ -224,8 +256,8 @@ public class ChatActivity extends FragmentActivity implements OnClickListener{
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.chat, menu);
-		return true;
+		getMenuInflater().inflate(R.menu.activity_main_actions, menu);
+        return super.onCreateOptionsMenu(menu);
 	}
 
 }

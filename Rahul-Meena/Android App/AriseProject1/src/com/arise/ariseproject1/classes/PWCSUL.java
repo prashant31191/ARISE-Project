@@ -1,11 +1,6 @@
 package com.arise.ariseproject1.classes;
 
-import android.content.Context;
-import android.location.Location;
-
 public class PWCSUL {
-
-	private Context context;
 	private String name;
 	private String email;
 	private String image;
@@ -15,8 +10,7 @@ public class PWCSUL {
 		
 	}
 	
-	public PWCSUL(Context context, String name, String email, String image, long uid){
-		this.context = context;
+	public PWCSUL( String name, String email, String image, long uid){
 		this.name = name;
 		this.email = email;
 		this.image = image;

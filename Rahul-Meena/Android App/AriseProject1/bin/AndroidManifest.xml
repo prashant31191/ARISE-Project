@@ -41,7 +41,7 @@
     <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES" />
     <!--
      The following two permissions are not required to use
-     Google Maps Android API v2, but are recommended.
+     Google Maps Android API v2, but are recommended.
     -->
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
@@ -56,7 +56,7 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name="com.arise.ariseproject1.ChatActivity"
+            android:name="com.arise.ariseproject1.IndexActivity"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -86,28 +86,12 @@
             android:label="@string/title_activity_register" >
         </activity>
         <activity
-            android:name="com.arise.ariseproject1.TempMainActivity"
-            android:label="@string/title_activity_temp_main" >
-        </activity>
-        <activity
             android:name="com.arise.ariseproject1.LogInActivity"
             android:label="@string/title_activity_log_in" >
         </activity>
         <activity
-            android:name="com.arise.ariseproject1.ProfileActivity"
-            android:label="@string/title_activity_profile" >
-        </activity>
-        <activity
-            android:name="com.arise.ariseproject1.RadarActivity"
-            android:label="@string/title_activity_radar" >
-        </activity>
-        <activity
-            android:name="com.arise.ariseproject1.LastKnownLocationActivity"
-            android:label="@string/title_activity_last_known_location" >
-        </activity>
-        <activity
-            android:name="com.arise.ariseproject1.IndexActivity"
-            android:label="@string/title_activity_main" >
+            android:name="com.arise.ariseproject1.ChatActivity"
+            android:label="@string/title_activity_chat" >
         </activity>
         <activity
             android:name="com.arise.ariseproject1.RegistrationResultActivity"
@@ -130,12 +114,23 @@
             android:label="@string/title_activity_chat" >
         </activity>
         <activity
-            android:name="com.arise.ariseproject1.TempActivity"
-            android:label="@string/title_activity_temp" >
+            android:name="com.arise.ariseproject1.MapActivity"
+            android:label="@string/title_activity_map"
+            android:parentActivityName="com.arise.ariseproject1.MainActivity" >
         </activity>
         <activity
-            android:name="com.arise.ariseproject1.MapActivity"
-            android:label="@string/title_activity_map" >
+            android:name="com.arise.ariseproject1.SettingsActivity"
+            android:label="@string/title_activity_settings"
+            android:parentActivityName="com.arise.ariseproject1.MainActivity" >
+        </activity>
+        <activity
+            android:name="com.arise.ariseproject1.ForgotPasswordResultActivity"
+            android:label="@string/title_activity_forgot_password_result" >
+        </activity>
+        <activity
+            android:name="com.arise.ariseproject1.HelpActivity"
+            android:label="@string/title_activity_help"
+            android:parentActivityName="com.arise.ariseproject1.MainActivity" >
         </activity>
     </application>
 

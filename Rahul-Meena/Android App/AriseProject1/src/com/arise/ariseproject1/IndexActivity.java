@@ -6,6 +6,7 @@ import com.google.android.gcm.GCMRegistrar;
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
+import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.view.Window;
@@ -45,7 +46,12 @@ public class IndexActivity extends Activity implements OnClickListener {
          * This will redirect user to LoginActivity is he is not
          * logged in
          * */
-		session.checkLogin();
+		//if(GCMRegistrar.isRegistered(getApplicationContext()))
+			//session.checkLogin();
+		
+		if(GCMRegistrar.isRegistered(getApplicationContext())){
+			Log.d("Registered", "true");
+		}
 	}
 
 	@Override
@@ -59,14 +65,18 @@ public class IndexActivity extends Activity implements OnClickListener {
 			
 		}
 		break;
+		
+		// NEEDS TO BE REMOVED
 		case R.id.button_unregister:{
-			
-			if(GCMRegistrar.isRegistered(this)){
-				GCMRegistrar.unregister(this);
+
+
+			if(GCMRegistrar.isRegistered(getApplicationContext())){
+				GCMRegistrar.unregister(getApplicationContext());
 				Toast.makeText(getApplicationContext(), "successfully unregistered", Toast.LENGTH_LONG).show();
 			}
-			
 		}
+		// NEEDS TO BE REMOVED
+		
 		break;
 		case R.id.button_index_activity_log_in:{
 			

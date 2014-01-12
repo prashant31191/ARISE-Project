@@ -200,7 +200,7 @@ public class RegisterActivity extends Activity {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            pDialog = new ProgressDialog(RegisterActivity.this);
+            pDialog = new ProgressDialog(context);
             pDialog.setMessage("Register User..");
             pDialog.setIndeterminate(false);
             pDialog.setCancelable(true);
@@ -260,12 +260,12 @@ public class RegisterActivity extends Activity {
             }
             else{
                 // Device is already registered on GCM
-                if (GCMRegistrar.isRegisteredOnServer(getApplicationContext())) {
+                if (GCMRegistrar.isRegisteredOnServer(context)) {
                    tv_device_error.setVisibility(View.VISIBLE);
                 }
                 else{
             	// Launch Main Activity
-                Intent i = new Intent(getApplicationContext(), RegistrationResultActivity.class);
+                Intent i = new Intent(context, RegistrationResultActivity.class);
                                   
                 // Sending registration details to RegistrationResultActivity
                 i.putExtra("name",full_name);

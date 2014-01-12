@@ -1,6 +1,7 @@
 package com.arise.ariseproject1.classes;
 
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
  
@@ -28,8 +29,9 @@ public class AlertDialogManager {
         //    alertDialog.setIcon((status) ? R.drawable.success : R.drawable.fail);
  
         // Setting OK Button
-        alertDialog.setButton("OK", new DialogInterface.OnClickListener() {
+        alertDialog.setButton(Dialog.BUTTON_POSITIVE, "OK", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {
+            	dialog.cancel();
             }
         });
  

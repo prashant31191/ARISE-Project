@@ -23,11 +23,9 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.assist.ImageScaleType;
 
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.AsyncTask;
@@ -42,7 +40,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -55,7 +52,7 @@ public class ProfileFragment extends Fragment implements OnClickListener{
 	private Button b_get_LKL,b_add_new,b_UML;
 	private ImageView iv_image;
 	private ListView lv_pwcsul;
-	private RelativeLayout rl_none;
+	//private RelativeLayout rl_none;
 	private TextView tv_name;
 	private LazyPWCSULAdapter peopleAdapter;
 	private DisplayImageOptions dioptions;
@@ -110,7 +107,7 @@ public class ProfileFragment extends Fragment implements OnClickListener{
         b_UML = (Button)rootView.findViewById(R.id.button_profile_fragment_UML);
         iv_image = (ImageView)rootView.findViewById(R.id.imageView_profile_fragment_image);
         lv_pwcsul = (ListView)rootView.findViewById(R.id.listView_profile_fragment_PWCSML);
-        rl_none = (RelativeLayout)rootView.findViewById(R.id.relativeLayout_profile_fragment_none);
+        //rl_none = (RelativeLayout)rootView.findViewById(R.id.relativeLayout_profile_fragment_none);
         tv_name = (TextView)rootView.findViewById(R.id.textView_profile_fragment_name);
 
         return rootView;
@@ -178,7 +175,7 @@ public class ProfileFragment extends Fragment implements OnClickListener{
         peopleAdapter.addAll(session.getPWCSUL());
         lv_pwcsul.setAdapter(peopleAdapter);
 		
-        /*if(ATjson.getJSONArray(CommonUtilities.TAG_PWCSUL) != null){
+        /*if(ATuser.getJSONArray(CommonUtilities.TAG_PWCSUL) != null){
 			rl_none.setVisibility(View.GONE);
 		}
 		*/
@@ -194,7 +191,7 @@ public class ProfileFragment extends Fragment implements OnClickListener{
 				Intent intent = new Intent(context,MapActivity.class);
 				startActivity(intent);
 			} else{
-				
+				alert.showAlertDialog(getActivity(), "Not Found!","Please Update your location", false);	
 			}
 		}
 		break;
@@ -297,25 +294,6 @@ public class ProfileFragment extends Fragment implements OnClickListener{
 
 		dialog.show();
 	}
-
-	private void showDialogUserNotFound(){
-		AlertDialog.Builder builder = new AlertDialog.Builder(context);
-		builder.setTitle("No User Found!");
-    	builder.setPositiveButton("OK",
-            new DialogInterface.OnClickListener() {
-                public void onClick(DialogInterface dialog, int id) {
-        
-                    dialog.cancel();
-
-                }
-            });
-		 
-		// create alert dialog
-		AlertDialog alertDialog = builder.create();
-
-		// show it
-		alertDialog.show();
-	}
  
     /**
      * Background Async Task to check and log in user
@@ -327,13 +305,15 @@ public class ProfileFragment extends Fragment implements OnClickListener{
 	   private String ATemail; 
 	   private String ATpassword;
 	   private JSONObject ATjson;
+	   private JSONObject ATuser;
 	   
 
 	   public CheckAndLogInDetails(Context context,String email,String password) {  // can take other params if needed
 		   this.ATcontext = context;
 		   this.ATemail = email;
 		   this.ATpassword = password;
-       	   this.ATjson = new JSONObject();
+       	   this.ATjson= new JSONObject();
+       	   this.ATuser= new JSONObject();
 	   }
  
         /**
@@ -353,9 +333,6 @@ public class ProfileFragment extends Fragment implements OnClickListener{
          * Creating product
          * */
         protected Boolean doInBackground(String... args) {
- 
-        	// boolean return variable 
-        	boolean temp_return = false;
         	
             // Building Parameters
             List<NameValuePair> params = new ArrayList<NameValuePair>();
@@ -380,7 +357,8 @@ public class ProfileFragment extends Fragment implements OnClickListener{
                 	// add user's id no
                 	ATjson = json;
                 	
-                	JSONArray pwcsul = ATjson.getJSONArray(CommonUtilities.TAG_PWCSUL);
+                	ATuser = ATjson.getJSONObject(CommonUtilities.TAG_USER);
+                	JSONArray pwcsul = ATuser.getJSONArray(CommonUtilities.TAG_PWCSUL);
                 	if(pwcsul != null){
                 	for(int i=0; i<pwcsul.length();i++){
                 		JSONObject jperson = pwcsul.getJSONObject(i);
@@ -393,7 +371,7 @@ public class ProfileFragment extends Fragment implements OnClickListener{
                 		session.getPWCSUL().add(person);
                 	}
                 	}
-					JSONArray pwlucs = ATjson.getJSONArray(CommonUtilities.TAG_PWLUCS);
+					JSONArray pwlucs = ATuser.getJSONArray(CommonUtilities.TAG_PWLUCS);
                 	if(pwlucs != null){
 					for(int i=0; i<pwlucs.length();i++){
                 		JSONObject jperson = pwlucs.getJSONObject(i);
@@ -401,24 +379,27 @@ public class ProfileFragment extends Fragment implements OnClickListener{
                 		person.setName(jperson.getString(CommonUtilities.TAG_NAME));
                 		person.setEmail(jperson.getString(CommonUtilities.TAG_EMAIL));
                 		person.setImage(jperson.getString(CommonUtilities.TAG_IMAGE));
+                		person.setGcmRegId(jperson.getString(CommonUtilities.TAG_GCM_REG_ID));
                 		person.setUid(jperson.getLong(CommonUtilities.TAG_UID));
+                		person.setCpid(jperson.getLong(CommonUtilities.TAG_CPID));
                 		person.setLocLat(jperson.getLong(CommonUtilities.TAG_LOC_LAT));
                 		person.setLocLong(jperson.getLong(CommonUtilities.TAG_LOC_LONG));
+                		person.setLocTime(jperson.getString(CommonUtilities.TAG_LOC_TIME));
                 		
                 		session.getPWLUCS().add(person);
                 	}
                 	}
-                	temp_return = true;
+                	return true;
                 	
                 } else {
                     // Login failed..", "Email/Password is incorrect
-                	temp_return = false;
+                	return false;
                 }
             } catch (JSONException e) {
                 e.printStackTrace();
             }
             
-            return temp_return;
+            return null;
         }
  
         /**
@@ -428,8 +409,15 @@ public class ProfileFragment extends Fragment implements OnClickListener{
             // dismiss the dialog once done
             pDialog.dismiss();
             if(!result){
+            	String message = new String();
+				try {
+					message = ATjson.getString(CommonUtilities.TAG_MESSAGE);
+				} catch (JSONException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
                 // username / password doesn't match
-                alert.showAlertDialog(getActivity(), "Login failed..", "Username/Password is incorrect", false);
+                alert.showAlertDialog(getActivity(), "Login failed..",message, false);
                 Intent intent = new Intent(getActivity(), IndexActivity.class);
                 startActivity(intent);
                 getActivity().finish();
@@ -445,17 +433,19 @@ public class ProfileFragment extends Fragment implements OnClickListener{
 
             	try {
             		
-					long uid = ATjson.getLong(CommonUtilities.TAG_UID);
-	            	session.createLoginSession(uid,ATemail,ATpassword);
+					long uid = ATuser.getLong(CommonUtilities.TAG_UID);
+					session.createLoginSession(uid,ATemail,ATpassword);
 	            	
-					String name = ATjson.getString(CommonUtilities.TAG_NAME);
-					double loclong = ATjson.getDouble(CommonUtilities.TAG_LOC_LONG);
-					double loclat = ATjson.getDouble(CommonUtilities.TAG_LOC_LAT);
-					String image = ATjson.getString(CommonUtilities.TAG_IMAGE);
+					String name = ATuser.getString(CommonUtilities.TAG_NAME);
+					double loclong = ATuser.getDouble(CommonUtilities.TAG_LOC_LONG);
+					double loclat = ATuser.getDouble(CommonUtilities.TAG_LOC_LAT);
+					String loctime = ATuser.getString(CommonUtilities.TAG_LOC_TIME);
+					String image = ATuser.getString(CommonUtilities.TAG_IMAGE);
 					
 					session.setName(name);
 					session.setLocLat(loclat);
 					session.setLocLong(loclong);
+					session.setLocTime(loctime);
 					session.setImage(image);
 					
 					loadFromSession();
@@ -482,6 +472,7 @@ public class ProfileFragment extends Fragment implements OnClickListener{
     * */
    public class UpdateMyLocation extends AsyncTask<String, String, Boolean> {
 
+	   private String message = new String();
        /**
         * Before starting background thread Show Progress Dialog
         * */
@@ -537,11 +528,14 @@ public class ProfileFragment extends Fragment implements OnClickListener{
            try {
                // Checking for SUCCESS TAG
                int success = json.getInt(CommonUtilities.TAG_SUCCESS);
+               message = json.getString(CommonUtilities.TAG_MESSAGE);
+               String loctime = json.getString(CommonUtilities.TAG_LOC_TIME);
 
                if (success == 1) {
                    // location updated
             	   session.setLocLat(loclat);
             	   session.setLocLong(loclong);
+            	   session.setLocTime(loctime);
             	   return true;
                } else {
             	   return false;
@@ -563,7 +557,7 @@ public class ProfileFragment extends Fragment implements OnClickListener{
            if(result){
         	   Toast.makeText(context, "Location Successfully updated!",Toast.LENGTH_SHORT).show();	
            } else{
-        	   Toast.makeText(context, "Server Error/Busy!",Toast.LENGTH_SHORT).show();	
+               alert.showAlertDialog(getActivity(), "Location update failed..",message, false);	
            }
 
        }
@@ -600,8 +594,9 @@ public class ProfileFragment extends Fragment implements OnClickListener{
            
            // Building Parameters
            List<NameValuePair> params = new ArrayList<NameValuePair>();
+           // the users id so that this email could not be produced in the result
            params.add(new BasicNameValuePair(CommonUtilities.TAG_UID, Long.toString(uid)));
-           params.add(new BasicNameValuePair(CommonUtilities.TAG_EMAIL, args[0].toString()));
+           params.add(new BasicNameValuePair(CommonUtilities.TAG_PERSON_EMAIL, args[0].toString()));
            
            // getting JSON string from URL
            JSONObject json = jsonParser.makeHttpRequest(CommonUtilities.SERVER_LOOK_FOR_PWCSUL_URL, "POST", params);
@@ -643,7 +638,7 @@ public class ProfileFragment extends Fragment implements OnClickListener{
            if(result){
         	   showDialogNewUser(person.getImage(),person.getName(),person.getUid());
            } else{
-        	   showDialogUserNotFound();
+               alert.showAlertDialog(getActivity(), "No user found!","", false);	
            }
 
        }
@@ -685,7 +680,7 @@ public class ProfileFragment extends Fragment implements OnClickListener{
            params.add(new BasicNameValuePair(CommonUtilities.TAG_PERSON_UID, args[0].toString()));
            
            // getting JSON string from URL
-           JSONObject json = jsonParser.makeHttpRequest(CommonUtilities.SERVER_ADD_PWCSUL_URL, "POST", params);
+           JSONObject json = jsonParser.makeHttpRequest(CommonUtilities.SERVER_ADD_NEW_PWCSUL_URL, "POST", params);
 
            // Check your log cat for JSON reponse
            Log.d("Response: ", json.toString());
@@ -726,7 +721,7 @@ public class ProfileFragment extends Fragment implements OnClickListener{
         	   lv_pwcsul.setSelection(lv_pwcsul.getChildCount()-1);
         	   Toast.makeText(context, "User successfully added!", Toast.LENGTH_LONG).show();
            } else{
-        	   Toast.makeText(context, "Server Error/Busy!",Toast.LENGTH_SHORT).show();	
+               alert.showAlertDialog(getActivity(), "Server Error/Busy!","Please try again.", false);
            }
 
        }

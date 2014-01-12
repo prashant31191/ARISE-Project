@@ -23,12 +23,11 @@
     <string name="options_clear">Clear</string>
     <string name="options_exit">Exit</string>
     <string name="title_activity_register">RegisterActivity</string>
-    <string name="title_activity_temp_main">TempMainActivity</string>
     <string name="title_activity_log_in">LogInActivity</string>
     <string name="title_activity_profile">ProfileActivity</string>
     <string name="title_activity_radar">RadarActivity</string>
-    <string name="title_activity_last_known_location">LastKnownLocationActivity</string>
     <string name="btn_send_message">Send Message</string>
+    <string name="cd">image</string>
 
     <!-- Action Bar action items -->
     <string name="action_more">More</string>
@@ -54,7 +53,44 @@
     <string name="title_activity_registration_result">RegistrationResultActivity</string>
     <string name="title_activity_forgot_password">ForgotPasswordActivity</string>
     <string name="title_activity_chat">ChatActivity</string>
-    <string name="title_activity_temp">TempActivity</string>
     <string name="title_activity_map">MapActivity</string>
+
+    <!-- Chat Activity -->
+    <string name="add_new">+</string>
+    <string name="message">Message</string>
+    <string name="send">Send</string>
+
+    <!-- Dialog -->
+    <string name="cancel">Cancel</string>
+    <string name="look">Look</string>
+    <string name="add">Add</string>
+
+    <!-- Fragment -->
+    <string name="name">Name</string>
+    <string name="lkl">Last Known Location</string>
+    <string name="get">Get</string>
+    <string name="uml">Update My Location</string>
+    <string name="pwcsml">People who can see my location</string>
+    <string name="add_new_user">Add new</string>
+    <string name="title_activity_settings">SettingsActivity</string>
+    <string name="title_activity_forgot_password_result">ForgotPasswordResultActivity</string>
+
+    <!-- Forgot Password Activity -->
+    <string name="forgot_password">Forgot Password?</string>
+    <string name="reset_password">Reset Password</string>
+    <string name="account_email_address">Account Email Address</string>
+
+    <!-- Forgot Password Result Activity -->
+    <string name="reset_password_link_sent">A link to reset your account password is sent to this email id - </string>
+
+    <!-- Settings Activity -->
+    <string name="change_password">Change Password</string>
+    <string name="unregister">Unregister</string>
+    <string name="title_activity_help">HelpActivity</string>
+    <string name="current_password">Current Password</string>
+    <string name="new_password">New Password</string>
+    <string name="confirm_new_password">Confirm New Password</string>
+    <string name="password_does_not_match">^ Password does not match!</string>
+    <string name="change">Change</string>
 
 </resources>

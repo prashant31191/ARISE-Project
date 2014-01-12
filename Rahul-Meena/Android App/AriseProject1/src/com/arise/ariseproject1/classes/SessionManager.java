@@ -48,6 +48,8 @@ public class SessionManager {
    
    public static double loclong = 0;
    
+   public static String loctime = new String();
+   
    public static String image = new String();
    
    public static List<PWLUCS> pwlucs;
@@ -110,6 +112,18 @@ public class SessionManager {
 	   return SessionManager.loclong;
    }
    /**
+    * Set loclat of user
+    */
+   public void setLocTime(String loctime){
+	   SessionManager.loctime = loctime;
+   }
+   /**
+    * Get loclat of user
+    */
+   public String getLocTime(){
+	   return SessionManager.loctime;
+   }
+   /**
     * Set image of user
     */
    public void setImage(String image){
@@ -168,7 +182,7 @@ public class SessionManager {
         
        // commit changes
        editor.commit();
-   }   
+   }
     
    /**
     * Check login method wil check user login status
@@ -180,6 +194,18 @@ public class SessionManager {
        if(this.isLoggedIn()){
            // user is logged in redirect him to Main Activity
            Intent i = new Intent(_context, MainActivity.class);
+           // Closing all the Activities
+           i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            
+           // Add new Flag to start new Activity
+           i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            
+           // Staring Login Activity
+           _context.startActivity(i);
+       } else{
+
+           // user is logged in redirect him to Main Activity
+           Intent i = new Intent(_context, LogInActivity.class);
            // Closing all the Activities
            i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             
@@ -235,7 +261,7 @@ public class SessionManager {
        // Clearing all data from Shared Preferences
        editor.clear();
        editor.commit();
-        
+       
        // After logout redirect user to Loing Activity
        Intent i = new Intent(_context, LogInActivity.class);
        // Closing all the Activities

@@ -1,9 +1,12 @@
 package com.arise.ariseproject1.classes;
 
+import org.json.JSONException;
+
+import com.arise.ariseproject1.ChatActivity;
+
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.widget.Toast;
 
 /**
  * Receiving push messages
@@ -23,10 +26,17 @@ public class MessageReceiver extends BroadcastReceiver {
 		 * */
      
 		// Showing received message
+		try {
+			ChatActivity.newMessageReceived(newMessage);
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		//lblMessage.append(newMessage + "\n");           
-		Toast.makeText(context, "New Message: " + newMessage, Toast.LENGTH_LONG).show();
+		//Toast.makeText(context, "New Message: " + newMessage, Toast.LENGTH_LONG).show();
 		
 		// Releasing wake lock
+		WakeLocker.release();
 		
 	}
 

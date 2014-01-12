@@ -5,13 +5,11 @@ import com.arise.ariseproject1.classes.JSONParser;
 import com.arise.ariseproject1.classes.SessionManager;
 import android.os.Bundle;
 import android.app.Activity;
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -19,7 +17,6 @@ public class LogInActivity extends Activity implements OnClickListener{
 	
 	// UI elements
 	Button b_log_in;
-	CheckBox cb_rm;
 	EditText et_email,et_password;
 	TextView tv_fp;
 	
@@ -30,14 +27,9 @@ public class LogInActivity extends Activity implements OnClickListener{
     
 	// Session Manager Class
 	SessionManager session;
-   
-	// Progress Dialog
-	private ProgressDialog pDialog;
-
+	
 	JSONParser jsonParser = new JSONParser();
    
-	// JSON Node names
-	private static final String TAG_SUCCESS = "success";
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -48,10 +40,12 @@ public class LogInActivity extends Activity implements OnClickListener{
        session = new SessionManager(getApplicationContext());
 		
 		b_log_in = (Button)findViewById(R.id.button_log_in_activity_log_in);
-		cb_rm = (CheckBox)findViewById(R.id.checkBox_log_in_activity_remember_me);
 		et_email = (EditText)findViewById(R.id.editText_log_in_activity_email);
 		et_password = (EditText)findViewById(R.id.editText_log_in_activity_password);
 		tv_fp = (TextView)findViewById(R.id.TextView_log_in_activity_forgot_password);
+		
+		b_log_in.setOnClickListener(this);
+		tv_fp.setOnClickListener(this);
 		
 		
 	}
@@ -75,6 +69,8 @@ public class LogInActivity extends Activity implements OnClickListener{
             	// Starting MainActivity
                   
       			Intent intent = new Intent(LogInActivity.this,MainActivity.class);
+      			intent.putExtra(SessionManager.KEY_EMAIL,email );
+      			intent.putExtra(SessionManager.KEY_PASS, password);
       			startActivity(intent);
       			finish();
             	
