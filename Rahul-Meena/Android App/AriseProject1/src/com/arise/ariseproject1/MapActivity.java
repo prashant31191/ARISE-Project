@@ -21,6 +21,8 @@ public class MapActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_map);
+		
+		session = new SessionManager(getApplicationContext());
  
         // get action bar   
         ActionBar actionBar = getActionBar();
@@ -28,7 +30,7 @@ public class MapActivity extends Activity {
         // Enabling Up / Back navigation
         actionBar.setDisplayHomeAsUpEnabled(true);
 
-        map = ((MapFragment)getFragmentManager().findFragmentById(R.id.map)).getMap();
+        map = ((MapFragment)getFragmentManager().findFragmentById(R.id.myLocationMap)).getMap();
 
 
 		LatLng myLocation = new LatLng(session.getLocLat(), session.getLocLong());

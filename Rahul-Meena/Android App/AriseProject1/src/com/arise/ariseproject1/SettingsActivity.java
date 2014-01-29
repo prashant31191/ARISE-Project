@@ -44,6 +44,8 @@ public class SettingsActivity extends Activity implements OnClickListener{
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		
+		session = new SessionManager(getApplicationContext());
 		setContentView(R.layout.activity_settings);
  
         // get action bar   
@@ -174,7 +176,7 @@ public class SettingsActivity extends Activity implements OnClickListener{
 	       @Override
 	       protected void onPreExecute() {
 	           super.onPreExecute();
-	           pDialog = new ProgressDialog(getApplicationContext());
+	           pDialog = new ProgressDialog(SettingsActivity.this);
 	           pDialog.setMessage("Unregistering...");
 	           pDialog.setIndeterminate(false);
 	           pDialog.setCancelable(false);
@@ -223,7 +225,7 @@ public class SettingsActivity extends Activity implements OnClickListener{
 	       @Override
 	       protected void onPreExecute() {
 	           super.onPreExecute();
-	           pDialog = new ProgressDialog(getApplicationContext());
+	           pDialog = new ProgressDialog(SettingsActivity.this);
 	           pDialog.setMessage("Requesting..");
 	           pDialog.setIndeterminate(false);
 	           pDialog.setCancelable(false);
@@ -237,6 +239,7 @@ public class SettingsActivity extends Activity implements OnClickListener{
 	           
 	           // Building Parameters
 	           List<NameValuePair> params = new ArrayList<NameValuePair>();
+	           params.add(new BasicNameValuePair(CommonUtilities.TAG_KNOCK_KNOCK, CommonUtilities.SERVER_KNOCK_KNOCK_CODE));
 	           params.add(new BasicNameValuePair(CommonUtilities.TAG_CURRENT_PASSWORD, args[0]));
 	           params.add(new BasicNameValuePair(CommonUtilities.TAG_NEW_PASSWORD, args[1]));
 	           

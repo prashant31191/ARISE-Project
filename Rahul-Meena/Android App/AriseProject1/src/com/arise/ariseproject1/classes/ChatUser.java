@@ -6,10 +6,10 @@ public class ChatUser {
 	private String image;
 	private long uid;
 	private int noOfMsgs;
-	private long cpid;
+	//private long cpid;
 	
 
-	public ChatUser(String name, String image, long uid,long cpid, int noOfMsgs) {
+	public ChatUser(String name, String image, long uid, int noOfMsgs) {
 		super();
 		this.name = name;
 		this.uid = uid;
@@ -30,10 +30,10 @@ public class ChatUser {
 	public int getNoOfMsgs(){
 		return this.noOfMsgs;
 	}
-	
+	/*
 	public long getCpid(){
 		return this.cpid;
-	}
+	}*/
 	
 	public void setNoOfMsgs(int noOfMsgs){
 		this.noOfMsgs = noOfMsgs;

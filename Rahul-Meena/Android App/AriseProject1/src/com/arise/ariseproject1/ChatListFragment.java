@@ -1,7 +1,11 @@
 package com.arise.ariseproject1;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
+import java.util.Locale;
+
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONException;
@@ -32,23 +36,26 @@ public class ChatListFragment extends ListFragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
+		session = new SessionManager(getActivity());
 		adapter = new ChatSessionArrayAdapter(getActivity().getApplicationContext(), R.layout.listitem_discuss);
 		setListAdapter(adapter);
 		//random = new Random();
 		return super.onCreateView(inflater, container, savedInstanceState);
 	}
 
-	public void send(String msg, long cpid){
+	public void send(String msg, long receiver_uid){
 
 		adapter.add(new OneComment(false, msg));
 		getListView().setSelection(getListView().getChildCount()-1);
+        SimpleDateFormat df = new SimpleDateFormat("d MMM yyyy HH:mm a",Locale.US);
+        String time = df.format(Calendar.getInstance().getTime());
 		SendChatMessage scm = new SendChatMessage();
-		scm.execute(String.valueOf(cpid), msg);
+		scm.execute(String.valueOf(receiver_uid), msg,time);
 	}
 
-	public void receive(String msg){
-
-		adapter.add(new OneComment(true, msg));
+	public void receive(String msg,String time){
+		String MsgWithTime = msg+"\nat: "+time;
+		adapter.add(new OneComment(true, MsgWithTime));
 		getListView().setSelection(getListView().getChildCount()-1);
 	}
 /*
@@ -86,16 +93,14 @@ public class ChatListFragment extends ListFragment {
         protected Boolean doInBackground(String... args) {
             // getting data from session
             long uid = session.getUserID();
-            String name = session.getName();
-            String image = session.getImage();
             
             // Building Parameters
             List<NameValuePair> params = new ArrayList<NameValuePair>();
-            params.add(new BasicNameValuePair(CommonUtilities.TAG_UID, Long.toString(uid)));
-            params.add(new BasicNameValuePair(CommonUtilities.TAG_NAME, name));
-            params.add(new BasicNameValuePair(CommonUtilities.TAG_IMAGE, image));
-            params.add(new BasicNameValuePair(CommonUtilities.TAG_MESSAGE_CPID, args[0]));
+            params.add(new BasicNameValuePair(CommonUtilities.TAG_KNOCK_KNOCK, CommonUtilities.SERVER_KNOCK_KNOCK_CODE));
+            params.add(new BasicNameValuePair(CommonUtilities.TAG_MESSAGE_SENDER_UID, String.valueOf(uid)));
+            params.add(new BasicNameValuePair(CommonUtilities.TAG_MESSAGE_RECIEVER_UID, args[0]));
             params.add(new BasicNameValuePair(CommonUtilities.TAG_MESSAGE_CONTENT, args[1]));
+            params.add(new BasicNameValuePair(CommonUtilities.TAG_MESSAGE_TIME, args[2]));
             
             // getting JSON string from URL
             JSONObject json = jsonParser.makeHttpRequest(CommonUtilities.SERVER_SEND_CHAT_MESSAGE_URL, "POST", params);

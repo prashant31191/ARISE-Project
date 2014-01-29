@@ -127,4 +127,9 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
         Intent i = new Intent(MainActivity.this, HelpActivity.class);
         startActivity(i);
     }
+
+	@Override
+	protected void onActivityResult(int arg0, int arg1, Intent arg2) {
+		super.onActivityResult(arg0, arg1, arg2);
+	}
 }

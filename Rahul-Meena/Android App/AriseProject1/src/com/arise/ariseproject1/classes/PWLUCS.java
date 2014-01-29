@@ -10,7 +10,7 @@ public class PWLUCS {
 	private String image;
 	private String gcmregid;
 	private long uid;
-	private long cpid;
+	//private long cpid;
 	private double loclat;
 	private double loclong;
 	private String loctime;
@@ -25,7 +25,7 @@ public class PWLUCS {
 		this.image = person.getString(CommonUtilities.TAG_IMAGE);
 		this.gcmregid = person.getString(CommonUtilities.TAG_GCM_REG_ID);
 		this.uid = person.getLong(CommonUtilities.TAG_UID);
-		this.cpid = person.getLong(CommonUtilities.TAG_CPID);
+		//this.cpid = person.getLong(CommonUtilities.TAG_CPID);
 		this.loclat = person.getDouble(CommonUtilities.TAG_LOC_LAT);
 		this.loclong= person.getDouble(CommonUtilities.TAG_LOC_LONG);
 		this.loctime= person.getString(CommonUtilities.TAG_LOC_TIME);
@@ -70,6 +70,7 @@ public class PWLUCS {
 	public long getUid(){
 		return this.uid;
 	}
+	/*
 
 	public void setCpid(long cpid){
 		this.cpid = cpid;
@@ -77,7 +78,7 @@ public class PWLUCS {
 	
 	public long getCpid(){
 		return this.cpid;
-	}
+	}*/
 	
 	public void setLocLat(double loclat){
 		this.loclat = loclat;

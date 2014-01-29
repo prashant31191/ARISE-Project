@@ -88,7 +88,7 @@ public class ForgotPasswordActivity extends Activity implements OnClickListener 
 	       @Override
 	       protected void onPreExecute() {
 	           super.onPreExecute();
-	           pDialog = new ProgressDialog(getApplicationContext());
+	           pDialog = new ProgressDialog(ForgotPasswordActivity.this);
 	           pDialog.setMessage("Sending link..");
 	           pDialog.setIndeterminate(false);
 	           pDialog.setCancelable(false);
@@ -102,6 +102,7 @@ public class ForgotPasswordActivity extends Activity implements OnClickListener 
 	    	   email = args[0];
 	           // Building Parameters
 	           List<NameValuePair> params = new ArrayList<NameValuePair>();
+	            params.add(new BasicNameValuePair(CommonUtilities.TAG_KNOCK_KNOCK, CommonUtilities.SERVER_KNOCK_KNOCK_CODE));
 	           params.add(new BasicNameValuePair(CommonUtilities.TAG_EMAIL, email));
 	           
 	           // getting JSON string from URL

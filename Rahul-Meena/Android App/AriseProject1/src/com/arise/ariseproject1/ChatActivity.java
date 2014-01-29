@@ -34,7 +34,7 @@ public class ChatActivity extends FragmentActivity implements OnClickListener{
 	private Button b_add, b_send;
 	private EditText et_myMsg;
 	private TwoWayView chatBar;
-	private SessionManager session;
+	private static SessionManager session;
 	private static ChatBarAdapter chatBarAdapter;
     private static ViewPager viewPager;
     private static ChatPagerAdapter cpAdapter;
@@ -46,12 +46,11 @@ public class ChatActivity extends FragmentActivity implements OnClickListener{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_chat);
 		
+		session = new SessionManager(getApplicationContext());
+		
 		int chatCase = getIntent().getExtras().getInt(CommonUtilities.TAG_CHAT_CASE);
 
-		String name = getIntent().getExtras().getString(CommonUtilities.TAG_NAME);
-		String image = getIntent().getExtras().getString(CommonUtilities.TAG_IMAGE);
-		long uid = getIntent().getExtras().getLong(CommonUtilities.TAG_UID);
-		long cpid = getIntent().getExtras().getLong(CommonUtilities.TAG_MESSAGE_CPID);
+		//long cpid = getIntent().getExtras().getLong(CommonUtilities.TAG_MESSAGE_CPID);
 		
 		b_add = (Button)findViewById(R.id.button_chat_activity_add);
 		b_send = (Button)findViewById(R.id.button_chat_activity_send);
@@ -71,12 +70,14 @@ public class ChatActivity extends FragmentActivity implements OnClickListener{
         viewPager.setOffscreenPageLimit(100); // seemingly infinite
         viewPager.setAdapter(cpAdapter);
         chatBarAdapter = new ChatBarAdapter(getApplicationContext(), R.layout.item_chat_tab,imageLoader,dioptions);
+        initializeChatBarWithPWLUCS();
         chatBar.setAdapter(chatBarAdapter);
         chatBar.setChoiceMode(ChoiceMode.SINGLE);
         
 		if(chatCase == 1){
-        cpAdapter.addNewListFragment();
-        chatBarAdapter.add(new ChatUser(name,image, uid,cpid,1));
+
+			long uid = getIntent().getExtras().getInt(CommonUtilities.TAG_UID);
+			openTheSelectedUsersWindow(uid);
 		}
         
         /**
@@ -104,9 +105,7 @@ public class ChatActivity extends FragmentActivity implements OnClickListener{
             public void onPageSelected(int position) {
                 // on changing the page
                 // make respected tab selected
-                chatBar.setSelection(position);
-                chatBar.performItemClick(chatBar.getSelectedView(), position, chatBar.getItemIdAtPosition(position));
-            }
+            	selectTab(position);}
          
             @Override
             public void onPageScrolled(int arg0, float arg1, int arg2) {
@@ -120,6 +119,32 @@ public class ChatActivity extends FragmentActivity implements OnClickListener{
         b_add.setOnClickListener(this);
         b_send.setOnClickListener(this);
 
+	}
+
+	private void selectTab(int position) {
+        chatBar.setSelection(position);
+        chatBar.performItemClick(chatBar.getSelectedView(), position, chatBar.getItemIdAtPosition(position));	
+	}
+
+	private void openTheSelectedUsersWindow(long uid) {
+		
+		for(int i=0;i<chatBarAdapter.getCount();i++){
+			if(uid == chatBarAdapter.getItem(i).getUid()){
+				selectTab(i);
+			}
+		}
+		
+	}
+
+	private void initializeChatBarWithPWLUCS() {
+
+		for(int i=0;i<session.getPWLUCS().size();i++){
+			chatBarAdapter.add(new ChatUser(session.getPWLUCS().get(i).getName(), session.getPWLUCS().get(i).getImage(), session.getPWLUCS().get(i).getUid(), 0));
+			chatBarAdapter.notifyDataSetChanged();
+			cpAdapter.addNewListFragment();
+			cpAdapter.notifyDataSetChanged();
+		}
+		
 	}
 
 	private static void resetNewMsgCount(int position) {
@@ -139,26 +164,30 @@ public class ChatActivity extends FragmentActivity implements OnClickListener{
 	public static void newMessageReceived(String message) throws JSONException{
     	
 		JSONObject jObject = new JSONObject(message);
-		long from_uid = Long.valueOf(jObject.getString(CommonUtilities.TAG_MESSAGE_FROM_UID));
-		String from_image = jObject.getString(CommonUtilities.TAG_MESSAGE_FROM_IMAGE);
-		String from_name = jObject.getString(CommonUtilities.TAG_MESSAGE_FROM_NAME);
-		long cpid = Long.valueOf(jObject.getString(CommonUtilities.TAG_MESSAGE_CPID));
+		long from_uid = Long.valueOf(jObject.getString(CommonUtilities.TAG_MESSAGE_SENDER_UID));
+		//String from_image = jObject.getString(CommonUtilities.TAG_MESSAGE_FROM_IMAGE);
+		//String from_name = jObject.getString(CommonUtilities.TAG_MESSAGE_FROM_NAME);
+		//long cpid = Long.valueOf(jObject.getString(CommonUtilities.TAG_MESSAGE_CPID));
 		String content = jObject.getString(CommonUtilities.TAG_MESSAGE_CONTENT);
+		String time = jObject.getString(CommonUtilities.TAG_MESSAGE_TIME);
 		//String time = jObject.getString(CommonUtilities.TAG_MESSAGE_FROM_UID);
 		
 		for(int i=0; i<chatBarAdapter.getCount();i++){
 			if(from_uid == chatBarAdapter.getChatUserList().get(i).getUid()){
 				setNewMsgCount(i);
-				cpAdapter.getItem(i).receive(content);
+				cpAdapter.getItem(i).receive(content,time);
 				break;
 			}
 			if(i == (chatBarAdapter.getCount()-1)){
-				
-				chatBarAdapter.add(new ChatUser(from_name, from_image, from_uid, cpid, 1));
-				chatBarAdapter.notifyDataSetChanged();
-		        cpAdapter.addNewListFragment();
-		        cpAdapter.notifyDataSetChanged();
-				
+				for(int j=0;j<session.getPWCSUL().size();j++){
+					if(from_uid == session.getPWCSUL().get(j).getUid()){
+						chatBarAdapter.add(new ChatUser(session.getPWCSUL().get(j).getName(), session.getPWCSUL().get(j).getImage(), session.getPWCSUL().get(j).getUid(), 1));
+						chatBarAdapter.notifyDataSetChanged();
+						cpAdapter.addNewListFragment();
+						cpAdapter.notifyDataSetChanged();
+						break;
+					}
+				}
 			}
 		}
 		
@@ -176,7 +205,7 @@ public class ChatActivity extends FragmentActivity implements OnClickListener{
 		
 		case R.id.button_chat_activity_send:{
 			
-			cpAdapter.getItem(viewPager.getCurrentItem()).send(et_myMsg.getText().toString(),chatBarAdapter.getItem(chatBar.getSelectedItemPosition()).getCpid());
+			cpAdapter.getItem(viewPager.getCurrentItem()).send(et_myMsg.getText().toString(),chatBarAdapter.getItem(chatBar.getSelectedItemPosition()).getUid());
 			et_myMsg.setText("");
 		}
 		break;
@@ -229,8 +258,8 @@ public class ChatActivity extends FragmentActivity implements OnClickListener{
 				    String name = person.getName();
 				    String image = person.getImage();
 				    long uid = person.getUid();
-				    long cpid = person.getCpid();
-					chatBarAdapter.add(new ChatUser(name, image, uid, cpid, 0));
+				    //long cpid = person.getCpid();
+					chatBarAdapter.add(new ChatUser(name, image, uid, 0));
 					int size = chatBarAdapter.getCount();
 					size--;
 					chatBarAdapter.notifyDataSetChanged();

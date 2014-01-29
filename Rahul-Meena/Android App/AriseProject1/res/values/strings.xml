@@ -74,6 +74,9 @@
     <string name="add_new_user">Add new</string>
     <string name="title_activity_settings">SettingsActivity</string>
     <string name="title_activity_forgot_password_result">ForgotPasswordResultActivity</string>
+    <string name="select">Select Picture</string>
+    <string name="upload">Upload</string>
+    <string name="remove">Remove</string>
 
     <!-- Forgot Password Activity -->
     <string name="forgot_password">Forgot Password?</string>
@@ -92,5 +95,6 @@
     <string name="confirm_new_password">Confirm New Password</string>
     <string name="password_does_not_match">^ Password does not match!</string>
     <string name="change">Change</string>
+    <string name="title_activity_change_picture">ChangePictureActivity</string>
 
 </resources>

@@ -4,39 +4,54 @@ import android.content.Context;
 import android.content.Intent;
  
 public final class CommonUtilities {
-     
+
+   // give your server knock knock code
+   public static final String TAG_KNOCK_KNOCK = "knockknock";
+   
+   // give your server knock knock code
+   public static final String SERVER_KNOCK_KNOCK_CODE = "WhoIsThere?";
+   
     // give your server registration url here
-    public static final String SERVER_REGISTER_URL = "http://10.0.2.2/users/register.php";
+    public static final String SERVER_REGISTER_URL = "http://ariseapp.net16.net/php/register.php";
 
+    // give your server un-registration url here
+	public static final String SERVER_UNREGISTER_URL = "http://ariseapp.net16.net/php/unregister.php";
+    
+    // give your server user exist url here
+    public static final String SERVER_USER_EXIST_URL = "http://ariseapp.net16.net/php/user_exist.php";
+    
+    // give your server user exist url here
+    public static final String SERVER_LOG_IN_URL = "http://ariseapp.net16.net/php/login.php";
+    
+    // give your server user exist url here
+    public static final String SERVER_UPLOAD_IMAGE_URL = "http://ariseapp.net16.net/php/upload_image.php";
+    
+    // give your server user exist url here
+    public static final String SERVER_IMAGE_URL = "http://ariseapp.net16.net/php/images/";
+    
+    // give your server update user location url here
+    public static final String SERVER_UPDATE_USER_NAME_URL = "http://ariseapp.net16.net/php/update_name.php";
+    
+    // give your server update user location url here
+    public static final String SERVER_UPDATE_USER_LOCATION_URL = "http://ariseapp.net16.net/php/update_location.php";
+    
+    // give your server update user location url here
+    public static final String SERVER_LOOK_FOR_PWCSUL_URL = "http://ariseapp.net16.net/php/look_for_person.php";
+
+    // give your server update user location url here
+    public static final String SERVER_ADD_NEW_PWCSUL_URL = "http://ariseapp.net16.net/php/add_new_pwcsul.php";;
+
+    // give your server update user location url here
+    public static final String SERVER_REMOVE_PWCSUL_URL = "http://ariseapp.net16.net/php/remove_pwcsul.php";
+    
     //
-	public static final String SERVER_UNREGISTER_URL = "http://10.0.2.2/users/unregister.php";
-    
-    // give your server user exist url here
-    public static final String SERVER_USER_EXIST_URL = "http://10.0.2.2/users/user_exist.php";
-    
-    // give your server user exist url here
-    public static final String SERVER_LOG_IN_URL = "http://10.0.2.2/users/login.php";
-    
-    // give your server user exist url here
-    public static final String SERVER_IMAGE_URL = "http://10.0.2.2/users/photo/";
-    
-    // give your server update user location url here
-    public static final String SERVER_UPDATE_USER_LOCATION_URL = "http://10.0.2.2/users/update_location.php";
-    
-    // give your server update user location url here
-    public static final String SERVER_LOOK_FOR_PWCSUL_URL = "http://10.0.2.2/users/look_for_person.php";
-
-    // give your server update user location url here
-    public static final String SERVER_ADD_NEW_PWCSUL_URL = "http://10.0.2.2/users/add_new_pwcsul.php";
-
-    //
-	public static final String SERVER_SEND_CHAT_MESSAGE_URL = "http://10.0.2.2/users/photo/";
+	public static final String SERVER_SEND_CHAT_MESSAGE_URL = "http://ariseapp.net16.net/php/send_message.php";
 	
 	//
-	public static final String SERVER_SEND_RESET_PASSWORD_LINK_URL = "http://10.0.2.2/users/photo/";
+	public static final String SERVER_SEND_RESET_PASSWORD_LINK_URL = "http://ariseapp.net16.net/php/send_change_password_link.php";
 	
 	//
-	public static final String SERVER_CHANGE_PASSWORD_URL = "http://10.0.2.2/users/photo/";
+	public static final String SERVER_CHANGE_PASSWORD_URL = "http://ariseapp.net16.net/php/change_password.php";
     
   	// JSON Node names
     public static final String TAG_SUCCESS = "success";
@@ -58,9 +73,9 @@ public final class CommonUtilities {
     
     public static final String TAG_IMAGE = "email";
 
-	public static final String TAG_GCM_REG_ID = "gcmregid";
+	public static final String TAG_GCM_REG_ID = "gcm_regid";
 
-	public static final String TAG_CPID = "cpid";
+	//public static final String TAG_CPID = "cpid";
     
     public static final String TAG_PWCSUL = "pwcsul";
     
@@ -79,13 +94,13 @@ public final class CommonUtilities {
     // GCM Message Architecture
     public static final String TAG_MESSAGE = "message";
     
-    public static final String TAG_MESSAGE_FROM_UID = "from_uid";
-
-	public static final String TAG_MESSAGE_FROM_NAME = "from_name";
-
-	public static final String TAG_MESSAGE_FROM_IMAGE = "from_image";
+    public static final String TAG_MESSAGE_SENDER_UID = "sender_uid";
     
-    public static final String TAG_MESSAGE_CPID = "cpid";
+    public static final String TAG_MESSAGE_SENDER_NAME = "sender_name";
+
+	public static final String TAG_MESSAGE_RECIEVER_UID = "receiver_uid";
+    
+    //public static final String TAG_MESSAGE_CPID = "cpid";
     
     public static final String TAG_MESSAGE_CONTENT = "content";
     
@@ -100,10 +115,10 @@ public final class CommonUtilities {
     /**
      * Tag used on log messages.
      */
-    static final String TAG = "AndroidHive GCM";
+    static final String TAG = "ARISEApp GCM";
  
     public static final String DISPLAY_MESSAGE_ACTION =
-            "com.androidhive.pushnotifications.DISPLAY_MESSAGE";
+            "com.arise.pushnotifications.DISPLAY_MESSAGE";
  
     public static final String EXTRA_MESSAGE = "message";
  
@@ -116,7 +131,7 @@ public final class CommonUtilities {
      * @param context application's context.
      * @param message message to be displayed.
      */
-    static void displayMessage(Context context, String message) {
+    public static void displayMessage(Context context, String message) {
         Intent intent = new Intent(DISPLAY_MESSAGE_ACTION);
         intent.putExtra(EXTRA_MESSAGE, message);
         context.sendBroadcast(intent);

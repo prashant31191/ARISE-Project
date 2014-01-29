@@ -83,5 +83,9 @@ public class LazyPWCSULAdapter extends ArrayAdapter<PWCSUL>{
         
 		return imageLayout;
 	}
+	
+	public void removeItem(int position){
+		people.remove(position);
+	}
 
 }

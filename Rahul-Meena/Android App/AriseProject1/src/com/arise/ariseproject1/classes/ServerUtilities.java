@@ -80,16 +80,18 @@ public final class ServerUtilities {
    /**
     * Unregister this account/device pair within the server.
     */
-   static void unregister(final Context context, final String regId) {
+   public static void unregister(final Context context, final String regId) {
        Log.i(TAG, "unregistering device (regId = " + regId + ")");
        String serverUrl = CommonUtilities.SERVER_UNREGISTER_URL;
        Map<String, String> params = new HashMap<String, String>();
-       params.put("regId", regId);
+       params.put(CommonUtilities.TAG_KNOCK_KNOCK, CommonUtilities.SERVER_KNOCK_KNOCK_CODE);
+       params.put(CommonUtilities.TAG_GCM_REG_ID, regId);
        try {
            post(serverUrl, params);
            GCMRegistrar.setRegisteredOnServer(context, false);
            String message = context.getString(R.string.server_unregistered);
-           CommonUtilities.displayMessage(context, message);
+           Log.d("setRegisteredOnServer", message);
+           //CommonUtilities.displayMessage(context, message);
        } catch (IOException e) {
            // At this point the device is unregistered from GCM, but still
            // registered in the server.

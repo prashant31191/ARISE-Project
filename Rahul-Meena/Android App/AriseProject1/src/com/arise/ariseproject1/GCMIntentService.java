@@ -1,4 +1,4 @@
-package com.arise.ariseproject1.classes;
+package com.arise.ariseproject1;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -12,13 +12,12 @@ import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 import android.widget.Toast;
  
-import com.arise.ariseproject1.ChatActivity;
 import com.arise.ariseproject1.R;
-import com.arise.ariseproject1.RegisterActivity;
+import com.arise.ariseproject1.classes.CommonUtilities;
+import com.arise.ariseproject1.classes.ServerUtilities;
 import com.google.android.gcm.GCMBaseIntentService;
  
 import static com.arise.ariseproject1.classes.CommonUtilities.SENDER_ID;
-import static com.arise.ariseproject1.classes.CommonUtilities.displayMessage;
  
 public class GCMIntentService extends GCMBaseIntentService {
  
@@ -57,7 +56,7 @@ public class GCMIntentService extends GCMBaseIntentService {
         Log.i(TAG, "Received message");
         String message = intent.getExtras().getString(CommonUtilities.TAG_MESSAGE);
         
-        displayMessage(context, message);
+        CommonUtilities.displayMessage(context, message);
 	    // notifies user
 	    try {
 			generateNotification(context, message);
@@ -109,7 +108,7 @@ public class GCMIntentService extends GCMBaseIntentService {
     	
 		JSONObject jObject = new JSONObject(message);
 	  //String from_uid = jObject.getString(CommonUtilities.TAG_MESSAGE_FROM_UID);
-		String from_name = jObject.getString(CommonUtilities.TAG_MESSAGE_FROM_NAME);
+		String from_name = jObject.getString(CommonUtilities.TAG_MESSAGE_SENDER_NAME);
       //String cpid = jObject.getString(CommonUtilities.TAG_MESSAGE_CPID);
 		String content = jObject.getString(CommonUtilities.TAG_MESSAGE_CONTENT);
 	  //String time = jObject.getString(CommonUtilities.TAG_MESSAGE_FROM_UID);

@@ -1,8 +1,11 @@
 package com.arise.ariseproject1;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
@@ -23,9 +26,11 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.assist.ImageScaleType;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.AsyncTask;
@@ -36,6 +41,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -44,6 +51,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class ProfileFragment extends Fragment implements OnClickListener{
+	
+
+	public static boolean isImageUpdated = false;
 	
     public Context context;
     private String activityAssignedValue ="";
@@ -64,6 +74,7 @@ public class ProfileFragment extends Fragment implements OnClickListener{
 	private UpdateMyLocation mUpdateMyLocation;
 	private AddNewPWCSUL mAddNewPWCSUL;
 	private AddNewPWCSULOption mAddNewPWCSULOption;
+	private RemoveAPWCSUL mRemoveAPWCSUL;
 	
     // Session Manager Class
 	private SessionManager session;
@@ -132,10 +143,12 @@ public class ProfileFragment extends Fragment implements OnClickListener{
 			.bitmapConfig(Bitmap.Config.RGB_565)
 			.cacheOnDisc(true)
 			.build();
-		
+		session = new SessionManager(context);
 		b_get_LKL.setOnClickListener(this);
         b_add_new.setOnClickListener(this);
         b_UML.setOnClickListener(this);
+        iv_image.setOnClickListener(this);
+        tv_name.setOnClickListener(this);
 
         String email = new String();
         String password = new String();
@@ -160,7 +173,7 @@ public class ProfileFragment extends Fragment implements OnClickListener{
         }
         
         if(session.getPDValue() == 0){
-        	mCheckAndLogIndetails = new CheckAndLogInDetails(context, email, password);
+        	mCheckAndLogIndetails = new CheckAndLogInDetails(email, password);
         	mCheckAndLogIndetails.execute();
         } else{
         	loadFromSession();
@@ -174,6 +187,20 @@ public class ProfileFragment extends Fragment implements OnClickListener{
         peopleAdapter = new LazyPWCSULAdapter(context, 0, imageLoader, dioptions);
         peopleAdapter.addAll(session.getPWCSUL());
         lv_pwcsul.setAdapter(peopleAdapter);
+        lv_pwcsul.setOnItemSelectedListener(new OnItemSelectedListener() {
+
+			@Override
+			public void onItemSelected(AdapterView<?> parent, View view,
+					int position, long id) {
+				showDialogToRemovePWCSUL(position);
+			}
+
+			@Override
+			public void onNothingSelected(AdapterView<?> arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
 		
         /*if(ATuser.getJSONArray(CommonUtilities.TAG_PWCSUL) != null){
 			rl_none.setVisibility(View.GONE);
@@ -181,11 +208,69 @@ public class ProfileFragment extends Fragment implements OnClickListener{
 		*/
 	}
 
+	private void showDialogToRemovePWCSUL(final int position) {
+		// custom dialog
+		final Dialog dialog = new Dialog(context);
+		dialog.setContentView(R.layout.dialog_remove_person);
+		dialog.setTitle("Search");
+
+		// set the custom dialog components - text, image and button
+		ImageView iv_image = (ImageView) dialog.findViewById(R.id.imageView_dialog_remove_person_image);
+		TextView tv_email = (TextView) dialog.findViewById(R.id.textView_dialog_remove_person_name);
+		
+		String image = peopleAdapter.getItem(position).getImage();
+		String name = peopleAdapter.getItem(position).getName();
+		final String puid = String.valueOf(peopleAdapter.getItem(position).getUid());
+		
+		imageLoader.displayImage(image, iv_image, dioptions);
+		tv_email.setText(name);
+		
+		Button b_cancel = (Button) dialog.findViewById(R.id.button_dialog_remove_person_cancel);
+		Button b_remove = (Button) dialog.findViewById(R.id.button_dialog_remove_person_remove);
+		
+		OnClickListener ocl = new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+
+				switch (v.getId()){
+				
+				case R.id.button_dialog_remove_person_cancel:{
+					dialog.cancel();
+				}
+				break;
+				
+				case R.id.button_dialog_remove_person_remove:{
+					mRemoveAPWCSUL = new RemoveAPWCSUL();
+					mRemoveAPWCSUL.execute(puid,String.valueOf(position));
+					dialog.cancel();
+				}
+				break;
+				}
+				
+			}
+		};
+		
+		b_remove.setOnClickListener(ocl);
+		b_cancel.setOnClickListener(ocl);
+
+		dialog.show();
+	}
+
 	@Override
 	public void onClick(View v) {
 
 		switch(v.getId()){
-
+		
+		case R.id.imageView_profile_fragment_image:{
+			Intent intent = new Intent(getActivity(),ChangePictureActivity.class);
+			startActivity(intent);
+		}
+		break;
+		case R.id.textView_profile_fragment_name:{
+			showDialogEditName();
+		}
+		break;
 		case R.id.button_profile_fragment_get_LKL:{
 			if(session.getLocLat() != 0 && session.getLocLong() != 0 ){
 				Intent intent = new Intent(context,MapActivity.class);
@@ -196,8 +281,10 @@ public class ProfileFragment extends Fragment implements OnClickListener{
 		}
 		break;
 		case R.id.button_profile_fragment_UML:{
+	        SimpleDateFormat df = new SimpleDateFormat("d MMM yyyy HH:mm a",Locale.US);
+	        String time = df.format(Calendar.getInstance().getTime());
 			mUpdateMyLocation = new UpdateMyLocation();
-			mUpdateMyLocation.execute();
+			mUpdateMyLocation.execute(time);
 		}
 		break;
 		case R.id.button_profile_fragment_add_new:{
@@ -208,6 +295,44 @@ public class ProfileFragment extends Fragment implements OnClickListener{
 		
 	}
 
+	private void showDialogEditName() {
+		AlertDialog.Builder builder = new AlertDialog.Builder(context);
+		builder.setTitle("Edit Name");
+		final EditText et_name = new EditText(context);
+		et_name.setText(session.getName());
+		builder.setView(et_name);
+		builder.setPositiveButton("Update",
+        new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+            	updateName(et_name.getText().toString());
+            	dialog.cancel();
+
+            }
+        });
+
+		builder.setNegativeButton("Cancel",
+				new DialogInterface.OnClickListener() {
+            	public void onClick(DialogInterface dialog, int id) {
+            		dialog.cancel();
+            		
+            	}
+        });
+	 
+		// create alert dialog
+		AlertDialog alertDialog = builder.create();
+
+		// show it
+		alertDialog.show();
+		
+	}
+
+	protected void updateName(String name) {
+
+		UpdateName mUpdateName = new UpdateName();
+		mUpdateName.execute(name);
+		
+	}
+    
 	private void showDialogAddNew(){
 		 
 		// custom dialog
@@ -300,16 +425,13 @@ public class ProfileFragment extends Fragment implements OnClickListener{
      * */
    public class CheckAndLogInDetails extends AsyncTask<String, String, Boolean> {
 
-
-	   private Context ATcontext; 
 	   private String ATemail; 
 	   private String ATpassword;
 	   private JSONObject ATjson;
 	   private JSONObject ATuser;
 	   
 
-	   public CheckAndLogInDetails(Context context,String email,String password) {  // can take other params if needed
-		   this.ATcontext = context;
+	   public CheckAndLogInDetails(String email,String password) {  // can take other params if needed
 		   this.ATemail = email;
 		   this.ATpassword = password;
        	   this.ATjson= new JSONObject();
@@ -322,7 +444,7 @@ public class ProfileFragment extends Fragment implements OnClickListener{
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            pDialog = new ProgressDialog(ATcontext);
+            pDialog = new ProgressDialog(getActivity());
             pDialog.setMessage("Loging In..");
             pDialog.setIndeterminate(false);
             pDialog.setCancelable(true);
@@ -337,6 +459,7 @@ public class ProfileFragment extends Fragment implements OnClickListener{
             // Building Parameters
             List<NameValuePair> params = new ArrayList<NameValuePair>();
             Log.d("email", ATemail);
+            params.add(new BasicNameValuePair(CommonUtilities.TAG_KNOCK_KNOCK, CommonUtilities.SERVER_KNOCK_KNOCK_CODE));
             params.add(new BasicNameValuePair("email", ATemail));
             params.add(new BasicNameValuePair("password", ATpassword));
  
@@ -381,7 +504,7 @@ public class ProfileFragment extends Fragment implements OnClickListener{
                 		person.setImage(jperson.getString(CommonUtilities.TAG_IMAGE));
                 		person.setGcmRegId(jperson.getString(CommonUtilities.TAG_GCM_REG_ID));
                 		person.setUid(jperson.getLong(CommonUtilities.TAG_UID));
-                		person.setCpid(jperson.getLong(CommonUtilities.TAG_CPID));
+                		//person.setCpid(jperson.getLong(CommonUtilities.TAG_CPID));
                 		person.setLocLat(jperson.getLong(CommonUtilities.TAG_LOC_LAT));
                 		person.setLocLong(jperson.getLong(CommonUtilities.TAG_LOC_LONG));
                 		person.setLocTime(jperson.getString(CommonUtilities.TAG_LOC_TIME));
@@ -515,9 +638,11 @@ public class ProfileFragment extends Fragment implements OnClickListener{
            
            // Building Parameters
            List<NameValuePair> params = new ArrayList<NameValuePair>();
+           params.add(new BasicNameValuePair(CommonUtilities.TAG_KNOCK_KNOCK, CommonUtilities.SERVER_KNOCK_KNOCK_CODE));
            params.add(new BasicNameValuePair(CommonUtilities.TAG_UID, Long.toString(uid)));
            params.add(new BasicNameValuePair(CommonUtilities.TAG_LOC_LAT, Double.toString(loclat)));
            params.add(new BasicNameValuePair(CommonUtilities.TAG_LOC_LONG, Double.toString(loclong)));
+           params.add(new BasicNameValuePair(CommonUtilities.TAG_LOC_TIME, args[0]));
            
            // getting JSON string from URL
            JSONObject json = jsonParser.makeHttpRequest(CommonUtilities.SERVER_UPDATE_USER_LOCATION_URL, "POST", params);
@@ -529,13 +654,12 @@ public class ProfileFragment extends Fragment implements OnClickListener{
                // Checking for SUCCESS TAG
                int success = json.getInt(CommonUtilities.TAG_SUCCESS);
                message = json.getString(CommonUtilities.TAG_MESSAGE);
-               String loctime = json.getString(CommonUtilities.TAG_LOC_TIME);
 
                if (success == 1) {
                    // location updated
             	   session.setLocLat(loclat);
             	   session.setLocLong(loclong);
-            	   session.setLocTime(loctime);
+            	   session.setLocTime(args[0]);
             	   return true;
                } else {
             	   return false;
@@ -595,6 +719,7 @@ public class ProfileFragment extends Fragment implements OnClickListener{
            // Building Parameters
            List<NameValuePair> params = new ArrayList<NameValuePair>();
            // the users id so that this email could not be produced in the result
+           params.add(new BasicNameValuePair(CommonUtilities.TAG_KNOCK_KNOCK, CommonUtilities.SERVER_KNOCK_KNOCK_CODE));
            params.add(new BasicNameValuePair(CommonUtilities.TAG_UID, Long.toString(uid)));
            params.add(new BasicNameValuePair(CommonUtilities.TAG_PERSON_EMAIL, args[0].toString()));
            
@@ -676,6 +801,7 @@ public class ProfileFragment extends Fragment implements OnClickListener{
            
            // Building Parameters
            List<NameValuePair> params = new ArrayList<NameValuePair>();
+           params.add(new BasicNameValuePair(CommonUtilities.TAG_KNOCK_KNOCK, CommonUtilities.SERVER_KNOCK_KNOCK_CODE));
            params.add(new BasicNameValuePair(CommonUtilities.TAG_UID, Long.toString(uid)));
            params.add(new BasicNameValuePair(CommonUtilities.TAG_PERSON_UID, args[0].toString()));
            
@@ -726,5 +852,166 @@ public class ProfileFragment extends Fragment implements OnClickListener{
 
        }
    }
-   
+
+
+
+   /**
+    * Background Async Task to Load all product by making HTTP Request
+    * */
+   public class UpdateName extends AsyncTask<String, String, Boolean> {
+
+       /**
+        * Before starting background thread Show Progress Dialog
+        * */
+       @Override
+       protected void onPreExecute() {
+           super.onPreExecute();
+           pDialog = new ProgressDialog(context);
+           pDialog.setMessage("Updating...");
+           pDialog.setIndeterminate(false);
+           pDialog.setCancelable(false);
+           pDialog.show();
+       }
+
+       /**
+        * getting All products from url
+        * */
+       protected Boolean doInBackground(String... args) {
+           // getting updated data from EditTexts
+           long uid = session.getUserID();
+           
+           // Building Parameters
+           List<NameValuePair> params = new ArrayList<NameValuePair>();
+           params.add(new BasicNameValuePair(CommonUtilities.TAG_KNOCK_KNOCK, CommonUtilities.SERVER_KNOCK_KNOCK_CODE));
+           params.add(new BasicNameValuePair(CommonUtilities.TAG_UID, Long.toString(uid)));
+           params.add(new BasicNameValuePair(CommonUtilities.TAG_NAME, args[0]));
+           
+           // getting JSON string from URL
+           JSONObject json = jsonParser.makeHttpRequest(CommonUtilities.SERVER_UPDATE_USER_NAME_URL, "POST", params);
+
+           // Check your log cat for JSON reponse
+           Log.d("Response: ", json.toString());
+
+           try {
+               // Checking for SUCCESS TAG
+               int success = json.getInt(CommonUtilities.TAG_SUCCESS);
+
+               if (success == 1) {
+            	   session.setName(args[0]);
+            	   return true;
+            	   
+               } else {
+            	   return false;
+       	        
+               }
+           } catch (JSONException e) {
+               e.printStackTrace();
+           }
+
+           return null;
+       }
+
+       /**
+        * After completing background task Dismiss the progress dialog
+        * **/
+       protected void onPostExecute(Boolean result) {
+           // dismiss the dialog after getting all products
+           pDialog.dismiss();
+           if(result){
+        	   tv_name.setText(session.getName());
+        	   Toast.makeText(context, "Name successfully updated!", Toast.LENGTH_LONG).show();
+           } else{
+               alert.showAlertDialog(getActivity(), "Server Error/Busy!","Please try again.", false);
+           }
+
+       }
+   }
+
+
+   /**
+    * Background Async Task to Load all product by making HTTP Request
+    * */
+   public class RemoveAPWCSUL extends AsyncTask<String, String, Boolean> {
+	   
+	   private int listPosition;
+
+       /**
+        * Before starting background thread Show Progress Dialog
+        * */
+       @Override
+       protected void onPreExecute() {
+           super.onPreExecute();
+           pDialog = new ProgressDialog(context);
+           pDialog.setMessage("Removing...");
+           pDialog.setIndeterminate(false);
+           pDialog.setCancelable(false);
+           pDialog.show();
+       }
+
+       /**
+        * getting All products from url
+        * */
+       protected Boolean doInBackground(String... args) {
+           // getting updated data from EditTexts
+           long uid = session.getUserID();
+           
+           // Building Parameters
+           List<NameValuePair> params = new ArrayList<NameValuePair>();
+           params.add(new BasicNameValuePair(CommonUtilities.TAG_KNOCK_KNOCK, CommonUtilities.SERVER_KNOCK_KNOCK_CODE));
+           params.add(new BasicNameValuePair(CommonUtilities.TAG_UID, Long.toString(uid)));
+           params.add(new BasicNameValuePair(CommonUtilities.TAG_PERSON_UID, args[0].toString()));
+           
+           // getting JSON string from URL
+           JSONObject json = jsonParser.makeHttpRequest(CommonUtilities.SERVER_REMOVE_PWCSUL_URL, "POST", params);
+
+           // Check your log cat for JSON reponse
+           Log.d("Response: ", json.toString());
+
+           try {
+               // Checking for SUCCESS TAG
+               int success = json.getInt(CommonUtilities.TAG_SUCCESS);
+
+               if (success == 1) {
+            	   listPosition = Integer.valueOf(args[1]);
+            	   return true;
+            	   
+               } else {
+            	   return false;
+       	        
+               }
+           } catch (JSONException e) {
+               e.printStackTrace();
+           }
+
+           return null;
+       }
+
+       /**
+        * After completing background task Dismiss the progress dialog
+        * **/
+       protected void onPostExecute(Boolean result) {
+           // dismiss the dialog after getting all products
+           pDialog.dismiss();
+           if(result){
+        	   peopleAdapter.removeItem(listPosition);
+        	   peopleAdapter.notifyDataSetChanged();
+        	   Toast.makeText(context, "Person successfully removed!", Toast.LENGTH_LONG).show();
+           } else{
+               alert.showAlertDialog(getActivity(), "Server Error/Busy!","Please try again.", false);
+           }
+
+       }
+   }
+
+
+
+   @Override
+   public void onResume() {
+	   imageLoader.clearDiscCache();
+	   imageLoader.displayImage(session.getImage(), iv_image, dioptions);
+	   isImageUpdated = false;
+	   super.onResume();
+   }
+
+
 }

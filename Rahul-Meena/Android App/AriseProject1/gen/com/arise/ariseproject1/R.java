@@ -232,126 +232,136 @@ containing a value of this type.
         public static final int tc=0x7f02002f;
     }
     public static final class id {
-        public static final int TextView_log_in_activity_forgot_password=0x7f050016;
-        public static final int action_help=0x7f050047;
-        public static final int action_log_out=0x7f050049;
-        public static final int action_more=0x7f050046;
-        public static final int action_settings=0x7f050048;
-        public static final int button_acitivity_settings_change_password=0x7f050023;
-        public static final int button_acitivity_settings_unregister=0x7f050024;
-        public static final int button_activity_forgot_password_cancel=0x7f05000e;
-        public static final int button_activity_forgot_password_reset_password=0x7f05000d;
-        public static final int button_activity_forgot_password_result_login=0x7f050010;
-        public static final int button_chat_activity_add=0x7f050007;
-        public static final int button_chat_activity_send=0x7f05000a;
-        public static final int button_dialog_add_new_pwcsul_cancel=0x7f050026;
-        public static final int button_dialog_add_new_pwcsul_look=0x7f050027;
-        public static final int button_dialog_chage_password_cancel=0x7f05002c;
-        public static final int button_dialog_chage_password_change=0x7f05002d;
-        public static final int button_dialog_new_pwcsul_add=0x7f050032;
-        public static final int button_dialog_new_pwcsul_cancel=0x7f050031;
-        public static final int button_index_activity_log_in=0x7f050013;
-        public static final int button_index_activity_register=0x7f050011;
-        public static final int button_log_in_activity_log_in=0x7f050017;
-        public static final int button_profile_fragment_UML=0x7f050037;
-        public static final int button_profile_fragment_add_new=0x7f050039;
-        public static final int button_profile_fragment_get_LKL=0x7f050036;
-        public static final int button_register_activity_register=0x7f050020;
-        public static final int button_unregister=0x7f050012;
-        public static final int comment=0x7f050045;
-        public static final int editText_activity_forgot_pssword_email=0x7f05000c;
-        public static final int editText_chat_activity_message=0x7f050009;
-        public static final int editText_dialog_add_new_pwcsul_email=0x7f050025;
-        public static final int editText_dialog_chage_password_confirm_new_password=0x7f05002a;
-        public static final int editText_dialog_chage_password_current_password=0x7f050028;
-        public static final int editText_dialog_chage_password_new_password=0x7f050029;
-        public static final int editText_log_in_activity_email=0x7f050014;
-        public static final int editText_log_in_activity_password=0x7f050015;
-        public static final int editText_register_activity_email=0x7f05001d;
-        public static final int editText_register_activity_first_name=0x7f05001b;
-        public static final int editText_register_activity_last_name=0x7f05001c;
-        public static final int editText_register_activity_password=0x7f05001f;
+        public static final int TextView_log_in_activity_forgot_password=0x7f05001a;
+        public static final int action_help=0x7f05004e;
+        public static final int action_log_out=0x7f050050;
+        public static final int action_more=0x7f05004d;
+        public static final int action_settings=0x7f05004f;
+        public static final int button_acitivity_settings_change_password=0x7f050026;
+        public static final int button_acitivity_settings_unregister=0x7f050027;
+        public static final int button_activity_forgot_password_cancel=0x7f050012;
+        public static final int button_activity_forgot_password_reset_password=0x7f050011;
+        public static final int button_activity_forgot_password_result_login=0x7f050014;
+        public static final int button_change_picture_activity_cancel=0x7f050008;
+        public static final int button_change_picture_activity_select=0x7f050006;
+        public static final int button_change_picture_activity_upload=0x7f050007;
+        public static final int button_chat_activity_add=0x7f05000b;
+        public static final int button_chat_activity_send=0x7f05000e;
+        public static final int button_dialog_add_new_pwcsul_cancel=0x7f050029;
+        public static final int button_dialog_add_new_pwcsul_look=0x7f05002a;
+        public static final int button_dialog_chage_password_cancel=0x7f05002f;
+        public static final int button_dialog_chage_password_change=0x7f050030;
+        public static final int button_dialog_new_pwcsul_add=0x7f050035;
+        public static final int button_dialog_new_pwcsul_cancel=0x7f050034;
+        public static final int button_dialog_remove_person_cancel=0x7f050038;
+        public static final int button_dialog_remove_person_remove=0x7f050039;
+        public static final int button_index_activity_log_in=0x7f050017;
+        public static final int button_index_activity_register=0x7f050015;
+        public static final int button_log_in_activity_log_in=0x7f05001b;
+        public static final int button_profile_fragment_UML=0x7f05003e;
+        public static final int button_profile_fragment_add_new=0x7f050040;
+        public static final int button_profile_fragment_get_LKL=0x7f05003d;
+        public static final int button_register_activity_register=0x7f050023;
+        public static final int button_unregister=0x7f050016;
+        public static final int comment=0x7f05004c;
+        public static final int editText_activity_forgot_pssword_email=0x7f050010;
+        public static final int editText_chat_activity_message=0x7f05000d;
+        public static final int editText_dialog_add_new_pwcsul_email=0x7f050028;
+        public static final int editText_dialog_chage_password_confirm_new_password=0x7f05002d;
+        public static final int editText_dialog_chage_password_current_password=0x7f05002b;
+        public static final int editText_dialog_chage_password_new_password=0x7f05002c;
+        public static final int editText_log_in_activity_email=0x7f050018;
+        public static final int editText_log_in_activity_password=0x7f050019;
+        public static final int editText_register_activity_email=0x7f050020;
+        public static final int editText_register_activity_first_name=0x7f05001e;
+        public static final int editText_register_activity_last_name=0x7f05001f;
+        public static final int editText_register_activity_password=0x7f050022;
         public static final int hybrid=0x7f050004;
-        public static final int imageView1=0x7f05001a;
-        public static final int imageView_dialog_new_pwcsul_image=0x7f05002f;
-        public static final int imageView_item_chat_tab_image=0x7f05003f;
-        public static final int imageView_item_lazy_people_dp=0x7f050041;
-        public static final int imageView_item_map_marker_image=0x7f050043;
-        public static final int imageView_profile_fragment_image=0x7f050033;
-        public static final int imageView_profile_fragment_none=0x7f05003c;
-        public static final int linearLayout_chat_activity_chatBar=0x7f050005;
-        public static final int listView_dialog_chat_user_list=0x7f05002e;
-        public static final int listView_profile_fragment_PWCSML=0x7f05003a;
-        public static final int map=0x7f05003e;
-        public static final int myLocationMap=0x7f050019;
+        public static final int imageView_change_picture_activity_image=0x7f050005;
+        public static final int imageView_dialog_new_pwcsul_image=0x7f050032;
+        public static final int imageView_dialog_remove_person_image=0x7f050036;
+        public static final int imageView_item_chat_tab_image=0x7f050046;
+        public static final int imageView_item_lazy_people_dp=0x7f050048;
+        public static final int imageView_item_map_marker_image=0x7f05004a;
+        public static final int imageView_profile_fragment_image=0x7f05003a;
+        public static final int imageView_profile_fragment_none=0x7f050043;
+        public static final int linearLayout_chat_activity_chatBar=0x7f050009;
+        public static final int listView_dialog_chat_user_list=0x7f050031;
+        public static final int listView_profile_fragment_PWCSML=0x7f050041;
+        public static final int mapwhere=0x7f050045;
+        public static final int myLocationMap=0x7f05001d;
         public static final int none=0x7f050000;
         public static final int normal=0x7f050001;
-        public static final int pager=0x7f050018;
-        public static final int relativeLayout_profile_fragment_none=0x7f05003b;
+        public static final int pager=0x7f05001c;
+        public static final int relativeLayout_profile_fragment_none=0x7f050042;
         public static final int satellite=0x7f050002;
-        public static final int spinner_fragment_radar_pwlucs=0x7f05003d;
+        public static final int spinner_fragment_radar_pwlucs=0x7f050044;
         public static final int terrain=0x7f050003;
-        public static final int textView1=0x7f05000b;
-        public static final int textView_activity_forgot_password_result_result=0x7f05000f;
-        public static final int textView_dialog_change_password_pdnm=0x7f05002b;
-        public static final int textView_dialog_new_pwcsul_name=0x7f050030;
-        public static final int textView_item_chat_tab_msg_count=0x7f050040;
-        public static final int textView_item_lazy_people_name=0x7f050042;
-        public static final int textView_profile_fragment_LKL=0x7f050035;
-        public static final int textView_profile_fragment_PWCSML=0x7f050038;
-        public static final int textView_profile_fragment_name=0x7f050034;
-        public static final int textView_regsiter_activity_device_error=0x7f050021;
-        public static final int textView_regsiter_activity_email_error=0x7f05001e;
-        public static final int textView_regsitration_result_output=0x7f050022;
-        public static final int twoWayView_chat_activity_chatBar=0x7f050006;
-        public static final int viewPager_chat_activity=0x7f050008;
-        public static final int wrapper=0x7f050044;
+        public static final int textView1=0x7f05000f;
+        public static final int textView_activity_forgot_password_result_result=0x7f050013;
+        public static final int textView_dialog_change_password_pdnm=0x7f05002e;
+        public static final int textView_dialog_new_pwcsul_name=0x7f050033;
+        public static final int textView_dialog_remove_person_name=0x7f050037;
+        public static final int textView_item_chat_tab_msg_count=0x7f050047;
+        public static final int textView_item_lazy_people_name=0x7f050049;
+        public static final int textView_profile_fragment_LKL=0x7f05003c;
+        public static final int textView_profile_fragment_PWCSML=0x7f05003f;
+        public static final int textView_profile_fragment_name=0x7f05003b;
+        public static final int textView_regsiter_activity_device_error=0x7f050024;
+        public static final int textView_regsiter_activity_email_error=0x7f050021;
+        public static final int textView_regsitration_result_output=0x7f050025;
+        public static final int twoWayView_chat_activity_chatBar=0x7f05000a;
+        public static final int viewPager_chat_activity=0x7f05000c;
+        public static final int wrapper=0x7f05004b;
     }
     public static final class integer {
         public static final int google_play_services_version=0x7f070000;
     }
     public static final class layout {
-        public static final int activity_chat=0x7f030000;
-        public static final int activity_forgot_password=0x7f030001;
-        public static final int activity_forgot_password_result=0x7f030002;
-        public static final int activity_help=0x7f030003;
-        public static final int activity_index=0x7f030004;
-        public static final int activity_log_in=0x7f030005;
-        public static final int activity_main=0x7f030006;
-        public static final int activity_map=0x7f030007;
-        public static final int activity_register=0x7f030008;
-        public static final int activity_registration_result=0x7f030009;
-        public static final int activity_settings=0x7f03000a;
-        public static final int activity_temp=0x7f03000b;
-        public static final int dialog_add_new_pwcsul=0x7f03000c;
-        public static final int dialog_change_password=0x7f03000d;
-        public static final int dialog_chat_user_list=0x7f03000e;
-        public static final int dialog_new_pwcsul=0x7f03000f;
-        public static final int fragment_profile=0x7f030010;
-        public static final int fragment_radar=0x7f030011;
-        public static final int item_chat_tab=0x7f030012;
-        public static final int item_lazy_people=0x7f030013;
-        public static final int item_map_marker=0x7f030014;
-        public static final int listitem_discuss=0x7f030015;
+        public static final int activity_change_picture=0x7f030000;
+        public static final int activity_chat=0x7f030001;
+        public static final int activity_forgot_password=0x7f030002;
+        public static final int activity_forgot_password_result=0x7f030003;
+        public static final int activity_help=0x7f030004;
+        public static final int activity_index=0x7f030005;
+        public static final int activity_log_in=0x7f030006;
+        public static final int activity_main=0x7f030007;
+        public static final int activity_map=0x7f030008;
+        public static final int activity_register=0x7f030009;
+        public static final int activity_registration_result=0x7f03000a;
+        public static final int activity_settings=0x7f03000b;
+        public static final int activity_temp=0x7f03000c;
+        public static final int dialog_add_new_pwcsul=0x7f03000d;
+        public static final int dialog_change_password=0x7f03000e;
+        public static final int dialog_chat_user_list=0x7f03000f;
+        public static final int dialog_new_pwcsul=0x7f030010;
+        public static final int dialog_remove_person=0x7f030011;
+        public static final int fragment_profile=0x7f030012;
+        public static final int fragment_radar=0x7f030013;
+        public static final int item_chat_tab=0x7f030014;
+        public static final int item_lazy_people=0x7f030015;
+        public static final int item_map_marker=0x7f030016;
+        public static final int listitem_discuss=0x7f030017;
     }
     public static final class menu {
         public static final int activity_main_actions=0x7f0a0000;
-        public static final int chat=0x7f0a0001;
-        public static final int forgot_password=0x7f0a0002;
-        public static final int forgot_password_result=0x7f0a0003;
-        public static final int help=0x7f0a0004;
-        public static final int index=0x7f0a0005;
-        public static final int log_in=0x7f0a0006;
-        public static final int main=0x7f0a0007;
-        public static final int map=0x7f0a0008;
-        public static final int profile=0x7f0a0009;
-        public static final int radar=0x7f0a000a;
-        public static final int register=0x7f0a000b;
-        public static final int registration_result=0x7f0a000c;
-        public static final int settings=0x7f0a000d;
+        public static final int change_picture=0x7f0a0001;
+        public static final int chat=0x7f0a0002;
+        public static final int forgot_password=0x7f0a0003;
+        public static final int forgot_password_result=0x7f0a0004;
+        public static final int help=0x7f0a0005;
+        public static final int index=0x7f0a0006;
+        public static final int log_in=0x7f0a0007;
+        public static final int main=0x7f0a0008;
+        public static final int map=0x7f0a0009;
+        public static final int profile=0x7f0a000a;
+        public static final int radar=0x7f0a000b;
+        public static final int register=0x7f0a000c;
+        public static final int registration_result=0x7f0a000d;
+        public static final int settings=0x7f0a000e;
     }
     public static final class string {
-        public static final int account_email_address=0x7f060057;
+        public static final int account_email_address=0x7f06005a;
         public static final int action_help=0x7f060038;
         public static final int action_log_out=0x7f060036;
         /**  Action Bar action items 
@@ -393,10 +403,10 @@ containing a value of this type.
          */
         public static final int cancel=0x7f06004a;
         public static final int cd=0x7f060034;
-        public static final int change=0x7f060060;
+        public static final int change=0x7f060063;
         /**  Settings Activity 
          */
-        public static final int change_password=0x7f060059;
+        public static final int change_password=0x7f06005c;
         /**  Button in confirmation dialog to enable Google Play services.  Clicking it
         will direct user to application settings of Google Play services where they
         can enable it [CHAR LIMIT=40] 
@@ -468,8 +478,8 @@ containing a value of this type.
         /**  Long form sign-in button text [CHAR LIMIT=30] 
          */
         public static final int common_signin_button_text_long=0x7f060013;
-        public static final int confirm_new_password=0x7f06005e;
-        public static final int current_password=0x7f06005c;
+        public static final int confirm_new_password=0x7f060061;
+        public static final int current_password=0x7f06005f;
         public static final int device_error=0x7f060041;
         public static final int email=0x7f06003f;
         public static final int email_error=0x7f060040;
@@ -479,7 +489,7 @@ containing a value of this type.
         public static final int first_name=0x7f06003d;
         /**  Forgot Password Activity 
          */
-        public static final int forgot_password=0x7f060055;
+        public static final int forgot_password=0x7f060058;
         public static final int gcm_deleted=0x7f060025;
         public static final int gcm_error=0x7f060023;
         public static final int gcm_message=0x7f060022;
@@ -497,34 +507,37 @@ containing a value of this type.
         /**  Fragment 
          */
         public static final int name=0x7f06004d;
-        public static final int new_password=0x7f06005d;
+        public static final int new_password=0x7f060060;
         public static final int options_clear=0x7f06002d;
         public static final int options_exit=0x7f06002e;
         public static final int options_register=0x7f06002b;
         public static final int options_unregister=0x7f06002c;
         public static final int password=0x7f060042;
-        public static final int password_does_not_match=0x7f06005f;
+        public static final int password_does_not_match=0x7f060062;
         public static final int pwcsml=0x7f060051;
         /**  Index Activity 
          */
         public static final int register=0x7f06003b;
-        public static final int reset_password=0x7f060056;
+        public static final int remove=0x7f060057;
+        public static final int reset_password=0x7f060059;
         /**  Forgot Password Result Activity 
          */
-        public static final int reset_password_link_sent=0x7f060058;
+        public static final int reset_password_link_sent=0x7f06005b;
         /**  Search 
          */
         public static final int search_hint=0x7f060039;
+        public static final int select=0x7f060055;
         public static final int send=0x7f060049;
         public static final int server_register_error=0x7f060029;
         public static final int server_registered=0x7f060027;
         public static final int server_registering=0x7f060026;
         public static final int server_unregister_error=0x7f06002a;
         public static final int server_unregistered=0x7f060028;
+        public static final int title_activity_change_picture=0x7f060064;
         public static final int title_activity_chat=0x7f060045;
         public static final int title_activity_forgot_password=0x7f060044;
         public static final int title_activity_forgot_password_result=0x7f060054;
-        public static final int title_activity_help=0x7f06005b;
+        public static final int title_activity_help=0x7f06005e;
         public static final int title_activity_index=0x7f06003a;
         public static final int title_activity_log_in=0x7f060030;
         public static final int title_activity_main=0x7f06001d;
@@ -535,7 +548,8 @@ containing a value of this type.
         public static final int title_activity_registration_result=0x7f060043;
         public static final int title_activity_settings=0x7f060053;
         public static final int uml=0x7f060050;
-        public static final int unregister=0x7f06005a;
+        public static final int unregister=0x7f06005d;
+        public static final int upload=0x7f060056;
     }
     public static final class style {
         /** 

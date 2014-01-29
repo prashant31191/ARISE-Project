@@ -42,6 +42,8 @@ public class LogInActivity extends Activity implements OnClickListener{
 		b_log_in = (Button)findViewById(R.id.button_log_in_activity_log_in);
 		et_email = (EditText)findViewById(R.id.editText_log_in_activity_email);
 		et_password = (EditText)findViewById(R.id.editText_log_in_activity_password);
+        et_email.setText("rahul_lookout@outlook.com");
+        et_password.setText("pass");
 		tv_fp = (TextView)findViewById(R.id.TextView_log_in_activity_forgot_password);
 		
 		b_log_in.setOnClickListener(this);

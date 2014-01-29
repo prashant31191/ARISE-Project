@@ -49,8 +49,11 @@ public class IndexActivity extends Activity implements OnClickListener {
 		//if(GCMRegistrar.isRegistered(getApplicationContext()))
 			//session.checkLogin();
 		
-		if(GCMRegistrar.isRegistered(getApplicationContext())){
-			Log.d("Registered", "true");
+		if(!GCMRegistrar.isRegistered(getApplicationContext())){
+			Log.d("Registered", "false");
+		}
+		if(!GCMRegistrar.isRegisteredOnServer(getApplicationContext())){
+			Log.d("Registered on server", "false");
 		}
 	}
 
@@ -70,8 +73,9 @@ public class IndexActivity extends Activity implements OnClickListener {
 		case R.id.button_unregister:{
 
 
-			if(GCMRegistrar.isRegistered(getApplicationContext())){
-				GCMRegistrar.unregister(getApplicationContext());
+			if(GCMRegistrar.isRegisteredOnServer(getApplicationContext())){
+				GCMRegistrar.setRegisteredOnServer(getApplicationContext(), false);
+				//GCMRegistrar.unregister(getApplicationContext());
 				Toast.makeText(getApplicationContext(), "successfully unregistered", Toast.LENGTH_LONG).show();
 			}
 		}
