@@ -35,7 +35,7 @@ public class LogInActivity extends Activity implements OnClickListener{
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_log_in);
-        
+		
        // Session Manager
        session = new SessionManager(getApplicationContext());
 		
@@ -46,8 +46,10 @@ public class LogInActivity extends Activity implements OnClickListener{
         et_password.setText("pass");
 		tv_fp = (TextView)findViewById(R.id.TextView_log_in_activity_forgot_password);
 		
+		
 		b_log_in.setOnClickListener(this);
 		tv_fp.setOnClickListener(this);
+		
 		
 		
 	}

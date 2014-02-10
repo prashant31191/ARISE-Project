@@ -23,6 +23,7 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.app.ActionBar;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -58,6 +59,12 @@ public class ChangePictureActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_change_picture);
+ 
+        // get action bar   
+        ActionBar actionBar = getActionBar();
+ 
+        // Enabling Up / Back navigation
+        actionBar.setDisplayHomeAsUpEnabled(true);
 		
 		session = new SessionManager(getApplicationContext());
 		iv_image = (ImageView)findViewById(R.id.imageView_change_picture_activity_image);
@@ -223,7 +230,7 @@ public class ChangePictureActivity extends Activity {
 
 				HttpPost postRequest = new HttpPost(CommonUtilities.SERVER_UPLOAD_IMAGE_URL);
 
-				String fileName = session.getUserID()+".png";
+				String fileName = session.getUserID()+".jpg";
 				ByteArrayBody bab = new ByteArrayBody(data, fileName);
 
 				// File file= new File("/mnt/sdcard/forest.png");

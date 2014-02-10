@@ -5,60 +5,61 @@ import android.content.Intent;
  
 public final class CommonUtilities {
 
-   // give your server knock knock code
+   // give your server knock knock tag
    public static final String TAG_KNOCK_KNOCK = "knockknock";
    
    // give your server knock knock code
    public static final String SERVER_KNOCK_KNOCK_CODE = "WhoIsThere?";
    
     // give your server registration url here
-    public static final String SERVER_REGISTER_URL = "http://ariseapp.net16.net/php/register.php";
+    public static final String SERVER_REGISTER_URL = "http://172.17.1.103/users/register.php";
 
     // give your server un-registration url here
-	public static final String SERVER_UNREGISTER_URL = "http://ariseapp.net16.net/php/unregister.php";
+	public static final String SERVER_UNREGISTER_URL = "http://172.17.1.103/users/unregister.php";
     
     // give your server user exist url here
-    public static final String SERVER_USER_EXIST_URL = "http://ariseapp.net16.net/php/user_exist.php";
+    public static final String SERVER_USER_EXIST_URL = "http://172.17.1.103/users/user_exist.php";
     
-    // give your server user exist url here
-    public static final String SERVER_LOG_IN_URL = "http://ariseapp.net16.net/php/login.php";
+    // give your server login url here
+    public static final String SERVER_LOG_IN_URL = "http://172.17.1.103/users/login.php";
     
-    // give your server user exist url here
-    public static final String SERVER_UPLOAD_IMAGE_URL = "http://ariseapp.net16.net/php/upload_image.php";
+    // give your server upload image url here
+    public static final String SERVER_UPLOAD_IMAGE_URL = "http://172.17.1.103/users/upload_image.php";
     
-    // give your server user exist url here
-    public static final String SERVER_IMAGE_URL = "http://ariseapp.net16.net/php/images/";
+    // give your server images folder url here
+    public static final String SERVER_IMAGE_URL = "http://172.17.1.103/users/images/";
+    
+    // give your server update user name url here
+    public static final String SERVER_UPDATE_USER_NAME_URL = "http://172.17.1.103/users/update_name.php";
     
     // give your server update user location url here
-    public static final String SERVER_UPDATE_USER_NAME_URL = "http://ariseapp.net16.net/php/update_name.php";
+    public static final String SERVER_UPDATE_USER_LOCATION_URL = "http://172.17.1.103/users/update_location.php";
     
-    // give your server update user location url here
-    public static final String SERVER_UPDATE_USER_LOCATION_URL = "http://ariseapp.net16.net/php/update_location.php";
-    
-    // give your server update user location url here
-    public static final String SERVER_LOOK_FOR_PWCSUL_URL = "http://ariseapp.net16.net/php/look_for_person.php";
+    // give your server look for person to add url here
+    public static final String SERVER_LOOK_FOR_PWCSUL_URL = "http://172.17.1.103/users/look_for_person.php";
 
-    // give your server update user location url here
-    public static final String SERVER_ADD_NEW_PWCSUL_URL = "http://ariseapp.net16.net/php/add_new_pwcsul.php";;
+    // give your server add new pwcsul url here
+    public static final String SERVER_ADD_NEW_PWCSUL_URL = "http://172.17.1.103/users/add_new_pwcsul.php";;
 
-    // give your server update user location url here
-    public static final String SERVER_REMOVE_PWCSUL_URL = "http://ariseapp.net16.net/php/remove_pwcsul.php";
+    // give your server remove pwcsul url here
+    public static final String SERVER_REMOVE_PWCSUL_URL = "http://172.17.1.103/users/remove_pwcsul.php";
     
-    //
-	public static final String SERVER_SEND_CHAT_MESSAGE_URL = "http://ariseapp.net16.net/php/send_message.php";
+    // give your server send chat message url here
+	public static final String SERVER_SEND_CHAT_MESSAGE_URL = "http://172.17.1.103/users/send_message.php";
 	
-	//
-	public static final String SERVER_SEND_RESET_PASSWORD_LINK_URL = "http://ariseapp.net16.net/php/send_change_password_link.php";
+	// give your server send change password link url here
+	public static final String SERVER_SEND_RESET_PASSWORD_LINK_URL = "http://172.17.1.103/users/send_change_password_link.php";
 	
-	//
-	public static final String SERVER_CHANGE_PASSWORD_URL = "http://ariseapp.net16.net/php/change_password.php";
+	// give your server set new password after login url here
+	public static final String SERVER_NEW_PASSWORD_AFTER_LOG_IN_URL = "http://172.17.1.103/users/set_new_password_after_login.php";
+
     
-  	// JSON Node names
+    
+  	// JSON TAGS
     public static final String TAG_SUCCESS = "success";
 
 	public static final String TAG_USER = "user";
     
-  	// TAGS
     public static final String TAG_UID = "uid";
     
     public static final String TAG_NAME = "name";
@@ -71,7 +72,7 @@ public final class CommonUtilities {
 
 	public static final String TAG_LOC_TIME = "loctime";
     
-    public static final String TAG_IMAGE = "email";
+    public static final String TAG_IMAGE = "image";
 
 	public static final String TAG_GCM_REG_ID = "gcm_regid";
 
@@ -99,6 +100,8 @@ public final class CommonUtilities {
     public static final String TAG_MESSAGE_SENDER_NAME = "sender_name";
 
 	public static final String TAG_MESSAGE_RECIEVER_UID = "receiver_uid";
+
+	public static final String TAG_MESSAGE_RECIEVER_GCM_REGID = "receiver_gcm_regid";
     
     //public static final String TAG_MESSAGE_CPID = "cpid";
     

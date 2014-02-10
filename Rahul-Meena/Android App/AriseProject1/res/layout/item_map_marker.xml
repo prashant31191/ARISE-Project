@@ -11,6 +11,6 @@
         android:background="@drawable/custom_info_bubble"
         android:contentDescription="@string/cd"
         android:scaleType="center"
-        android:src="@drawable/tc" />
+        android:src="@drawable/default_image" />
 
 </LinearLayout>

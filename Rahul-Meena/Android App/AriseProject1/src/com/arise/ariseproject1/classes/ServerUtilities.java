@@ -24,6 +24,7 @@ public final class ServerUtilities {
    private static final int MAX_ATTEMPTS = 5;
    private static final int BACKOFF_MILLI_SECONDS = 2000;
    private static final Random random = new Random();
+   private static SessionManager session;
 
    /**
     * Register this account/device pair within the server.
@@ -81,11 +82,12 @@ public final class ServerUtilities {
     * Unregister this account/device pair within the server.
     */
    public static void unregister(final Context context, final String regId) {
+	   session = new SessionManager(context);
        Log.i(TAG, "unregistering device (regId = " + regId + ")");
        String serverUrl = CommonUtilities.SERVER_UNREGISTER_URL;
        Map<String, String> params = new HashMap<String, String>();
        params.put(CommonUtilities.TAG_KNOCK_KNOCK, CommonUtilities.SERVER_KNOCK_KNOCK_CODE);
-       params.put(CommonUtilities.TAG_GCM_REG_ID, regId);
+       params.put(CommonUtilities.TAG_UID, String.valueOf(session.getUserID()));
        try {
            post(serverUrl, params);
            GCMRegistrar.setRegisteredOnServer(context, false);

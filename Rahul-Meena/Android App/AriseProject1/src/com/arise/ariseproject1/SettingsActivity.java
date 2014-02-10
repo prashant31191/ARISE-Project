@@ -240,11 +240,12 @@ public class SettingsActivity extends Activity implements OnClickListener{
 	           // Building Parameters
 	           List<NameValuePair> params = new ArrayList<NameValuePair>();
 	           params.add(new BasicNameValuePair(CommonUtilities.TAG_KNOCK_KNOCK, CommonUtilities.SERVER_KNOCK_KNOCK_CODE));
+	           params.add(new BasicNameValuePair(CommonUtilities.TAG_UID, String.valueOf(session.getUserID())));
 	           params.add(new BasicNameValuePair(CommonUtilities.TAG_CURRENT_PASSWORD, args[0]));
 	           params.add(new BasicNameValuePair(CommonUtilities.TAG_NEW_PASSWORD, args[1]));
 	           
 	           // getting JSON string from URL
-	           JSONObject json = jsonParser.makeHttpRequest(CommonUtilities.SERVER_CHANGE_PASSWORD_URL, "POST", params);
+	           JSONObject json = jsonParser.makeHttpRequest(CommonUtilities.SERVER_NEW_PASSWORD_AFTER_LOG_IN_URL, "POST", params);
 
 	           // Check your log cat for JSON reponse
 	           Log.d("Response: ", json.toString());

@@ -41,7 +41,6 @@ public class RadarFragment extends SupportMapFragment {
 	private LazyPWLUCSAdapter peopleAdapter;
 	private DisplayImageOptions dioptions;
 
-	private SupportMapFragment fragment;
 	private GoogleMap map;
 
 	private ImageLoader imageLoader = ImageLoader.getInstance();
@@ -91,9 +90,9 @@ public class RadarFragment extends SupportMapFragment {
 	private void init() {
 
 		dioptions = new DisplayImageOptions.Builder()
-				.showImageOnLoading(R.drawable.ic_launcher)
-				.showImageForEmptyUri(R.drawable.ic_launcher)
-				.showImageOnFail(R.drawable.ic_launcher)
+				.showImageOnLoading(R.drawable.default_image)
+				.showImageForEmptyUri(R.drawable.default_image)
+				.showImageOnFail(R.drawable.default_image)
 				.imageScaleType(ImageScaleType.NONE)
 				.bitmapConfig(Bitmap.Config.RGB_565).cacheOnDisc(true).build();
 
@@ -109,7 +108,8 @@ public class RadarFragment extends SupportMapFragment {
 					.position(sydney));
 		}
 		if (session.getPDValue() == 1) {
-			loadRadar(session.getPWLUCS());
+			if(!session.getPWLUCS().isEmpty())
+				loadRadar(session.getPWLUCS());
 		}
 	}
 

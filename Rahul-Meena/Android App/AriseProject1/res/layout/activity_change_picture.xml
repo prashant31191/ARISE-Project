@@ -18,7 +18,7 @@
             android:layout_height="200dp"
             android:layout_gravity="center"
             android:contentDescription="@string/app_name"
-            android:src="@drawable/tc" />
+            android:src="@drawable/default_image" />
     </LinearLayout>
 
     <LinearLayout

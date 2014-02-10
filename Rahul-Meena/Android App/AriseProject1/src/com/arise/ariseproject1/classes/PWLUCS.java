@@ -8,7 +8,7 @@ public class PWLUCS {
 	private String name;
 	private String email;
 	private String image;
-	private String gcmregid;
+	private String gcm_regid;
 	private long uid;
 	//private long cpid;
 	private double loclat;
@@ -22,8 +22,8 @@ public class PWLUCS {
 	public PWLUCS(JSONObject person) throws JSONException{
 		this.name = person.getString(CommonUtilities.TAG_NAME);
 		this.email = person.getString(CommonUtilities.TAG_EMAIL);
-		this.image = person.getString(CommonUtilities.TAG_IMAGE);
-		this.gcmregid = person.getString(CommonUtilities.TAG_GCM_REG_ID);
+		this.image =  CommonUtilities.SERVER_IMAGE_URL+person.getString(CommonUtilities.TAG_IMAGE);
+		this.gcm_regid = person.getString(CommonUtilities.TAG_GCM_REG_ID);
 		this.uid = person.getLong(CommonUtilities.TAG_UID);
 		//this.cpid = person.getLong(CommonUtilities.TAG_CPID);
 		this.loclat = person.getDouble(CommonUtilities.TAG_LOC_LAT);
@@ -48,7 +48,7 @@ public class PWLUCS {
 	}
 
 	public void setImage(String image){
-		this.image = image;
+		this.image =  CommonUtilities.SERVER_IMAGE_URL+image;
 	}
 	
 	public String getImage(){
@@ -56,11 +56,11 @@ public class PWLUCS {
 	}
 
 	public void setGcmRegId(String gcmregid){
-		this.gcmregid = gcmregid;
+		this.gcm_regid = gcmregid;
 	}
 	
 	public String getGcmRegId(){
-		return this.gcmregid;
+		return this.gcm_regid;
 	}
 
 	public void setUid(long uid){

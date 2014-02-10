@@ -43,14 +43,14 @@ public class ChatListFragment extends ListFragment {
 		return super.onCreateView(inflater, container, savedInstanceState);
 	}
 
-	public void send(String msg, long receiver_uid){
+	public void send(String msg, long receiver_uid, String gcm_regid){
 
 		adapter.add(new OneComment(false, msg));
 		getListView().setSelection(getListView().getChildCount()-1);
         SimpleDateFormat df = new SimpleDateFormat("d MMM yyyy HH:mm a",Locale.US);
         String time = df.format(Calendar.getInstance().getTime());
 		SendChatMessage scm = new SendChatMessage();
-		scm.execute(String.valueOf(receiver_uid), msg,time);
+		scm.execute(gcm_regid,String.valueOf(receiver_uid), msg,time);
 	}
 
 	public void receive(String msg,String time){
@@ -92,15 +92,18 @@ public class ChatListFragment extends ListFragment {
          * */
         protected Boolean doInBackground(String... args) {
             // getting data from session
+            String name = session.getName();
             long uid = session.getUserID();
             
             // Building Parameters
             List<NameValuePair> params = new ArrayList<NameValuePair>();
             params.add(new BasicNameValuePair(CommonUtilities.TAG_KNOCK_KNOCK, CommonUtilities.SERVER_KNOCK_KNOCK_CODE));
+            params.add(new BasicNameValuePair(CommonUtilities.TAG_MESSAGE_SENDER_NAME, name));
             params.add(new BasicNameValuePair(CommonUtilities.TAG_MESSAGE_SENDER_UID, String.valueOf(uid)));
-            params.add(new BasicNameValuePair(CommonUtilities.TAG_MESSAGE_RECIEVER_UID, args[0]));
-            params.add(new BasicNameValuePair(CommonUtilities.TAG_MESSAGE_CONTENT, args[1]));
-            params.add(new BasicNameValuePair(CommonUtilities.TAG_MESSAGE_TIME, args[2]));
+            params.add(new BasicNameValuePair(CommonUtilities.TAG_MESSAGE_RECIEVER_GCM_REGID, args[0]));
+            params.add(new BasicNameValuePair(CommonUtilities.TAG_MESSAGE_RECIEVER_UID, args[1]));
+            params.add(new BasicNameValuePair(CommonUtilities.TAG_MESSAGE_CONTENT, args[2]));
+            params.add(new BasicNameValuePair(CommonUtilities.TAG_MESSAGE_TIME, args[3]));
             
             // getting JSON string from URL
             JSONObject json = jsonParser.makeHttpRequest(CommonUtilities.SERVER_SEND_CHAT_MESSAGE_URL, "POST", params);

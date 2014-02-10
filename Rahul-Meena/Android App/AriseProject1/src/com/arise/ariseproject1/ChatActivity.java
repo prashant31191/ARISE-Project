@@ -14,9 +14,11 @@ import com.arise.ariseproject1.classes.PWLUCS;
 import com.arise.ariseproject1.classes.SessionManager;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.assist.ImageScaleType;
 
 import android.app.ActionBar;
 import android.app.Dialog;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
@@ -45,6 +47,14 @@ public class ChatActivity extends FragmentActivity implements OnClickListener{
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_chat);
+
+
+		dioptions = new DisplayImageOptions.Builder()
+				.showImageOnLoading(R.drawable.default_image)
+				.showImageForEmptyUri(R.drawable.default_image)
+				.showImageOnFail(R.drawable.default_image)
+				.imageScaleType(ImageScaleType.NONE)
+				.bitmapConfig(Bitmap.Config.RGB_565).cacheOnDisc(true).build();
 		
 		session = new SessionManager(getApplicationContext());
 		
@@ -139,7 +149,7 @@ public class ChatActivity extends FragmentActivity implements OnClickListener{
 	private void initializeChatBarWithPWLUCS() {
 
 		for(int i=0;i<session.getPWLUCS().size();i++){
-			chatBarAdapter.add(new ChatUser(session.getPWLUCS().get(i).getName(), session.getPWLUCS().get(i).getImage(), session.getPWLUCS().get(i).getUid(), 0));
+			chatBarAdapter.add(new ChatUser(session.getPWLUCS().get(i).getName(), session.getPWLUCS().get(i).getImage(), session.getPWLUCS().get(i).getUid(), 0, session.getPWLUCS().get(i).getGcmRegId()));
 			chatBarAdapter.notifyDataSetChanged();
 			cpAdapter.addNewListFragment();
 			cpAdapter.notifyDataSetChanged();
@@ -181,7 +191,7 @@ public class ChatActivity extends FragmentActivity implements OnClickListener{
 			if(i == (chatBarAdapter.getCount()-1)){
 				for(int j=0;j<session.getPWCSUL().size();j++){
 					if(from_uid == session.getPWCSUL().get(j).getUid()){
-						chatBarAdapter.add(new ChatUser(session.getPWCSUL().get(j).getName(), session.getPWCSUL().get(j).getImage(), session.getPWCSUL().get(j).getUid(), 1));
+						chatBarAdapter.add(new ChatUser(session.getPWCSUL().get(j).getName(), session.getPWCSUL().get(j).getImage(), session.getPWCSUL().get(j).getUid(), 1, session.getPWLUCS().get(i).getGcmRegId()));
 						chatBarAdapter.notifyDataSetChanged();
 						cpAdapter.addNewListFragment();
 						cpAdapter.notifyDataSetChanged();
@@ -197,15 +207,15 @@ public class ChatActivity extends FragmentActivity implements OnClickListener{
 	public void onClick(View v) {
 
 		switch(v.getId()){
-		
+		/*
 		case R.id.button_chat_activity_add:{
 			showChatUserListDialog();
 		}
 		break;
-		
+		*/
 		case R.id.button_chat_activity_send:{
 			
-			cpAdapter.getItem(viewPager.getCurrentItem()).send(et_myMsg.getText().toString(),chatBarAdapter.getItem(chatBar.getSelectedItemPosition()).getUid());
+			cpAdapter.getItem(viewPager.getCurrentItem()).send(et_myMsg.getText().toString(),chatBarAdapter.getItem(chatBar.getSelectedItemPosition()).getUid(),chatBarAdapter.getItem(chatBar.getSelectedItemPosition()).getGcmRegId());
 			et_myMsg.setText("");
 		}
 		break;
@@ -214,7 +224,8 @@ public class ChatActivity extends FragmentActivity implements OnClickListener{
 		
 	}       
  
-    private void showChatUserListDialog() {
+    @SuppressWarnings("unused")
+	private void showChatUserListDialog() {
 		 
 		// custom dialog
 		final Dialog dialog = new Dialog(getApplicationContext());
@@ -258,8 +269,9 @@ public class ChatActivity extends FragmentActivity implements OnClickListener{
 				    String name = person.getName();
 				    String image = person.getImage();
 				    long uid = person.getUid();
+				    String gcm_regid = person.getGcmRegId();
 				    //long cpid = person.getCpid();
-					chatBarAdapter.add(new ChatUser(name, image, uid, 0));
+					chatBarAdapter.add(new ChatUser(name, image, uid, 0, gcm_regid));
 					int size = chatBarAdapter.getCount();
 					size--;
 					chatBarAdapter.notifyDataSetChanged();

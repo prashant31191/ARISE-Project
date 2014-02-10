@@ -12,5 +12,6 @@ public final class Manifest {
         /**  Creates a custom permission so only this app can receive its messages. 
          */
         public static final String C2D_MESSAGE="com.arise.ariseproject1.permission.C2D_MESSAGE";
+        public static final String MAPS_RECEIVE="com.arise.ariseproject1.permission.MAPS_RECEIVE";
     }
 }

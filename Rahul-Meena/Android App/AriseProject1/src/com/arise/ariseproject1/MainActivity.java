@@ -5,6 +5,7 @@ import com.arise.ariseproject1.classes.SessionManager;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.app.ActionBar;
@@ -27,7 +28,7 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
- 
+        session = new SessionManager(getApplicationContext());
         // Initialization
         viewPager = (ViewPager) findViewById(R.id.pager);
         actionBar = getActionBar();
@@ -104,8 +105,11 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
         case R.id.action_help:
             LaunchHelpScreen();
             return true;
-        case R.id.action_log_out:
+        case R.id.action_log_out:{
         	session.logoutUser();
+        	finish();
+        	Log.d("loggedout", "yes");
+        	}
             return true;
         default:
             return super.onOptionsItemSelected(item);
@@ -131,5 +135,17 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
 	@Override
 	protected void onActivityResult(int arg0, int arg1, Intent arg2) {
 		super.onActivityResult(arg0, arg1, arg2);
+	}
+	
+	@Override
+	public void onBackPressed() {
+		session.setPDValue(0);
+		super.onBackPressed();
+	}
+	
+	@Override
+	protected void onDestroy() {
+		session.setPDValue(0);
+		super.onDestroy();
 	}
 }

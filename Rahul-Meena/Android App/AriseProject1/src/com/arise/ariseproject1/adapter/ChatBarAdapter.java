@@ -60,7 +60,7 @@ public class ChatBarAdapter extends ArrayAdapter<ChatUser> {
 		TextView tv_msgCount = (TextView) row.findViewById(R.id.textView_item_chat_tab_msg_count);
 
 		ChatUser user = getItem(position);
-		iv_image.setImageResource(R.drawable.tc);
+		//iv_image.setImageResource(R.drawable.default_image);
 		imageLoader.displayImage(user.getImage(), iv_image, dioptions);
 		
 		int noOfMsgs = user.getNoOfMsgs();

@@ -15,7 +15,7 @@
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:contentDescription="@string/cd"
-            android:src="@drawable/tc" />
+            android:src="@drawable/default_image" />
 
         <TextView
             android:id="@+id/textView_dialog_remove_person_name"

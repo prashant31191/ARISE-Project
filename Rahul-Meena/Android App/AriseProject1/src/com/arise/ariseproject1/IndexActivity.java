@@ -29,7 +29,8 @@ public class IndexActivity extends Activity implements OnClickListener {
 		super.onCreate(savedInstanceState);
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.activity_index);
-		
+
+		session = new SessionManager(getApplicationContext());
 		// Referencing buttons
 		b_register = (Button)findViewById(R.id.button_index_activity_register);
 		b_unreg = (Button)findViewById(R.id.button_unregister);
@@ -49,11 +50,23 @@ public class IndexActivity extends Activity implements OnClickListener {
 		//if(GCMRegistrar.isRegistered(getApplicationContext()))
 			//session.checkLogin();
 		
-		if(!GCMRegistrar.isRegistered(getApplicationContext())){
-			Log.d("Registered", "false");
+		if(GCMRegistrar.isRegistered(getApplicationContext())){
+			Log.d("Device Registered", "true");
+		    // Get GCM registration id
+		    final String regId = GCMRegistrar.getRegistrationId(this);
+		    Log.d("regId", regId+"out");
+		}else{
+			Log.d("Device Registered", "false");
 		}
-		if(!GCMRegistrar.isRegisteredOnServer(getApplicationContext())){
-			Log.d("Registered on server", "false");
+		if(GCMRegistrar.isRegisteredOnServer(getApplicationContext())){
+			Log.d("Device / user Registered on server", "true");
+		}else{
+			Log.d("Device / user Registered on server", "false");
+		}
+		
+		if(GCMRegistrar.isRegistered(getApplicationContext()) && GCMRegistrar.isRegisteredOnServer(getApplicationContext())){
+			session.checkLogin();
+			finish();
 		}
 	}
 
@@ -83,7 +96,6 @@ public class IndexActivity extends Activity implements OnClickListener {
 		
 		break;
 		case R.id.button_index_activity_log_in:{
-			
 			intent = new Intent(IndexActivity.this,LogInActivity.class);
 			startActivity(intent);
 			
@@ -91,7 +103,6 @@ public class IndexActivity extends Activity implements OnClickListener {
 		break;
 		}
 	}
-
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.

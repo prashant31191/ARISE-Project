@@ -52,9 +52,9 @@ public class SessionManager {
    
    public static String image = new String();
    
-   public static List<PWLUCS> pwlucs;
+   public static List<PWLUCS> pwlucs = new ArrayList<PWLUCS>();
    
-   public static List<PWCSUL> pwcsul;
+   public static List<PWCSUL> pwcsul = new ArrayList<PWCSUL>();
     
    // Constructor
    public SessionManager(Context context){
@@ -127,7 +127,8 @@ public class SessionManager {
     * Set image of user
     */
    public void setImage(String image){
-	   SessionManager.image = image;
+	   
+	   SessionManager.image = CommonUtilities.SERVER_IMAGE_URL+image;
    }
    /**
     * Get image of user
@@ -215,7 +216,6 @@ public class SessionManager {
            // Staring Login Activity
            _context.startActivity(i);
        }
-        
    }
     
     
@@ -272,6 +272,8 @@ public class SessionManager {
         
        // Staring Login Activity
        _context.startActivity(i);
+       
+       setPDValue(0);
    }
     
    /**
